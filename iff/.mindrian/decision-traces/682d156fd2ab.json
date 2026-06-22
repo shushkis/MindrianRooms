@@ -1,0 +1,276 @@
+{
+  "version": 1,
+  "session_id": "682d156fd2ab",
+  "traces": [
+    {
+      "brain_md_version": null,
+      "brain_md_staleness": "absent",
+      "brain_md_stale_reason": null,
+      "brain_md_weight_applied": 0,
+      "brain_md_recommended_confidence": null,
+      "brain_md_recommended_marker_rendered": false,
+      "brain_md_tier_mode": "tier_0",
+      "brain_md_sections_consumed": [],
+      "icm_scope": {
+        "section_path": null,
+        "room_exists": false,
+        "artifact_count": 0
+      },
+      "sql_signals": {
+        "edges_consulted": 0,
+        "contradictions_detected": 0
+      },
+      "minto_reasoning": {
+        "exists": false,
+        "reasoning_health_score": 0,
+        "governing_thought": null,
+        "is_stale": true
+      },
+      "intent_persona": {
+        "archetype": null,
+        "problem_type": null,
+        "venture_stage": null,
+        "intent": null,
+        "intent_confidence": null
+      },
+      "chosen_rationale": "Tier 0 fallback: no quadruple available for sectionPath.",
+      "turn": 1,
+      "at": "2026-06-10T16:32:48.576Z",
+      "elapsed_ms": 114,
+      "routing_source": "legacy",
+      "routing_reason": "engine_silent_or_absent",
+      "routing_activated_skills": [
+        "larry-personality",
+        "context-engine",
+        "room-passive",
+        "room-proactive"
+      ],
+      "routing_suppressed_skills": []
+    },
+    {
+      "brain_md_version": null,
+      "brain_md_staleness": "absent",
+      "brain_md_stale_reason": null,
+      "brain_md_weight_applied": 0,
+      "brain_md_recommended_confidence": null,
+      "brain_md_recommended_marker_rendered": false,
+      "brain_md_tier_mode": "tier_0",
+      "brain_md_sections_consumed": [],
+      "icm_scope": {
+        "section_path": null,
+        "room_exists": false,
+        "artifact_count": 0
+      },
+      "sql_signals": {
+        "edges_consulted": 0,
+        "contradictions_detected": 0
+      },
+      "minto_reasoning": {
+        "exists": false,
+        "reasoning_health_score": 0,
+        "governing_thought": null,
+        "is_stale": true
+      },
+      "intent_persona": {
+        "archetype": null,
+        "problem_type": null,
+        "venture_stage": null,
+        "intent": null,
+        "intent_confidence": null
+      },
+      "chosen_rationale": "Tier 0 fallback: no quadruple available for sectionPath.",
+      "turn": 2,
+      "at": "2026-06-10T16:37:33.642Z",
+      "elapsed_ms": 110,
+      "routing_source": "legacy",
+      "routing_reason": "engine_silent_or_absent",
+      "routing_activated_skills": [
+        "larry-personality",
+        "context-engine",
+        "room-passive",
+        "room-proactive"
+      ],
+      "routing_suppressed_skills": []
+    },
+    {
+      "brain_md_version": null,
+      "brain_md_staleness": "absent",
+      "brain_md_stale_reason": null,
+      "brain_md_weight_applied": 0,
+      "brain_md_recommended_confidence": null,
+      "brain_md_recommended_marker_rendered": false,
+      "brain_md_tier_mode": "tier_0",
+      "brain_md_sections_consumed": [],
+      "icm_scope": {
+        "section_path": null,
+        "room_exists": false,
+        "artifact_count": 0
+      },
+      "sql_signals": {
+        "edges_consulted": 0,
+        "contradictions_detected": 0
+      },
+      "minto_reasoning": {
+        "exists": false,
+        "reasoning_health_score": 0,
+        "governing_thought": null,
+        "is_stale": true
+      },
+      "intent_persona": {
+        "archetype": null,
+        "problem_type": null,
+        "venture_stage": null,
+        "intent": null,
+        "intent_confidence": null
+      },
+      "chosen_rationale": "Tier 0 fallback: no quadruple available for sectionPath.",
+      "turn": 3,
+      "at": "2026-06-10T16:41:49.428Z",
+      "elapsed_ms": 99,
+      "routing_source": "legacy",
+      "routing_reason": "engine_silent_or_absent",
+      "routing_activated_skills": [
+        "larry-personality",
+        "context-engine",
+        "room-passive",
+        "room-proactive"
+      ],
+      "routing_suppressed_skills": []
+    },
+    {
+      "brain_md_version": null,
+      "brain_md_staleness": "absent",
+      "brain_md_stale_reason": null,
+      "brain_md_weight_applied": 0,
+      "brain_md_recommended_confidence": null,
+      "brain_md_recommended_marker_rendered": false,
+      "brain_md_tier_mode": "tier_0",
+      "brain_md_sections_consumed": [],
+      "icm_scope": {
+        "section_path": null,
+        "room_exists": false,
+        "artifact_count": 0
+      },
+      "sql_signals": {
+        "edges_consulted": 0,
+        "contradictions_detected": 0
+      },
+      "minto_reasoning": {
+        "exists": false,
+        "reasoning_health_score": 0,
+        "governing_thought": null,
+        "is_stale": true
+      },
+      "intent_persona": {
+        "archetype": null,
+        "problem_type": null,
+        "venture_stage": null,
+        "intent": null,
+        "intent_confidence": null
+      },
+      "chosen_rationale": "Tier 0 fallback: no quadruple available for sectionPath.",
+      "turn": 4,
+      "at": "2026-06-10T16:44:55.957Z",
+      "elapsed_ms": 98,
+      "routing_source": "legacy",
+      "routing_reason": "engine_silent_or_absent",
+      "routing_activated_skills": [
+        "larry-personality",
+        "context-engine",
+        "room-passive",
+        "room-proactive"
+      ],
+      "routing_suppressed_skills": []
+    },
+    {
+      "brain_md_version": null,
+      "brain_md_staleness": "absent",
+      "brain_md_stale_reason": null,
+      "brain_md_weight_applied": 0,
+      "brain_md_recommended_confidence": null,
+      "brain_md_recommended_marker_rendered": false,
+      "brain_md_tier_mode": "tier_0",
+      "brain_md_sections_consumed": [],
+      "icm_scope": {
+        "section_path": null,
+        "room_exists": false,
+        "artifact_count": 0
+      },
+      "sql_signals": {
+        "edges_consulted": 0,
+        "contradictions_detected": 0
+      },
+      "minto_reasoning": {
+        "exists": false,
+        "reasoning_health_score": 0,
+        "governing_thought": null,
+        "is_stale": true
+      },
+      "intent_persona": {
+        "archetype": null,
+        "problem_type": null,
+        "venture_stage": null,
+        "intent": null,
+        "intent_confidence": null
+      },
+      "chosen_rationale": "Tier 0 fallback: no quadruple available for sectionPath.",
+      "turn": 5,
+      "at": "2026-06-10T16:46:18.072Z",
+      "elapsed_ms": 104,
+      "routing_source": "legacy",
+      "routing_reason": "engine_silent_or_absent",
+      "routing_activated_skills": [
+        "larry-personality",
+        "context-engine",
+        "room-passive",
+        "room-proactive"
+      ],
+      "routing_suppressed_skills": []
+    },
+    {
+      "brain_md_version": null,
+      "brain_md_staleness": "absent",
+      "brain_md_stale_reason": null,
+      "brain_md_weight_applied": 0,
+      "brain_md_recommended_confidence": null,
+      "brain_md_recommended_marker_rendered": false,
+      "brain_md_tier_mode": "tier_0",
+      "brain_md_sections_consumed": [],
+      "icm_scope": {
+        "section_path": null,
+        "room_exists": false,
+        "artifact_count": 0
+      },
+      "sql_signals": {
+        "edges_consulted": 0,
+        "contradictions_detected": 0
+      },
+      "minto_reasoning": {
+        "exists": false,
+        "reasoning_health_score": 0,
+        "governing_thought": null,
+        "is_stale": true
+      },
+      "intent_persona": {
+        "archetype": null,
+        "problem_type": null,
+        "venture_stage": null,
+        "intent": null,
+        "intent_confidence": null
+      },
+      "chosen_rationale": "Tier 0 fallback: no quadruple available for sectionPath.",
+      "turn": 6,
+      "at": "2026-06-10T16:49:17.369Z",
+      "elapsed_ms": 160,
+      "routing_source": "legacy",
+      "routing_reason": "engine_silent_or_absent",
+      "routing_activated_skills": [
+        "larry-personality",
+        "context-engine",
+        "room-passive",
+        "room-proactive"
+      ],
+      "routing_suppressed_skills": []
+    }
+  ]
+}

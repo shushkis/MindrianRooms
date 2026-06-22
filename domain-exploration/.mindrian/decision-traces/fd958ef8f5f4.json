@@ -1,0 +1,348 @@
+{
+  "version": 1,
+  "session_id": "fd958ef8f5f4",
+  "traces": [
+    {
+      "brain_md_version": null,
+      "brain_md_staleness": "absent",
+      "brain_md_stale_reason": null,
+      "brain_md_weight_applied": 0,
+      "brain_md_recommended_confidence": null,
+      "brain_md_recommended_marker_rendered": false,
+      "brain_md_tier_mode": "tier_0",
+      "brain_md_sections_consumed": [],
+      "navigated_neighborhood": null,
+      "icm_scope": {
+        "section_path": null,
+        "room_exists": false,
+        "artifact_count": 0
+      },
+      "sql_signals": {
+        "edges_consulted": 0,
+        "contradictions_detected": 0
+      },
+      "minto_reasoning": {
+        "exists": false,
+        "reasoning_health_score": 0,
+        "governing_thought": null,
+        "is_stale": true
+      },
+      "intent_persona": {
+        "archetype": null,
+        "problem_type": null,
+        "venture_stage": null,
+        "intent": null,
+        "intent_confidence": null
+      },
+      "chosen_rationale": "Tier 0 fallback: no quadruple available for sectionPath.",
+      "context_assembly": {
+        "user_summary": [],
+        "facts": [],
+        "decision_grounding": null
+      },
+      "_meta": {
+        "latencies_ms": {
+          "dispatchSensors_ms": 1,
+          "decide_total_ms": 2
+        }
+      },
+      "turn": 1,
+      "at": "2026-06-15T17:06:16.716Z",
+      "elapsed_ms": 120,
+      "routing_source": "legacy",
+      "routing_reason": "engine_silent_or_absent",
+      "routing_activated_skills": [
+        "larry-personality",
+        "context-engine",
+        "room-passive",
+        "room-proactive"
+      ],
+      "routing_suppressed_skills": []
+    },
+    {
+      "brain_md_version": null,
+      "brain_md_staleness": "absent",
+      "brain_md_stale_reason": null,
+      "brain_md_weight_applied": 0,
+      "brain_md_recommended_confidence": null,
+      "brain_md_recommended_marker_rendered": false,
+      "brain_md_tier_mode": "tier_0",
+      "brain_md_sections_consumed": [],
+      "navigated_neighborhood": null,
+      "icm_scope": {
+        "section_path": null,
+        "room_exists": false,
+        "artifact_count": 0
+      },
+      "sql_signals": {
+        "edges_consulted": 0,
+        "contradictions_detected": 0
+      },
+      "minto_reasoning": {
+        "exists": false,
+        "reasoning_health_score": 0,
+        "governing_thought": null,
+        "is_stale": true
+      },
+      "intent_persona": {
+        "archetype": null,
+        "problem_type": null,
+        "venture_stage": null,
+        "intent": null,
+        "intent_confidence": null
+      },
+      "chosen_rationale": "Tier 0 fallback: no quadruple available for sectionPath.",
+      "context_assembly": {
+        "user_summary": [],
+        "facts": [],
+        "decision_grounding": null
+      },
+      "_meta": {
+        "latencies_ms": {
+          "dispatchSensors_ms": 4,
+          "decide_total_ms": 5
+        }
+      },
+      "turn": 2,
+      "at": "2026-06-15T17:07:20.841Z",
+      "elapsed_ms": 214,
+      "routing_source": "legacy",
+      "routing_reason": "engine_silent_or_absent",
+      "routing_activated_skills": [
+        "larry-personality",
+        "context-engine",
+        "room-passive",
+        "room-proactive"
+      ],
+      "routing_suppressed_skills": []
+    },
+    {
+      "brain_md_version": null,
+      "brain_md_staleness": "absent",
+      "brain_md_stale_reason": null,
+      "brain_md_weight_applied": 0,
+      "brain_md_recommended_confidence": null,
+      "brain_md_recommended_marker_rendered": false,
+      "brain_md_tier_mode": "tier_0",
+      "brain_md_sections_consumed": [],
+      "navigated_neighborhood": null,
+      "icm_scope": {
+        "section_path": null,
+        "room_exists": false,
+        "artifact_count": 0
+      },
+      "sql_signals": {
+        "edges_consulted": 0,
+        "contradictions_detected": 0
+      },
+      "minto_reasoning": {
+        "exists": false,
+        "reasoning_health_score": 0,
+        "governing_thought": null,
+        "is_stale": true
+      },
+      "intent_persona": {
+        "archetype": null,
+        "problem_type": null,
+        "venture_stage": null,
+        "intent": null,
+        "intent_confidence": null
+      },
+      "chosen_rationale": "Tier 0 fallback: no quadruple available for sectionPath.",
+      "context_assembly": {
+        "user_summary": [],
+        "facts": [],
+        "decision_grounding": null
+      },
+      "_meta": {
+        "latencies_ms": {
+          "dispatchSensors_ms": 3,
+          "decide_total_ms": 4
+        }
+      },
+      "turn": 3,
+      "at": "2026-06-15T17:16:43.514Z",
+      "elapsed_ms": 204,
+      "routing_source": "legacy",
+      "routing_reason": "engine_silent_or_absent",
+      "routing_activated_skills": [
+        "larry-personality",
+        "context-engine",
+        "room-passive",
+        "room-proactive"
+      ],
+      "routing_suppressed_skills": []
+    },
+    {
+      "brain_md_version": null,
+      "brain_md_staleness": "absent",
+      "brain_md_stale_reason": null,
+      "brain_md_weight_applied": 0,
+      "brain_md_recommended_confidence": null,
+      "brain_md_recommended_marker_rendered": false,
+      "brain_md_tier_mode": "tier_0",
+      "brain_md_sections_consumed": [],
+      "navigated_neighborhood": null,
+      "icm_scope": {
+        "section_path": null,
+        "room_exists": false,
+        "artifact_count": 0
+      },
+      "sql_signals": {
+        "edges_consulted": 0,
+        "contradictions_detected": 0
+      },
+      "minto_reasoning": {
+        "exists": false,
+        "reasoning_health_score": 0,
+        "governing_thought": null,
+        "is_stale": true
+      },
+      "intent_persona": {
+        "archetype": null,
+        "problem_type": null,
+        "venture_stage": null,
+        "intent": null,
+        "intent_confidence": null
+      },
+      "chosen_rationale": "Tier 0 fallback: no quadruple available for sectionPath.",
+      "context_assembly": {
+        "user_summary": [],
+        "facts": [],
+        "decision_grounding": null
+      },
+      "_meta": {
+        "latencies_ms": {
+          "dispatchSensors_ms": 3,
+          "decide_total_ms": 3
+        }
+      },
+      "turn": 4,
+      "at": "2026-06-15T17:40:26.457Z",
+      "elapsed_ms": 209,
+      "routing_source": "legacy",
+      "routing_reason": "engine_silent_or_absent",
+      "routing_activated_skills": [
+        "larry-personality",
+        "context-engine",
+        "room-passive",
+        "room-proactive"
+      ],
+      "routing_suppressed_skills": []
+    },
+    {
+      "brain_md_version": null,
+      "brain_md_staleness": "absent",
+      "brain_md_stale_reason": null,
+      "brain_md_weight_applied": 0,
+      "brain_md_recommended_confidence": null,
+      "brain_md_recommended_marker_rendered": false,
+      "brain_md_tier_mode": "tier_0",
+      "brain_md_sections_consumed": [],
+      "navigated_neighborhood": null,
+      "icm_scope": {
+        "section_path": null,
+        "room_exists": false,
+        "artifact_count": 0
+      },
+      "sql_signals": {
+        "edges_consulted": 0,
+        "contradictions_detected": 0
+      },
+      "minto_reasoning": {
+        "exists": false,
+        "reasoning_health_score": 0,
+        "governing_thought": null,
+        "is_stale": true
+      },
+      "intent_persona": {
+        "archetype": null,
+        "problem_type": null,
+        "venture_stage": null,
+        "intent": null,
+        "intent_confidence": null
+      },
+      "chosen_rationale": "Tier 0 fallback: no quadruple available for sectionPath.",
+      "context_assembly": {
+        "user_summary": [],
+        "facts": [],
+        "decision_grounding": null
+      },
+      "_meta": {
+        "latencies_ms": {
+          "dispatchSensors_ms": 2,
+          "decide_total_ms": 3
+        }
+      },
+      "turn": 5,
+      "at": "2026-06-15T20:50:12.882Z",
+      "elapsed_ms": 228,
+      "routing_source": "legacy",
+      "routing_reason": "engine_silent_or_absent",
+      "routing_activated_skills": [
+        "larry-personality",
+        "context-engine",
+        "room-passive",
+        "room-proactive"
+      ],
+      "routing_suppressed_skills": []
+    },
+    {
+      "brain_md_version": null,
+      "brain_md_staleness": "absent",
+      "brain_md_stale_reason": null,
+      "brain_md_weight_applied": 0,
+      "brain_md_recommended_confidence": null,
+      "brain_md_recommended_marker_rendered": false,
+      "brain_md_tier_mode": "tier_0",
+      "brain_md_sections_consumed": [],
+      "navigated_neighborhood": null,
+      "icm_scope": {
+        "section_path": null,
+        "room_exists": false,
+        "artifact_count": 0
+      },
+      "sql_signals": {
+        "edges_consulted": 0,
+        "contradictions_detected": 0
+      },
+      "minto_reasoning": {
+        "exists": false,
+        "reasoning_health_score": 0,
+        "governing_thought": null,
+        "is_stale": true
+      },
+      "intent_persona": {
+        "archetype": null,
+        "problem_type": null,
+        "venture_stage": null,
+        "intent": null,
+        "intent_confidence": null
+      },
+      "chosen_rationale": "Tier 0 fallback: no quadruple available for sectionPath.",
+      "context_assembly": {
+        "user_summary": [],
+        "facts": [],
+        "decision_grounding": null
+      },
+      "_meta": {
+        "latencies_ms": {
+          "dispatchSensors_ms": 2,
+          "decide_total_ms": 3
+        }
+      },
+      "turn": 6,
+      "at": "2026-06-15T20:51:03.874Z",
+      "elapsed_ms": 202,
+      "routing_source": "legacy",
+      "routing_reason": "engine_silent_or_absent",
+      "routing_activated_skills": [
+        "larry-personality",
+        "context-engine",
+        "room-passive",
+        "room-proactive"
+      ],
+      "routing_suppressed_skills": []
+    }
+  ]
+}

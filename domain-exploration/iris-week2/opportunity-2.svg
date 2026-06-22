@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="520" viewBox="0 0 760 520" font-family="Arial, sans-serif" direction="rtl">
+  <!-- Background -->
+  <rect width="760" height="520" fill="#ffffff" rx="8"/>
+  <rect x="1" y="1" width="758" height="518" fill="none" stroke="#16A34A" stroke-width="2" rx="8"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="760" height="54" fill="#16A34A" rx="8"/>
+  <rect x="0" y="30" width="760" height="24" fill="#16A34A"/>
+  <text x="380" y="33" text-anchor="middle" fill="white" font-size="16" font-weight="bold">הזדמנות 2 | Global Multilingual Family Intelligence Hub</text>
+
+  <!-- Chain Row -->
+  <!-- Domain Box -->
+  <rect x="570" y="80" width="160" height="60" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.5" rx="6"/>
+  <text x="650" y="105" text-anchor="middle" fill="#14532D" font-size="11" font-weight="bold">תחום</text>
+  <text x="650" y="122" text-anchor="middle" fill="#15803D" font-size="10">CAMK2B Disorders</text>
+  <text x="650" y="135" text-anchor="middle" fill="#15803D" font-size="9">(~70 חולים, גלובלי)</text>
+
+  <!-- Arrow 1 -->
+  <line x1="570" y1="110" x2="530" y2="110" stroke="#16A34A" stroke-width="2" marker-end="url(#arrow-green)"/>
+
+  <!-- Method Box -->
+  <rect x="295" y="80" width="225" height="60" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.5" rx="6"/>
+  <text x="407" y="103" text-anchor="middle" fill="#14532D" font-size="11" font-weight="bold">מתודולוגיה</text>
+  <text x="407" y="118" text-anchor="middle" fill="#15803D" font-size="10">Causal Loop + Reverse Salient</text>
+  <text x="407" y="132" text-anchor="middle" fill="#15803D" font-size="9">לולאה: בידוד → פחות נתונים → בידוד</text>
+
+  <!-- Arrow 2 -->
+  <line x1="295" y1="110" x2="260" y2="110" stroke="#16A34A" stroke-width="2" marker-end="url(#arrow-green)"/>
+
+  <!-- Opportunity Box -->
+  <rect x="30" y="76" width="220" height="68" fill="#16A34A" stroke="#14532D" stroke-width="1.5" rx="6"/>
+  <text x="140" y="99" text-anchor="middle" fill="white" font-size="11" font-weight="bold">ההזדמנות</text>
+  <text x="140" y="114" text-anchor="middle" fill="#BBF7D0" font-size="9.5">תשתית ידע רב-לשונית</text>
+  <text x="140" y="127" text-anchor="middle" fill="#BBF7D0" font-size="9.5">שמחברת משפחות שאינן</text>
+  <text x="140" y="140" text-anchor="middle" fill="#BBF7D0" font-size="9.5">דוברות אנגלית לרשת הגלובלית</text>
+
+  <!-- Down Arrow -->
+  <line x1="380" y1="148" x2="380" y2="175" stroke="#16A34A" stroke-width="2" marker-end="url(#arrow-green)"/>
+
+  <!-- Problem Formulations Title -->
+  <text x="380" y="195" text-anchor="middle" fill="#14532D" font-size="13" font-weight="bold">ניסוחי הבעיה</text>
+  <line x1="80" y1="202" x2="680" y2="202" stroke="#BBF7D0" stroke-width="1"/>
+
+  <!-- Un-Defined -->
+  <rect x="490" y="215" width="230" height="120" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5" rx="6"/>
+  <rect x="490" y="215" width="230" height="28" fill="#BBF7D0" rx="6"/>
+  <rect x="490" y="231" width="230" height="12" fill="#BBF7D0"/>
+  <text x="605" y="233" text-anchor="middle" fill="#14532D" font-size="11" font-weight="bold">Un-Defined</text>
+  <text x="605" y="252" text-anchor="middle" fill="#15803D" font-size="9">(תחושת אי-נחת)</text>
+  <text x="605" y="268" text-anchor="middle" fill="#374151" font-size="9">משפחות שמקבלות אבחנה</text>
+  <text x="605" y="282" text-anchor="middle" fill="#374151" font-size="9">של CAMK2B מוצאות</text>
+  <text x="605" y="296" text-anchor="middle" fill="#374151" font-size="9">עצמן לבד — אין אחד</text>
+  <text x="605" y="310" text-anchor="middle" fill="#374151" font-size="9">שמכיר את המחלה.</text>
+  <text x="605" y="327" text-anchor="middle" fill="#6B7280" font-size="8" font-style="italic">מקור: PubMed 40712205</text>
+
+  <!-- Ill-Defined -->
+  <rect x="265" y="215" width="210" height="120" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5" rx="6"/>
+  <rect x="265" y="215" width="210" height="28" fill="#86EFAC" rx="6"/>
+  <rect x="265" y="231" width="210" height="12" fill="#86EFAC"/>
+  <text x="370" y="233" text-anchor="middle" fill="#14532D" font-size="11" font-weight="bold">Ill-Defined</text>
+  <text x="370" y="252" text-anchor="middle" fill="#15803D" font-size="9">(מה כואב)</text>
+  <text x="370" y="268" text-anchor="middle" fill="#374151" font-size="9">הידע על CAMK2B</text>
+  <text x="370" y="282" text-anchor="middle" fill="#374151" font-size="9">נשאר בשפה האנגלית</text>
+  <text x="370" y="296" text-anchor="middle" fill="#374151" font-size="9">ולא מגיע למשפחות</text>
+  <text x="370" y="310" text-anchor="middle" fill="#374151" font-size="9">שאינן דוברות אנגלית.</text>
+  <text x="370" y="327" text-anchor="middle" fill="#6B7280" font-size="8" font-style="italic">מקור: camk2.org</text>
+
+  <!-- Well-Defined -->
+  <rect x="30" y="215" width="220" height="215" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.5" rx="6"/>
+  <rect x="30" y="215" width="220" height="28" fill="#16A34A" rx="6"/>
+  <rect x="30" y="231" width="220" height="12" fill="#16A34A"/>
+  <text x="140" y="233" text-anchor="middle" fill="white" font-size="11" font-weight="bold">Well-Defined</text>
+  <text x="140" y="252" text-anchor="middle" fill="#15803D" font-size="9">(ניסוח 1 — ישראל)</text>
+  <text x="140" y="267" text-anchor="middle" fill="#374151" font-size="8.5">הורה ישראלי לאחר אבחנת</text>
+  <text x="140" y="280" text-anchor="middle" fill="#374151" font-size="8.5">CAMK2B אינו מוצא חומר</text>
+  <text x="140" y="293" text-anchor="middle" fill="#374151" font-size="8.5">בעברית ולא מודע לרשת.</text>
+  <line x1="50" y1="305" x2="230" y2="305" stroke="#BBF7D0" stroke-width="1"/>
+  <text x="140" y="321" text-anchor="middle" fill="#15803D" font-size="9">(ניסוח 2 — גלובלי)</text>
+  <text x="140" y="336" text-anchor="middle" fill="#374151" font-size="8.5">כל חולה שאינו ב-registry</text>
+  <text x="140" y="349" text-anchor="middle" fill="#374151" font-size="8.5">הוא נתון מחקרי שאבד</text>
+  <text x="140" y="362" text-anchor="middle" fill="#374151" font-size="8.5">לנצח לקהילת המחקר.</text>
+  <text x="140" y="382" text-anchor="middle" fill="#6B7280" font-size="8" font-style="italic">מקור: CAMK2 Therapeutics Network</text>
+  <text x="140" y="395" text-anchor="middle" fill="#6B7280" font-size="8" font-style="italic">camk2.org</text>
+  <text x="140" y="413" text-anchor="middle" fill="#15803D" font-size="8.5" font-weight="bold">מדד: 80%+ מאובחנים חדש</text>
+  <text x="140" y="426" text-anchor="middle" fill="#15803D" font-size="8.5" font-weight="bold">ב-registry תוך 60 יום</text>
+
+  <!-- Footer -->
+  <rect x="0" y="480" width="760" height="40" fill="#F0FDF4" rx="8"/>
+  <rect x="0" y="480" width="760" height="12" fill="#F0FDF4"/>
+  <text x="380" y="498" text-anchor="middle" fill="#14532D" font-size="9">IRIS Week 2 | CAMK2B Domain | Opportunity 2 of 3</text>
+  <text x="380" y="512" text-anchor="middle" fill="#6B7280" font-size="8">Sources: PubMed 40712205 · PMC10960130 · camk2.org · NORD rarediseases.org</text>
+
+  <defs>
+    <marker id="arrow-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#16A34A"/>
+    </marker>
+  </defs>
+</svg>

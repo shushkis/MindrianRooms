@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="520" viewBox="0 0 760 520" font-family="Arial, sans-serif" direction="rtl">
+  <!-- Background -->
+  <rect width="760" height="520" fill="#ffffff" rx="8"/>
+  <rect x="1" y="1" width="758" height="518" fill="none" stroke="#7C3AED" stroke-width="2" rx="8"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="760" height="54" fill="#7C3AED" rx="8"/>
+  <rect x="0" y="30" width="760" height="24" fill="#7C3AED"/>
+  <text x="380" y="33" text-anchor="middle" fill="white" font-size="16" font-weight="bold">הזדמנות 3 | Functional Variant Classification Engine</text>
+
+  <!-- Chain Row -->
+  <!-- Domain Box -->
+  <rect x="570" y="80" width="160" height="60" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1.5" rx="6"/>
+  <text x="650" y="105" text-anchor="middle" fill="#4C1D95" font-size="11" font-weight="bold">תחום</text>
+  <text x="650" y="122" text-anchor="middle" fill="#6D28D9" font-size="10">CAMK2B Disorders</text>
+  <text x="650" y="135" text-anchor="middle" fill="#6D28D9" font-size="9">(GoF vs LoF — לא ידוע לרוב הוריאנטים)</text>
+
+  <!-- Arrow 1 -->
+  <line x1="570" y1="110" x2="530" y2="110" stroke="#7C3AED" stroke-width="2" marker-end="url(#arrow-purple)"/>
+
+  <!-- Method Box -->
+  <rect x="290" y="80" width="230" height="60" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1.5" rx="6"/>
+  <text x="405" y="103" text-anchor="middle" fill="#4C1D95" font-size="11" font-weight="bold">מתודולוגיה</text>
+  <text x="405" y="118" text-anchor="middle" fill="#6D28D9" font-size="10">S-Curve Flattening + Dominant Design</text>
+  <text x="405" y="132" text-anchor="middle" fill="#6D28D9" font-size="9">פנוטייפינג בפלטו; מודל פרמה קרס</text>
+
+  <!-- Arrow 2 -->
+  <line x1="290" y1="110" x2="255" y2="110" stroke="#7C3AED" stroke-width="2" marker-end="url(#arrow-purple)"/>
+
+  <!-- Opportunity Box -->
+  <rect x="30" y="76" width="215" height="68" fill="#7C3AED" stroke="#4C1D95" stroke-width="1.5" rx="6"/>
+  <text x="137" y="99" text-anchor="middle" fill="white" font-size="11" font-weight="bold">ההזדמנות</text>
+  <text x="137" y="114" text-anchor="middle" fill="#DDD6FE" font-size="9.5">workflow לסיווג מהיר של</text>
+  <text x="137" y="127" text-anchor="middle" fill="#DDD6FE" font-size="9.5">וריאנטים CAMK2B כ-GoF/LoF —</text>
+  <text x="137" y="140" text-anchor="middle" fill="#DDD6FE" font-size="9.5">שער לטיפול מותאם-וריאנט</text>
+
+  <!-- Down Arrow -->
+  <line x1="380" y1="148" x2="380" y2="175" stroke="#7C3AED" stroke-width="2" marker-end="url(#arrow-purple)"/>
+
+  <!-- Problem Formulations Title -->
+  <text x="380" y="195" text-anchor="middle" fill="#4C1D95" font-size="13" font-weight="bold">ניסוחי הבעיה</text>
+  <line x1="80" y1="202" x2="680" y2="202" stroke="#DDD6FE" stroke-width="1"/>
+
+  <!-- Un-Defined -->
+  <rect x="490" y="215" width="230" height="130" fill="#F5F3FF" stroke="#C4B5FD" stroke-width="1.5" rx="6"/>
+  <rect x="490" y="215" width="230" height="28" fill="#DDD6FE" rx="6"/>
+  <rect x="490" y="231" width="230" height="12" fill="#DDD6FE"/>
+  <text x="605" y="233" text-anchor="middle" fill="#4C1D95" font-size="11" font-weight="bold">Un-Defined</text>
+  <text x="605" y="252" text-anchor="middle" fill="#6D28D9" font-size="9">(תחושת אי-נחת)</text>
+  <text x="605" y="268" text-anchor="middle" fill="#374151" font-size="9">רופאים מטפלים ב-CAMK2B</text>
+  <text x="605" y="282" text-anchor="middle" fill="#374151" font-size="9">בלי לדעת אם הפגם</text>
+  <text x="605" y="296" text-anchor="middle" fill="#374151" font-size="9">מגביר פעילות גנטית</text>
+  <text x="605" y="310" text-anchor="middle" fill="#374151" font-size="9">או מחסר אותה.</text>
+  <text x="605" y="335" text-anchor="middle" fill="#6B7280" font-size="8" font-style="italic">מקור: PMC11418780</text>
+
+  <!-- Ill-Defined -->
+  <rect x="265" y="215" width="210" height="130" fill="#F5F3FF" stroke="#C4B5FD" stroke-width="1.5" rx="6"/>
+  <rect x="265" y="215" width="210" height="28" fill="#C4B5FD" rx="6"/>
+  <rect x="265" y="231" width="210" height="12" fill="#C4B5FD"/>
+  <text x="370" y="233" text-anchor="middle" fill="#4C1D95" font-size="11" font-weight="bold">Ill-Defined</text>
+  <text x="370" y="252" text-anchor="middle" fill="#6D28D9" font-size="9">(מה כואב)</text>
+  <text x="370" y="268" text-anchor="middle" fill="#374151" font-size="9">אין מנגנון שיטתי לסיווג</text>
+  <text x="370" y="282" text-anchor="middle" fill="#374151" font-size="9">וריאנטים חדשים כ-GoF/LoF</text>
+  <text x="370" y="296" text-anchor="middle" fill="#374151" font-size="9">בזמן קליני סביר — חוסם</text>
+  <text x="370" y="310" text-anchor="middle" fill="#374151" font-size="9">טיפול ופיתוח תרפויטי.</text>
+  <text x="370" y="335" text-anchor="middle" fill="#6B7280" font-size="8" font-style="italic">מקור: PMC11418780 + CAMK2 Roadmap 2025</text>
+
+  <!-- Well-Defined -->
+  <rect x="30" y="215" width="220" height="215" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1.5" rx="6"/>
+  <rect x="30" y="215" width="220" height="28" fill="#7C3AED" rx="6"/>
+  <rect x="30" y="231" width="220" height="12" fill="#7C3AED"/>
+  <text x="140" y="233" text-anchor="middle" fill="white" font-size="11" font-weight="bold">Well-Defined</text>
+  <text x="140" y="252" text-anchor="middle" fill="#6D28D9" font-size="9">(ניסוח 1 — קלינאי)</text>
+  <text x="140" y="267" text-anchor="middle" fill="#374151" font-size="8.5">נוירולוג שמטפל בילד עם</text>
+  <text x="140" y="280" text-anchor="middle" fill="#374151" font-size="8.5">וריאנט CAMK2B חדש אינו</text>
+  <text x="140" y="293" text-anchor="middle" fill="#374151" font-size="8.5">יכול לסווג GoF/LoF ב-3 חודשים.</text>
+  <text x="140" y="307" text-anchor="middle" fill="#374151" font-size="8.5">טיפולים שגויים מוכרים.</text>
+  <line x1="50" y1="318" x2="230" y2="318" stroke="#DDD6FE" stroke-width="1"/>
+  <text x="140" y="334" text-anchor="middle" fill="#6D28D9" font-size="9">(ניסוח 2 — חוקר/פרמה)</text>
+  <text x="140" y="349" text-anchor="middle" fill="#374151" font-size="8.5">בלי סיווג GoF/LoF — אי-אפשר</text>
+  <text x="140" y="362" text-anchor="middle" fill="#374151" font-size="8.5">לבחור agent מתאים</text>
+  <text x="140" y="375" text-anchor="middle" fill="#374151" font-size="8.5">ל-N-of-1 ASO therapy.</text>
+  <text x="140" y="393" text-anchor="middle" fill="#6B7280" font-size="8" font-style="italic">מקור: PMC11418780 + medRxiv ASO 2025</text>
+  <text x="140" y="413" text-anchor="middle" fill="#6D28D9" font-size="8.5" font-weight="bold">מדד: סיווג מאומת < 60 יום</text>
+  <text x="140" y="426" text-anchor="middle" fill="#6D28D9" font-size="8.5" font-weight="bold">דיוק > 90% לעומת functional assay</text>
+
+  <!-- Footer -->
+  <rect x="0" y="480" width="760" height="40" fill="#F5F3FF" rx="8"/>
+  <rect x="0" y="480" width="760" height="12" fill="#F5F3FF"/>
+  <text x="380" y="498" text-anchor="middle" fill="#4C1D95" font-size="9">IRIS Week 2 | CAMK2B Domain | Opportunity 3 of 3</text>
+  <text x="380" y="512" text-anchor="middle" fill="#6B7280" font-size="8">Sources: PMC11418780 · medRxiv 2025 ASO · HHS.gov FDA Framework · PubMed 29100089</text>
+
+  <defs>
+    <marker id="arrow-purple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#7C3AED"/>
+    </marker>
+  </defs>
+</svg>

@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "status": "ok",
+  "polled_at": "2026-06-14T19:09:16.214Z",
+  "operator": "JUST_TALK",
+  "jtbd": null,
+  "tier": 1,
+  "mode": "B",
+  "doctor": {
+    "status": "warn",
+    "totalViolations": 129,
+    "counts": {
+      "missingBodyShape": 0,
+      "unauthorizedBoxChar": 69,
+      "unauthorizedGlyph": 1,
+      "rendererMissingZone1": 28,
+      "rendererMissingZone4": 31
+    }
+  },
+  "operator_shape_mismatches": [],
+  "priorities": [
+    {
+      "kind": "renderer-missing-zone1",
+      "file": "scripts\\auto-explore-drain.cjs",
+      "line": 0,
+      "detail": "renderer file lacks Zone 1 header pattern (-- X -- Y --)",
+      "weight": 0.5,
+      "matched_jtbd": null,
+      "via": null
+    },
+    {
+      "kind": "renderer-missing-zone4",
+      "file": "scripts\\auto-explore-drain.cjs",
+      "line": 0,
+      "detail": "renderer file lacks Zone 4 action footer pattern (>/mos: marker)",
+      "weight": 0.5,
+      "matched_jtbd": null,
+      "via": null
+    },
+    {
+      "kind": "renderer-missing-zone1",
+      "file": "scripts\\brain-derive-command.cjs",
+      "line": 0,
+      "detail": "renderer file lacks Zone 1 header pattern (-- X -- Y --)",
+      "weight": 0.5,
+      "matched_jtbd": null,
+      "via": null
+    },
+    {
+      "kind": "renderer-missing-zone4",
+      "file": "scripts\\brain-derive-command.cjs",
+      "line": 0,
+      "detail": "renderer file lacks Zone 4 action footer pattern (>/mos: marker)",
+      "weight": 0.5,
+      "matched_jtbd": null,
+      "via": null
+    },
+    {
+      "kind": "renderer-missing-zone1",
+      "file": "scripts\\check-dual-graph-health.cjs",
+      "line": 0,
+      "detail": "renderer file lacks Zone 1 header pattern (-- X -- Y --)",
+      "weight": 0.5,
+      "matched_jtbd": null,
+      "via": null
+    }
+  ],
+  "elapsed_ms": 468,
+  "_provenance": {
+    "phase": "105-01",
+    "doctor_version": "scripts/doctor.cjs --ui-compliance --json",
+    "skill_ref": "skills/ui-system/SKILL.md"
+  }
+}
