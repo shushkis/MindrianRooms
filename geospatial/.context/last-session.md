@@ -1,21 +1,36 @@
 # Last Session
 
-## Session: 2026-06-22 -- Room Creation
+## Session: 2026-06-22 -- Room Creation + Git Setup
 
-**Commands:** /mos:new-project geospatial
-**Artifacts created:** 8 ROOM.md section files, 2 initial-exploration.md entries (problem-definition, solution-design)
+**Commands:** /mos:new-project geospatial, /mos:rooms git-setup geospatial
 
-## Key Decisions Made This Session
-- Committed to geospatial legal intelligence as the venture path (over pediatric epilepsy path)
-- Descriptive architecture confirmed (not generative)
+## What Was Built
+- 8-section Data Room created at C:/Users/eidlm/MindrianRooms/geospatial/
+- problem-definition/ and solution-design/ seeded with exploration notes
+- Git initialized, connected to https://github.com/shushkis/MindrianRooms.git
+- .gitignore added (excludes .mindrian/ runtime files)
+- Pushed to GitHub (main, ahead of 6a6d340)
+
+## Key Decisions Filed
+- Committed to geospatial path (over pediatric epilepsy)
+- Descriptive architecture: current imagery as ground truth, historical as annotation overlays
 - Decision-level fusion selected for provenance auditability
-- Platform ambition stated: application-agnostic, legal as wedge
+- Generative/normative output explicitly rejected (hallucination risk in legal context)
+- Platform ambition stated: application-agnostic; legal disputes as wedge
 
-## Signals
-- Mordi's colleagues already validated internal value (case decision speed + intake filtering)
-- Technical foundation: Elli's sensor fusion background maps directly to georeferencing and correspondence identification
+## Where We Stopped
+Larry asked the competitive landscape framing question -- specifically:
+"What does Mordi actually replace?" Four possible competitive realities:
 
-## Pending Verifications
-- Mordi's current workflow step-by-step (time + pain points)
-- Competitive landscape -- what lawyers actually use today
-- Business model: per-case vs. subscription, who writes the first check
+1. GIS contractor (price + turnaround competition)
+2. Licensed surveyor (credential + legal standing competition)
+3. Internal ArcGIS by hand (capability they already own)
+4. No spatial evidence used at all (new category creation)
+
+Elli did not answer yet. This is the first question for next session.
+
+## Pending Next Steps
+- Answer: what does Mordi's firm currently use for historical evidence?
+- Map competitive landscape in competitive-analysis/ section
+- Explore business model (per-case vs. subscription, who writes first check)
+- Figure out how Elli and Mordi will collaborate in this room
