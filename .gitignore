@@ -1,0 +1,8 @@
+# MindrianOS -- runtime files (not source of truth, regenerated each session)
+**/.mindrian/room.db
+**/.mindrian/last-hmi-poll.json
+**/.mindrian/decision-traces/
+
+# OS / editor
+.DS_Store
+Thumbs.db
