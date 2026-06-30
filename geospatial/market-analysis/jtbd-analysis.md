@@ -11,11 +11,13 @@ room_section: market-analysis
 
 ## Customer
 
-Mordi. Land dispute lawyer. On a Tuesday he has a client sitting across from him holding a document that says "from the oak tree to the hill" -- and the oak tree no longer exists. He needs to figure out where that line is today, with enough rigor to hold up in court.
+Mordi. Chairman of a juridical committee adjudicating land disputes. On a Tuesday he has two parties in front of him, each holding documents claiming ownership of the same parcel. He needs to evaluate both sets of competing evidence against an independent spatial baseline -- and produce a verdict with precisely determined boundaries.
+
+He is not an advocate. He is an adjudicator. His credibility depends on ruling accurately, not winning.
 
 ## Job Statement
 
-When a client presents a historical land description with vanished markers, I want to translate that description into current spatial coordinates with full provenance, so I can produce legally admissible evidence of the boundary.
+When two parties present competing ownership claims over a piece of land with disputed or vanished historical markers, I want to evaluate both claims against an independent historical spatial record with full provenance, so I can issue a legally defensible verdict with precisely mapped boundaries that the Israel Survey Authority can authorize.
 
 ## Job Steps
 
@@ -59,7 +61,29 @@ The system answers Mordi's earlier question: should we take this case at all?
 Fast, low-cost historical evidence scan as case intake filter -- distinct commercial value
 before full dispute support is needed.
 
+## Legal Default -- State Ownership (Critical Commercial Fact)
+
+Israeli law: if ownership cannot be proved, the land defaults to the state.
+Implication: the government is the largest single beneficiary of unresolved or unprovable claims.
+The Israel Survey Authority has direct financial and institutional interest in accurate, fast dispute resolution.
+
+## Customer Stack (Updated)
+
+| Customer | Role | Relationship to System |
+|----------|------|------------------------|
+| Mordi's committee | Proof of concept user | Validates system works; first use case |
+| Israel Survey Authority | Institutional buyer | Produces authorized maps post-verdict; already identified as potential customer by Mordi; government scale |
+| Road planners, infrastructure authorities | Platform expansion | Query land ownership corpus once built; do not require legal verdict workflow |
+
+## Workflow Position
+
+Mordi's committee rules → Israel Survey Authority draws the authorized map → map becomes legal record.
+This system sits UPSTREAM of ISA's entire map production process.
+ISA is not a competitor. They are the body that formalizes what this system produces.
+
 ## Homework
 
-Interview one lawyer who lost a land dispute case. Don't ask what tool they wanted --
-ask what evidence they couldn't produce, and what it cost them.
+Talk to the ISA contact Mordi interviewed. Three questions:
+1. What does their current process look like when a verdict arrives without adequate spatial evidence?
+2. What does it cost them (time, money, appeals) when a boundary determination gets challenged?
+3. Would they pay for better pre-verdict spatial intelligence, or does that have to come through the committee?
