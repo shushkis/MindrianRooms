@@ -52,19 +52,21 @@ Each has a different procurement path and willingness-to-pay logic.
 - Land value: several million NIS per typical parcel
 - A 20,000-50,000 NIS report that changes the outcome is not an expense -- it is the cheapest bet available
 
-**Procurement path:** B2B -- law firm pays, no procurement process, fast
-**Revenue speed:** FASTEST path to first revenue
+**Procurement path:** B2B via law firms -- no procurement process
+**Stage:** Big Market expansion (not MVP)
 **Pitch logic:** "You paid the lawyer, the surveyor, the architect. You haven't paid the one person who can prove the land is yours."
 
 ---
 
 ## Comparative Table
 
-| Buyer | Motivation | Procurement | Revenue Speed | Pitch Anchor |
-|-------|------------|-------------|---------------|--------------|
-| סגן רמ"א | Operational efficiency | B2G, slow | Slow | Reduce appeals |
-| ממונה רכוש | Asset identification | B2G, slow | Slow | State land portfolio |
-| יזם / צד פרטי | Win the dispute | B2B, fast | **Fast** | ROI on case value |
+| Buyer | Motivation | Procurement | Stage | Pitch Anchor |
+|-------|------------|-------------|-------|--------------|
+| ממונה רכוש ממשלתי | Identify unregistered land → state ownership | B2G | **MVP** | Every unregistered parcel is a potential state asset |
+| סגן רמ"א | Operational efficiency, fewer appeals | B2G | MVP / Scale | Reduce unresolved caseload |
+| יזם / צד פרטי | Prove ownership, win registration | B2B via law firms | Big Market expansion | ROI on case value |
+
+**Corrected sequence (2026-07-01):** State is the primary MVP customer. Private claimant is the big market expansion -- same engine, opposite query direction.
 
 ---
 

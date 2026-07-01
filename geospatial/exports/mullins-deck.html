@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HaMuzim -- Mullins 7 Domains</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0D0D0D;--card:#1A1A1A;
+  --text:#E8E4DD;--muted:#8A8680;
+  --red:#A63D2F;--yellow:#C8A43C;--blue:#1E3A6E;
+  --green:#2D6B4A;--sienna:#B5602A;--purple:#6B4E8B;--teal:#2A6B5E;
+}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow:hidden;height:100vh;width:100vw}
+h1,h2,h3{font-family:'Bebas Neue',sans-serif;text-transform:uppercase;letter-spacing:0.04em;line-height:1.0}
+
+/* DECK */
+.deck{position:relative;width:100vw;height:100vh}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:72px 96px 90px;transform:translateX(100%);opacity:0;transition:transform 380ms cubic-bezier(.4,0,.2,1),opacity 280ms ease;pointer-events:none}
+.slide.active{transform:translateX(0);opacity:1;pointer-events:auto}
+.slide.prev{transform:translateX(-100%);opacity:0}
+
+/* SECTION LABEL */
+.section-label{position:absolute;top:36px;left:96px;font-family:'JetBrains Mono',monospace;font-size:0.65vw;text-transform:uppercase;letter-spacing:0.18em;color:var(--muted);opacity:0.55}
+
+/* DOMAIN CARD */
+.domain-card{background:var(--card);padding:28px 32px;border-left:4px solid transparent;margin-bottom:0}
+
+/* SCORE BADGE */
+.score{font-family:'JetBrains Mono',monospace;font-size:1.8vw;font-weight:700}
+.badge{display:inline-block;padding:3px 14px;font-family:'JetBrains Mono',monospace;font-size:0.75vw;font-weight:700;text-transform:uppercase;letter-spacing:0.12em}
+.badge-green{background:var(--green);color:#E8E4DD}
+.badge-yellow{background:var(--yellow);color:#0D0D0D}
+.badge-red{background:var(--red);color:#E8E4DD}
+
+/* ACCENT BAR */
+.accent{height:4px;width:80px;margin-bottom:20px}
+
+/* GRID */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+
+/* NAV */
+.nav-dots{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:200}
+.nav-dot{width:7px;height:7px;background:var(--muted);opacity:0.3;cursor:pointer;transition:opacity 200ms,background 200ms}
+.nav-dot.active{opacity:1;background:var(--yellow)}
+.progress-bar{position:fixed;bottom:0;left:0;height:3px;background:var(--yellow);z-index:201;transition:width 380ms ease}
+.controls{position:fixed;bottom:18px;right:28px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted)}
+.mondrian-bar{position:fixed;bottom:0;left:0;right:0;height:4px;display:flex;z-index:9999}
+.mondrian-bar span:nth-child(1){flex:1;background:#C23B22}
+.mondrian-bar span:nth-child(2){flex:1;background:#1B3B6F}
+.mondrian-bar span:nth-child(3){flex:1;background:#E8B931}
+.mondrian-bar span:nth-child(4){flex:1;background:#1A1A1A}
+.built{position:fixed;bottom:10px;left:20px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#333;letter-spacing:0.5px}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+<!-- SLIDE 1: Title -->
+<div class="slide active" data-idx="0">
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:32px;text-align:center">
+    <div style="display:flex;gap:6px;justify-content:center">
+      <div style="width:28px;height:28px;background:var(--red)"></div>
+      <div style="width:14px;height:28px;background:var(--yellow)"></div>
+      <div style="width:14px;height:28px;background:var(--blue)"></div>
+    </div>
+    <h1 style="font-size:5.5vw;line-height:1">HaMuzim</h1>
+    <h2 style="font-size:2.2vw;color:var(--muted);font-family:'Inter',sans-serif;font-weight:300;text-transform:none;letter-spacing:0">Geographic Data Intelligence</h2>
+    <span class="badge badge-green" style="font-size:1vw;padding:6px 24px">Mullins 7 Domains &nbsp;&#8212;&nbsp; VERDICT: GO</span>
+    <p style="color:var(--muted);font-size:0.85vw;margin-top:24px;font-family:'JetBrains Mono',monospace">2026-07-01 &nbsp;&#8212;&nbsp; Mordi Verzberger &nbsp;&amp;&nbsp; Elli Eidelman</p>
+  </div>
+</div>
+
+<!-- SLIDE 2: The Problem -->
+<div class="slide" data-idx="1">
+  <span class="section-label">Well-Defined Problem</span>
+  <div style="display:flex;flex-direction:column;justify-content:center;height:100%;gap:36px">
+    <div class="accent" style="background:var(--yellow)"></div>
+    <h2 style="font-size:3vw">The Problem</h2>
+    <div style="background:var(--card);padding:32px 36px;border-left:4px solid var(--yellow)">
+      <p style="font-size:1.25vw;font-weight:500;color:var(--text);margin-bottom:16px">Big Market</p>
+      <p style="font-size:1.05vw;color:var(--muted);line-height:1.7">How can we help <strong style="color:var(--text)">land registration authorities</strong> reach a legally defensible verdict, under circumstances where historical evidence is fragmented across disconnected archives unlinked to geographic coordinates, in order to <strong style="color:var(--yellow)">resolve the disputed parcels that today default to the state by procedural failure rather than by fact?</strong></p>
+    </div>
+    <div style="background:var(--card);padding:32px 36px;border-left:4px solid var(--sienna)">
+      <p style="font-size:1.25vw;font-weight:500;color:var(--text);margin-bottom:16px">MVP</p>
+      <p style="font-size:1.05vw;color:var(--muted);line-height:1.7">How can we help <strong style="color:var(--text)">the state</strong> identify parcels where private ownership cannot be proven, under circumstances where 70% of West Bank land is unregistered and historical records are disconnected from geographic coordinates, in order to <strong style="color:var(--sienna)">systematically establish state ownership over unregistered land?</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3: Domain 1 -->
+<div class="slide" data-idx="2">
+  <span class="section-label">Market Domain 1 of 2</span>
+  <div style="display:flex;flex-direction:column;justify-content:center;height:100%;gap:28px">
+    <div class="accent" style="background:var(--green)"></div>
+    <div style="display:flex;align-items:center;gap:24px">
+      <h2 style="font-size:3.2vw">Target Segment Benefits</h2>
+      <span class="badge badge-green">5 / 5 &nbsp; GREEN</span>
+    </div>
+    <div class="grid-2" style="gap:24px">
+      <div class="domain-card" style="border-left-color:var(--green)">
+        <p style="font-size:0.8vw;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px">The Pain</p>
+        <p style="font-size:1.05vw;line-height:1.65">Land that fails to register <strong>defaults permanently to the state.</strong> The outcome is irreversible. No appeals after the window closes.</p>
+      </div>
+      <div class="domain-card" style="border-left-color:var(--yellow)">
+        <p style="font-size:0.8vw;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px">The Economics</p>
+        <p style="font-size:1.05vw;line-height:1.65">Parcel value: <strong>several million NIS.</strong> Report cost: <strong>20-50K NIS.</strong> JTBD importance/satisfaction gap: <strong>8 / 10</strong> -- among the highest possible.</p>
+      </div>
+    </div>
+    <div class="domain-card" style="border-left-color:var(--green);padding:20px 32px">
+      <p style="font-size:1.05vw;color:var(--muted);line-height:1.6">"You paid the lawyer, the surveyor, the architect. You haven't paid the one person who can prove the land is yours."</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4: Domain 2 -->
+<div class="slide" data-idx="3">
+  <span class="section-label">Market Domain 2 of 2</span>
+  <div style="display:flex;flex-direction:column;justify-content:center;height:100%;gap:28px">
+    <div class="accent" style="background:var(--green)"></div>
+    <div style="display:flex;align-items:center;gap:24px">
+      <h2 style="font-size:3.2vw">Market Attractiveness</h2>
+      <span class="badge badge-green">4 / 5 &nbsp; GREEN</span>
+    </div>
+    <div class="grid-3">
+      <div class="domain-card" style="border-left-color:var(--green)">
+        <p style="font-size:0.8vw;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.1em">Scale</p>
+        <p style="font-size:2.5vw;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--yellow)">70%</p>
+        <p style="font-size:0.95vw;color:var(--muted);margin-top:6px">of West Bank parcels unregistered</p>
+      </div>
+      <div class="domain-card" style="border-left-color:var(--blue)">
+        <p style="font-size:0.8vw;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.1em">Budget</p>
+        <p style="font-size:1.3vw;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--text)">Hundreds of<br>millions NIS</p>
+        <p style="font-size:0.95vw;color:var(--muted);margin-top:6px">allocated for land registration</p>
+      </div>
+      <div class="domain-card" style="border-left-color:var(--sienna)">
+        <p style="font-size:0.8vw;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.1em">Verticals</p>
+        <p style="font-size:0.95vw;line-height:1.7;color:var(--text)">Energy &bull; Agriculture<br>Fire Management<br>Infrastructure<br><em style="color:var(--muted)">Same engine, different output</em></p>
+      </div>
+    </div>
+    <div class="domain-card" style="border-left-color:var(--yellow);padding:20px 32px">
+      <p style="font-size:1vw;color:var(--muted)">Breezometer analogy: legal disputes are the entry point. The historical spatial intelligence layer is the product.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5: Domain 3 -->
+<div class="slide" data-idx="4">
+  <span class="section-label">Industry Domain 1 of 2</span>
+  <div style="display:flex;flex-direction:column;justify-content:center;height:100%;gap:28px">
+    <div class="accent" style="background:var(--green)"></div>
+    <div style="display:flex;align-items:center;gap:24px">
+      <h2 style="font-size:3.2vw">Industry Attractiveness</h2>
+      <span class="badge badge-green">4 / 5 &nbsp; GREEN</span>
+    </div>
+    <div class="grid-2" style="gap:20px">
+      <div class="domain-card" style="border-left-color:var(--green)">
+        <p style="font-size:0.8vw;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.1em">Supplier Power &mdash; LOW</p>
+        <p style="font-size:1vw;line-height:1.6;color:var(--muted)">Core data is public: Survey Institute, satellites, court records. No supplier lock-in.</p>
+      </div>
+      <div class="domain-card" style="border-left-color:var(--green)">
+        <p style="font-size:0.8vw;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.1em">Buyer Power &mdash; LOW / MED</p>
+        <p style="font-size:1vw;line-height:1.6;color:var(--muted)">LOW for private claimants (irreversible stakes). MEDIUM for government procurement.</p>
+      </div>
+      <div class="domain-card" style="border-left-color:var(--yellow)">
+        <p style="font-size:0.8vw;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.1em">Primary Substitute</p>
+        <p style="font-size:1vw;line-height:1.6;color:var(--text)">"Doing nothing" &mdash; the most common choice. It has no lobby and no price point.</p>
+      </div>
+      <div class="domain-card" style="border-left-color:var(--green)">
+        <p style="font-size:0.8vw;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.1em">New Entrants &mdash; HIGH BARRIER</p>
+        <p style="font-size:1vw;line-height:1.6;color:var(--muted)">The assembled layer takes years to build. Zero direct rivals in this niche today.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6: Domain 4 -->
+<div class="slide" data-idx="5">
+  <span class="section-label">Industry Domain 2 of 2</span>
+  <div style="display:flex;flex-direction:column;justify-content:center;height:100%;gap:28px">
+    <div class="accent" style="background:var(--green)"></div>
+    <div style="display:flex;align-items:center;gap:24px">
+      <h2 style="font-size:3.2vw">Sustainable Advantage</h2>
+      <span class="badge badge-green">4 / 5 &nbsp; GREEN</span>
+    </div>
+    <div class="domain-card" style="border-left-color:var(--yellow);padding:28px 32px;margin-bottom:8px">
+      <p style="font-size:1.2vw;font-weight:600;margin-bottom:12px">The Moat: The Assembled Layer</p>
+      <p style="font-size:1.05vw;color:var(--muted);line-height:1.7">Every case ingested enriches every prior case. Historical aerial photos georeferenced, court decisions spatially tagged, Ottoman records digitized and fused. This is a <strong style="color:var(--text)">technical network effect</strong> -- not a strategy claim, a mathematical inevitability of the data model.</p>
+    </div>
+    <div class="grid-2" style="gap:20px">
+      <div class="domain-card" style="border-left-color:var(--green)">
+        <p style="font-size:0.8vw;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.1em">What Esri can't copy</p>
+        <p style="font-size:1vw;line-height:1.6;color:var(--muted)">Esri can build the algorithm. Planet can sell the data. Neither can copy 10 years of assembled provenance chains.</p>
+      </div>
+      <div class="domain-card" style="border-left-color:var(--green)">
+        <p style="font-size:0.8vw;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.1em">Founder as Channel</p>
+        <p style="font-size:1vw;line-height:1.6;color:var(--muted)">Mordi is simultaneously the founder, the first customer, and the distribution channel. That combination is rare.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7: Domain 5 -->
+<div class="slide" data-idx="6">
+  <span class="section-label">Team Domain 1 of 3</span>
+  <div style="display:flex;flex-direction:column;justify-content:center;height:100%;gap:28px">
+    <div class="accent" style="background:var(--green)"></div>
+    <div style="display:flex;align-items:center;gap:24px">
+      <h2 style="font-size:3.2vw">Mission &amp; Risk Propensity</h2>
+      <span class="badge badge-green">4 / 5 &nbsp; GREEN</span>
+    </div>
+    <div class="grid-2" style="gap:24px">
+      <div class="domain-card" style="border-left-color:var(--red)">
+        <p style="font-size:1.1vw;font-weight:600;margin-bottom:12px">Mordi &mdash; Domain</p>
+        <p style="font-size:1vw;color:var(--muted);line-height:1.65">"Can't sleep because the problem keeps him up." Committee chairman. Legal network. First customer. BD channel. IP coverage.</p>
+      </div>
+      <div class="domain-card" style="border-left-color:var(--blue)">
+        <p style="font-size:1.1vw;font-weight:600;margin-bottom:12px">Elli &mdash; CTO</p>
+        <p style="font-size:1vw;color:var(--muted);line-height:1.65">Owns the technical challenge. 11 years sensor fusion + computer vision. "Leave the passion for the problem to Mordi. Stay in love with the solutions."</p>
+      </div>
+    </div>
+    <div class="domain-card" style="border-left-color:var(--yellow);padding:20px 32px">
+      <p style="font-size:1vw;color:var(--muted)">Role split is clean and non-overlapping. Legal and IP coverage on founding team is uncommon at this stage.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8: Domain 6 -->
+<div class="slide" data-idx="7">
+  <span class="section-label">Team Domain 2 of 3</span>
+  <div style="display:flex;flex-direction:column;justify-content:center;height:100%;gap:28px">
+    <div class="accent" style="background:var(--green)"></div>
+    <div style="display:flex;align-items:center;gap:24px">
+      <h2 style="font-size:3.2vw">Ability to Execute on CSFs</h2>
+      <span class="badge badge-green">4 / 5 &nbsp; GREEN &nbsp;&#10003; resolved</span>
+    </div>
+    <div class="grid-2" style="gap:16px">
+      <div class="domain-card" style="border-left-color:var(--green)">
+        <p style="font-size:0.8vw;color:var(--green);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.1em">&#10003; Covered</p>
+        <p style="font-size:1vw;font-weight:500;margin-bottom:6px">Georeferencing + CV</p>
+        <p style="font-size:0.9vw;color:var(--muted)">Elli -- 11 years sensor fusion and computer vision</p>
+      </div>
+      <div class="domain-card" style="border-left-color:var(--green)">
+        <p style="font-size:0.8vw;color:var(--green);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.1em">&#10003; Covered</p>
+        <p style="font-size:1vw;font-weight:500;margin-bottom:6px">Legal Admissibility</p>
+        <p style="font-size:0.9vw;color:var(--muted)">Mordi -- direct operational experience as adjudicator</p>
+      </div>
+      <div class="domain-card" style="border-left-color:var(--green)">
+        <p style="font-size:0.8vw;color:var(--green);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.1em">&#10003; Covered</p>
+        <p style="font-size:1vw;font-weight:500;margin-bottom:6px">Gov Procurement</p>
+        <p style="font-size:0.9vw;color:var(--muted)">Mordi -- existing working relationship with סגן רמ"א</p>
+      </div>
+      <div class="domain-card" style="border-left-color:var(--green)">
+        <p style="font-size:0.8vw;color:var(--green);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.1em">&#10003; Resolved</p>
+        <p style="font-size:1vw;font-weight:500;margin-bottom:6px">Ottoman Arabic OCR/NLP</p>
+        <p style="font-size:0.9vw;color:var(--muted)">Osmanlica.com 88-97% accuracy. Fine-tune small LLM on Jordanian tax records. Engineering sprint, not research.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: Domain 7 -->
+<div class="slide" data-idx="8">
+  <span class="section-label">Team Domain 3 of 3</span>
+  <div style="display:flex;flex-direction:column;justify-content:center;height:100%;gap:28px">
+    <div class="accent" style="background:var(--green)"></div>
+    <div style="display:flex;align-items:center;gap:24px">
+      <h2 style="font-size:3.2vw">Connectedness</h2>
+      <span class="badge badge-green">4 / 5 &nbsp; GREEN</span>
+    </div>
+    <div class="grid-3">
+      <div class="domain-card" style="border-left-color:var(--teal)">
+        <p style="font-size:0.8vw;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.1em">Upstream &mdash; Data</p>
+        <p style="font-size:1vw;line-height:1.65">Survey Institute archives. PalOpenMaps.org. Sentinel-2, Landsat. Public court records. No gatekeepers.</p>
+      </div>
+      <div class="domain-card" style="border-left-color:var(--yellow)">
+        <p style="font-size:0.8vw;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.1em">Downstream &mdash; Buyers</p>
+        <p style="font-size:1vw;line-height:1.65">Mordi IS the buyer and the channel. Direct access to land dispute law firms across Judea &amp; Samaria.</p>
+      </div>
+      <div class="domain-card" style="border-left-color:var(--blue)">
+        <p style="font-size:0.8vw;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.1em">Across &mdash; ISA</p>
+        <p style="font-size:1vw;line-height:1.65">"Missing many layers on top of GIS -- textual data related to the geographical area." Validated unprompted.</p>
+      </div>
+    </div>
+    <div class="domain-card" style="border-left-color:var(--green);padding:20px 32px">
+      <p style="font-size:1vw;color:var(--muted)">ISA is not a competitor. They formalize what HaMuzim produces. This system sits upstream of ISA's entire map production process.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 10: Scorecard -->
+<div class="slide" data-idx="9">
+  <span class="section-label">Scorecard</span>
+  <div style="display:flex;flex-direction:column;justify-content:center;height:100%;gap:24px">
+    <div style="display:flex;align-items:center;gap:24px;margin-bottom:8px">
+      <div class="accent" style="background:var(--yellow);margin-bottom:0"></div>
+      <h2 style="font-size:3.2vw">7 Domains</h2>
+      <span class="badge badge-green" style="font-size:1.1vw;padding:8px 28px">VERDICT: GO</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="display:grid;grid-template-columns:2fr 6fr 2fr 2fr;gap:16px;padding:0 4px">
+        <p style="font-size:0.75vw;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em">#</p>
+        <p style="font-size:0.75vw;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em">Domain</p>
+        <p style="font-size:0.75vw;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em">Score</p>
+        <p style="font-size:0.75vw;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em">Status</p>
+      </div>
+      <div style="height:1px;background:var(--card)"></div>
+      ${[
+        ['1','Target Segment Benefits','5 / 5','GREEN'],
+        ['2','Market Attractiveness (Macro)','4 / 5','GREEN'],
+        ['3','Industry Attractiveness','4 / 5','GREEN'],
+        ['4','Sustainable Advantage','4 / 5','GREEN'],
+        ['5','Mission &amp; Risk Propensity','4 / 5','GREEN'],
+        ['6','Ability to Execute on CSFs','4 / 5','GREEN'],
+        ['7','Connectedness','4 / 5','GREEN'],
+      ].map(function(r){ return `
+      <div style="display:grid;grid-template-columns:2fr 6fr 2fr 2fr;gap:16px;padding:10px 4px;border-bottom:1px solid #1A1A1A;align-items:center">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:0.9vw;color:var(--muted)">${r[0]}</p>
+        <p style="font-size:1vw">${r[1]}</p>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:1vw;color:var(--yellow)">${r[2]}</p>
+        <span class="badge badge-green" style="font-size:0.7vw">${r[3]}</span>
+      </div>`; }).join('')}
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 11: Next Actions -->
+<div class="slide" data-idx="10">
+  <span class="section-label">Next Actions</span>
+  <div style="display:flex;flex-direction:column;justify-content:center;height:100%;gap:28px">
+    <div class="accent" style="background:var(--yellow)"></div>
+    <h2 style="font-size:3.2vw">What Happens Now</h2>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="domain-card" style="border-left-color:var(--red);display:grid;grid-template-columns:40px 1fr;gap:20px;align-items:center">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:1.8vw;font-weight:700;color:var(--red)">01</p>
+        <div>
+          <p style="font-size:1.05vw;font-weight:600;margin-bottom:4px">Biti Hills PoC -- public data only</p>
+          <p style="font-size:0.95vw;color:var(--muted)">Reconstruct the missing cultivation evidence retroactively. If the public layer answers what the court couldn't -- that IS the demo, the pitch, and the proof simultaneously.</p>
+        </div>
+      </div>
+      <div class="domain-card" style="border-left-color:var(--yellow);display:grid;grid-template-columns:40px 1fr;gap:20px;align-items:center">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:1.8vw;font-weight:700;color:var(--yellow)">02</p>
+        <div>
+          <p style="font-size:1.05vw;font-weight:600;margin-bottom:4px">First revenue -- private claimant segment</p>
+          <p style="font-size:0.95vw;color:var(--muted)">Approach land dispute law firms in Mordi's network. Per-case pricing 20-50K NIS. No procurement process required.</p>
+        </div>
+      </div>
+      <div class="domain-card" style="border-left-color:var(--blue);display:grid;grid-template-columns:40px 1fr;gap:20px;align-items:center">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:1.8vw;font-weight:700;color:var(--blue)">03</p>
+        <div>
+          <p style="font-size:1.05vw;font-weight:600;margin-bottom:4px">Ottoman NLP -- engineering sprint</p>
+          <p style="font-size:0.95vw;color:var(--muted)">Evaluate Osmanlica.com + TrOCR as base. Fine-tune on labeled Jordanian property tax records. 2-3 month sprint, not a research program.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /deck -->
+
+<div class="nav-dots" id="nav-dots"></div>
+<div class="progress-bar" id="progress-bar"></div>
+<div class="controls"><span id="current">1</span> / <span id="total">11</span></div>
+<div class="built">Built with MindrianOS</div>
+<div class="mondrian-bar"><span></span><span></span><span></span><span></span></div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const dotsEl = document.getElementById('nav-dots');
+const pb = document.getElementById('progress-bar');
+const curEl = document.getElementById('current');
+const totEl = document.getElementById('total');
+let cur = 0;
+
+totEl.textContent = slides.length;
+
+slides.forEach(function(_,i){
+  const d = document.createElement('div');
+  d.className = 'nav-dot' + (i===0?' active':'');
+  d.onclick = function(){ go(i); };
+  dotsEl.appendChild(d);
+});
+
+const dots = dotsEl.querySelectorAll('.nav-dot');
+
+function go(n){
+  if(n<0||n>=slides.length||n===cur) return;
+  slides[cur].classList.remove('active');
+  slides[cur].classList.add('prev');
+  dots[cur].classList.remove('active');
+  const prev = cur; cur = n;
+  slides[cur].classList.add('active');
+  dots[cur].classList.add('active');
+  curEl.textContent = cur+1;
+  pb.style.width = ((cur+1)/slides.length*100)+'%';
+  setTimeout(function(){ slides[prev].classList.remove('prev'); }, 420);
+}
+
+document.addEventListener('keydown',function(e){
+  if(e.key==='ArrowRight'||e.key===' '){ e.preventDefault(); go(cur+1); }
+  if(e.key==='ArrowLeft'){ e.preventDefault(); go(cur-1); }
+  if(e.key==='Home'){ e.preventDefault(); go(0); }
+  if(e.key==='End'){ e.preventDefault(); go(slides.length-1); }
+});
+
+let tx=0;
+document.addEventListener('touchstart',function(e){ tx=e.touches[0].clientX; });
+document.addEventListener('touchend',function(e){
+  const d=tx-e.changedTouches[0].clientX;
+  if(Math.abs(d)>50){ if(d>0) go(cur+1); else go(cur-1); }
+});
+
+document.querySelector('.deck').addEventListener('click',function(e){
+  if(e.target.closest('a')) return;
+  e.clientX < window.innerWidth/2 ? go(cur-1) : go(cur+1);
+});
+
+pb.style.width = (1/slides.length*100)+'%';
+</script>
+</body>
+</html>

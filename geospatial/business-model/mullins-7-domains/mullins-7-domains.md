@@ -15,7 +15,7 @@ weakest_domain_resolved: true
 How can we help land registration authorities reach a legally defensible verdict, under circumstances where historical evidence is fragmented across disconnected archives unlinked to geographic coordinates, in order to resolve the disputed parcels that today default to the state by procedural failure rather than by fact?
 
 **MVP:**
-How can we help land claimants prove historical ownership, under circumstances where the evidence exists but is scattered across disconnected archives unlinked to geographic coordinates, in order to secure land registration before the state claims it by default?
+How can we help the state identify parcels where private ownership cannot be proven, under circumstances where 70% of West Bank land is unregistered and historical records are disconnected from geographic coordinates, in order to systematically establish state ownership over unregistered land?
 
 ---
 
@@ -64,13 +64,13 @@ The pain is irreversible and the economics are clear. When a parcel defaults to 
 
 ## Buyer Segments
 
-| Buyer | Motivation | Path | Revenue Speed |
-|-------|------------|------|---------------|
-| סגן רמ"א (Deputy Head, ILA) | Operational efficiency, fewer appeals | B2G, slow | Slow |
-| ממונה רכוש ממשלתי | State land asset identification | B2G, slow | Slow |
-| Private claimant / developer | Win the case | B2B via law firms, fast | **Fast** |
+| Buyer | Motivation | Path | Stage |
+|-------|------------|------|-------|
+| ממונה רכוש ממשלתי | Identify unregistered land → establish state ownership | B2G | **MVP** |
+| סגן רמ"א (Deputy Head, ILA) | Operational efficiency, fewer appeals | B2G | MVP / Scale |
+| Private claimant / developer | Prove ownership and win registration | B2B via law firms | Big Market expansion |
 
-First revenue: private claimant segment. No procurement process. Law firm pays.
+**Corrected sequence:** State is the primary MVP customer. Private claimant segment addressed in the big market expansion phase.
 
 ---
 
@@ -78,11 +78,11 @@ First revenue: private claimant segment. No procurement process. Law firm pays.
 
 1. **Move immediately to Biti Hills PoC.** Public data only. Reconstruct the missing cultivation evidence retroactively. If the public layer answers what the court couldn't answer -- that is the demo, the pitch, and the proof simultaneously.
 
-2. **First revenue target: private claimant segment.** Approach land dispute law firms in Mordi's network. Per-case pricing at 1-2% of asset value (20-50K NIS). No procurement required.
+2. **MVP customer: the state (ממונה על הרכוש הממשלתי).** The system scans unregistered parcels, finds land with no provable private owner, and surfaces it for state registration. Mordi has the working relationship. PoC triggers the conversation.
 
 3. **Ottoman NLP: don't build from scratch.** Evaluate Osmanlica.com and TrOCR-based models as base. Fine-tune on a small labeled corpus of Jordanian-era property tax records (נסחי מס רכוש). This is a 2-3 month engineering sprint, not a research program.
 
-4. **Government approach: sequence after PoC.** סגן רמ"א has the relationship (Mordi). The trigger is "something serious to present." The PoC IS that something.
+4. **Big market expansion: private claimants.** Once the state-side product is proven, address the inverse use case -- helping private parties prove ownership. Same engine, opposite query direction. This is the larger long-term market.
 
 ---
 
