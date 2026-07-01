@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "active": "domain-exploration",
+  "active": "geospatial",
   "rooms": {
     "iff": {
       "name": "iff",
@@ -25,6 +25,19 @@
       "git": {
         "enabled": false,
         "remote": "",
+        "auto_push": false
+      }
+    },
+    "geospatial": {
+      "name": "geospatial",
+      "venture_name": "Geospatial Fusion Platform",
+      "stage": "Discovery",
+      "path": "C:/Users/eidlm/MindrianRooms/geospatial",
+      "created_at": "2026-06-22T20:05:36.489Z",
+      "last_active": "2026-06-22T20:05:36.489Z",
+      "git": {
+        "enabled": true,
+        "remote": "https://github.com/shushkis/MindrianRooms.git",
         "auto_push": false
       }
     }
