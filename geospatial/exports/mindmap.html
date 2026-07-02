@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>המוזים -- Mind Map</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: #0D0D0D;
+  color: #E8E4DD;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+canvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+.label {
+  position: absolute;
+  pointer-events: none;
+  text-align: center;
+  direction: rtl;
+}
+#title {
+  position: fixed;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.15em;
+  color: #8A8680;
+  text-transform: uppercase;
+}
+/* De Stijl bar */
+.mondrian-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 4px;
+  display: flex;
+  z-index: 999;
+}
+.mondrian-bar span:nth-child(1) { flex:1; background:#C23B22; }
+.mondrian-bar span:nth-child(2) { flex:1; background:#1B3B6F; }
+.mondrian-bar span:nth-child(3) { flex:1; background:#E8B931; }
+.mondrian-bar span:nth-child(4) { flex:1; background:#1A1A1A; }
+#built {
+  position: fixed;
+  bottom: 10px; left: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: #4A4A4A;
+  letter-spacing: 0.5px;
+}
+#hint {
+  position: fixed;
+  bottom: 10px; right: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: #4A4A4A;
+  letter-spacing: 0.3px;
+}
+</style>
+</head>
+<body>
+
+<canvas id="c"></canvas>
+<div id="title">המוזים &mdash; Geographic Data Intelligence</div>
+<div id="built">Built with MindrianOS</div>
+<div id="hint">גלגל עכבר להתקרב &nbsp;|&nbsp; גרירה להזזה</div>
+<div class="mondrian-bar"><span></span><span></span><span></span><span></span></div>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+// Colors -- De Stijl palette
+const C = {
+  bg:      '#0D0D0D',
+  card:    '#1A1A1A',
+  red:     '#A63D2F',
+  yellow:  '#C8A43C',
+  blue:    '#1E3A6E',
+  green:   '#2D6B4A',
+  sienna:  '#B5602A',
+  purple:  '#6B4E8B',
+  teal:    '#2A6B5E',
+  muted:   '#8A8680',
+  text:    '#E8E4DD',
+  line:    '#2A2A2A',
+};
+
+// Pan + zoom state
+let ox = 0, oy = 0, scale = 1;
+let dragging = false, lastX, lastY;
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  draw();
+}
+window.addEventListener('resize', resize);
+
+// --- Mind map data ---
+const CENTER = { label: 'המוזים', sub: 'Geographic Data Intelligence', color: C.yellow, r: 72, textColor: '#0D0D0D' };
+
+const BRANCHES = [
+  {
+    label: 'מודולים\nמשפטיים', color: C.red, angle: -90, dist: 240, r: 52,
+    children: [
+      { label: 'Module 1\nרכישה', sub: 'שרשרת זכויות\nמכירה כפולה', color: C.red, dist: 180, r: 44 },
+      { label: 'Module 2\nמיקום', sub: 'מווקע → קואורדינטות\nText → Geo', color: C.red, dist: 180, r: 44 },
+      { label: 'Module 3\nעיבוד וחזקה', sub: 'סעיף 78 עות\'מאני\n10 שנות עיבוד', color: C.red, dist: 180, r: 44 },
+    ]
+  },
+  {
+    label: 'קונים', color: C.yellow, angle: 0, dist: 240, r: 52,
+    children: [
+      { label: 'סגן רמ"א', sub: 'יעילות תפעולית\nB2G -- איטי', color: C.yellow, dist: 180, r: 40 },
+      { label: 'ממונה רכוש', sub: 'זיהוי קרקע מדינה\nB2G -- איטי', color: C.sienna, dist: 180, r: 40 },
+      { label: 'יזם פרטי', sub: 'לנצח בתיק\nB2B -- מהיר ★', color: C.green, dist: 180, r: 40 },
+    ]
+  },
+  {
+    label: 'ארכיטקטורה', color: C.blue, angle: 90, dist: 240, r: 52,
+    children: [
+      { label: 'Observation', sub: '(location, time,\ncondition, source, conf)', color: C.blue, dist: 200, r: 44 },
+      { label: 'Text ↔ Geo\nBridge', sub: 'שני כיוונים\nISA: אומת', color: C.blue, dist: 200, r: 44 },
+      { label: 'Decision-Level\nFusion', sub: 'כל מקור מצביע\nבנפרד', color: C.blue, dist: 200, r: 40 },
+    ]
+  },
+  {
+    label: 'נתונים', color: C.teal, angle: 145, dist: 230, r: 50,
+    children: [
+      { label: 'שכבה ציבורית', sub: 'מפ"י, לוויין\nבתי משפט', color: C.teal, dist: 175, r: 40 },
+      { label: 'PalOpenMaps', sub: 'עות\'מאני +\nמנדט בריטי', color: C.teal, dist: 175, r: 40 },
+    ]
+  },
+  {
+    label: 'Case Study\nביטי הילס', color: C.sienna, angle: 215, dist: 230, r: 50,
+    children: [
+      { label: 'הכשל', sub: 'לא הוכיחו\n10 שנות עיבוד', color: C.sienna, dist: 175, r: 40 },
+      { label: 'ה-PoC', sub: 'שחזור ראיות\nמנתונים ציבוריים', color: C.green, dist: 175, r: 40 },
+    ]
+  },
+  {
+    label: 'מוצר', color: C.purple, angle: 310, dist: 230, r: 50,
+    children: [
+      { label: 'ציר זמן', sub: '1959→2024\nלכל שנה: ממצאים', color: C.purple, dist: 175, r: 38 },
+      { label: 'מפה + Layers', sub: 'תמונה נוכחית\n+ שכבות היסטוריות', color: C.purple, dist: 175, r: 38 },
+      { label: 'תערוכה משפטית', sub: 'PDF + שרשרת מקורות\nמוכן להגשה', color: C.purple, dist: 175, r: 38 },
+    ]
+  },
+];
+
+// Compute positions
+function toRad(deg) { return deg * Math.PI / 180; }
+
+function computePositions() {
+  const nodes = [];
+  const edges = [];
+  const cx = canvas.width / 2;
+  const cy = canvas.height / 2;
+
+  // Center
+  const center = { x: cx, y: cy, ...CENTER };
+  nodes.push(center);
+
+  BRANCHES.forEach(function(branch) {
+    const rad = toRad(branch.angle);
+    const bx = cx + Math.cos(rad) * branch.dist;
+    const by = cy + Math.sin(rad) * branch.dist;
+    const bNode = { x: bx, y: by, label: branch.label, color: branch.color, r: branch.r, textColor: C.text };
+    nodes.push(bNode);
+    edges.push({ from: center, to: bNode, color: branch.color, width: 2 });
+
+    const n = branch.children.length;
+    branch.children.forEach(function(child, i) {
+      // Spread children around branch angle
+      const spread = 44;
+      const childAngle = branch.angle + (i - (n - 1) / 2) * spread;
+      const cr = toRad(childAngle);
+      const cdist = branch.dist + child.dist;
+      const childx = cx + Math.cos(cr) * cdist;
+      const childy = cy + Math.sin(cr) * cdist;
+      const cNode = { x: childx, y: childy, label: child.label, sub: child.sub, color: child.color, r: child.r, textColor: C.text };
+      nodes.push(cNode);
+      edges.push({ from: bNode, to: cNode, color: child.color, width: 1.5, dashed: true });
+    });
+  });
+
+  return { nodes, edges, cx, cy };
+}
+
+// Drawing helpers
+function drawEdge(from, to, color, width, dashed) {
+  ctx.save();
+  ctx.strokeStyle = color + '88';
+  ctx.lineWidth = width;
+  if (dashed) ctx.setLineDash([5, 5]);
+  else ctx.setLineDash([]);
+
+  // Curved line
+  const mx = (from.x + to.x) / 2;
+  const my = (from.y + to.y) / 2;
+  ctx.beginPath();
+  ctx.moveTo(from.x, from.y);
+  ctx.quadraticCurveTo(mx, my, to.x, to.y);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawNode(node) {
+  const { x, y, label, sub, color, r, textColor } = node;
+
+  // Shadow glow
+  ctx.save();
+  ctx.shadowColor = color + '44';
+  ctx.shadowBlur = 18;
+
+  // Node circle
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.fillStyle = '#1A1A1A';
+  ctx.fill();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.restore();
+
+  // Inner accent ring
+  ctx.beginPath();
+  ctx.arc(x, y, r - 5, 0, Math.PI * 2);
+  ctx.strokeStyle = color + '33';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Label text
+  ctx.save();
+  ctx.fillStyle = textColor || C.text;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+
+  const lines = label.split('\n');
+  const subLines = sub ? sub.split('\n') : [];
+  const totalLines = lines.length + (subLines.length > 0 ? subLines.length + 0.3 : 0);
+  const lineH = r < 45 ? 13 : 15;
+  const startY = y - ((totalLines - 1) / 2) * lineH;
+
+  // Main label
+  ctx.font = (r < 45 ? '500 11px' : '600 12px') + ' \'Inter\', sans-serif';
+  ctx.fillStyle = C.text;
+  lines.forEach(function(line, i) {
+    ctx.fillText(line, x, startY + i * lineH);
+  });
+
+  // Sub label
+  if (subLines.length > 0) {
+    ctx.font = '300 9px \'Inter\', sans-serif';
+    ctx.fillStyle = C.muted;
+    subLines.forEach(function(line, i) {
+      ctx.fillText(line, x, startY + (lines.length + 0.5 + i) * lineH);
+    });
+  }
+
+  ctx.restore();
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // BG
+  ctx.fillStyle = C.bg;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Apply pan + zoom
+  ctx.save();
+  ctx.translate(canvas.width / 2 + ox, canvas.height / 2 + oy);
+  ctx.scale(scale, scale);
+  ctx.translate(-canvas.width / 2, -canvas.height / 2);
+
+  const { nodes, edges } = computePositions();
+
+  // Draw edges first
+  edges.forEach(function(e) {
+    drawEdge(e.from, e.to, e.color, e.width, e.dashed);
+  });
+
+  // Draw nodes
+  nodes.forEach(function(n) {
+    drawNode(n);
+  });
+
+  ctx.restore();
+}
+
+// Pan
+canvas.addEventListener('mousedown', function(e) {
+  dragging = true;
+  lastX = e.clientX;
+  lastY = e.clientY;
+});
+canvas.addEventListener('mousemove', function(e) {
+  if (!dragging) return;
+  ox += e.clientX - lastX;
+  oy += e.clientY - lastY;
+  lastX = e.clientX;
+  lastY = e.clientY;
+  draw();
+});
+canvas.addEventListener('mouseup', function() { dragging = false; });
+canvas.addEventListener('mouseleave', function() { dragging = false; });
+
+// Zoom
+canvas.addEventListener('wheel', function(e) {
+  e.preventDefault();
+  const delta = e.deltaY > 0 ? 0.9 : 1.1;
+  scale = Math.min(Math.max(scale * delta, 0.3), 3);
+  draw();
+}, { passive: false });
+
+// Touch
+let touchDist = null;
+canvas.addEventListener('touchstart', function(e) {
+  if (e.touches.length === 1) {
+    dragging = true;
+    lastX = e.touches[0].clientX;
+    lastY = e.touches[0].clientY;
+  } else if (e.touches.length === 2) {
+    touchDist = Math.hypot(
+      e.touches[0].clientX - e.touches[1].clientX,
+      e.touches[0].clientY - e.touches[1].clientY
+    );
+  }
+});
+canvas.addEventListener('touchmove', function(e) {
+  e.preventDefault();
+  if (e.touches.length === 1 && dragging) {
+    ox += e.touches[0].clientX - lastX;
+    oy += e.touches[0].clientY - lastY;
+    lastX = e.touches[0].clientX;
+    lastY = e.touches[0].clientY;
+    draw();
+  } else if (e.touches.length === 2 && touchDist) {
+    const newDist = Math.hypot(
+      e.touches[0].clientX - e.touches[1].clientX,
+      e.touches[0].clientY - e.touches[1].clientY
+    );
+    scale = Math.min(Math.max(scale * (newDist / touchDist), 0.3), 3);
+    touchDist = newDist;
+    draw();
+  }
+}, { passive: false });
+canvas.addEventListener('touchend', function() { dragging = false; touchDist = null; });
+
+resize();
+</script>
+</body>
+</html>
