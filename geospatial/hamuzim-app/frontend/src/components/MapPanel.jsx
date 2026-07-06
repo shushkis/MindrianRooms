@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import L from "leaflet";
+import { TRANSLATIONS } from "../translations";
 
 // leaflet-draw is a legacy global-script build (no CJS/AMD wrapper) that
 // patches a *global* `L`. Static `import "leaflet-draw"` would get hoisted
@@ -46,12 +47,14 @@ export default function MapPanel({
   onToggleOverlay,
   onPolygonComplete,
   hasQueried,
+  lang,
 }) {
   const mapContainer = useRef(null);
   const mapRef = useRef(null);
   const drawnItemsRef = useRef(null);
   const overlayLayerRef = useRef(null);
   const [mapReady, setMapReady] = useState(false);
+  const t = TRANSLATIONS[lang || "en"];
 
   // Init map once leaflet-draw has patched L.Control.Draw onto the global
   useEffect(() => {
@@ -156,14 +159,15 @@ export default function MapPanel({
           onClick={onToggleOverlay}
           disabled={!hasQueried}
         >
-          {showOverlay ? "Hide" : "Show"} cultivation overlay
+          {showOverlay ? t.hideOverlay : t.showOverlay}
         </button>
-        {selectedYear && hasQueried && <span className="map-toggle-year">Year: {selectedYear}</span>}
+        {selectedYear && hasQueried && <span className="map-toggle-year">{t.yearLabel}: {selectedYear}</span>}
       </div>
 
       {!hasQueried && (
-        <div className="map-hint">Draw a polygon or rectangle (top-left tool) to query evidence for that parcel.</div>
+        <div className="map-hint">{t.mapHint}</div>
       )}
     </main>
   );
 }
+

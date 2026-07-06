@@ -572,3 +572,31 @@ button {
 .leaflet-control-attribution a {
   color: var(--text-1) !important;
 }
+
+/* ---------- RTL support ---------- */
+[dir="rtl"] {
+  font-family: "Heebo", "Inter", system-ui, sans-serif;
+}
+[dir="rtl"] .panel-left {
+  border-left: 1px solid var(--border);
+  border-right: none;
+}
+[dir="rtl"] .panel-right {
+  border-right: 1px solid var(--border);
+  border-left: none;
+}
+[dir="rtl"] .timeline-item {
+  text-align: right;
+}
+[dir="rtl"] .obs-card {
+  text-align: right;
+}
+[dir="rtl"] .obs-card-type {
+  margin-right: auto;
+  margin-left: 0;
+}
+[dir="rtl"] .summary-card {
+  border-right: 3px solid var(--accent);
+  border-left: 1px solid var(--border);
+}
+

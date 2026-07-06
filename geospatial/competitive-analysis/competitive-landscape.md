@@ -46,6 +46,15 @@ Do not fuse heterogeneous historical sources automatically.
 Do not produce provenance-traced legal exhibits.
 Mordi uses ArcGIS today -- it is what you replace at the workflow layer.
 
+Named example, government/municipal flavor: Orhitec GIS Group (Israel,
+est. 1999, ~$7M revenue, 140+ government/municipal clients). Sells
+ERPGIS smart-city systems -- building permits, land registry workflow,
+infrastructure, tax -- to city halls on multi-year contracts. Same gap as
+Esri/Bentley: no historical multi-source fusion, no legal exhibit output.
+Not a competitor; potential downstream interoperability point if a
+registration authority runs an Orhitec-style backend. Full review filed
+in `orhitec-review.md`.
+
 ## Platform Competitive Landscape (Future)
 
 ### Agriculture / Change Detection

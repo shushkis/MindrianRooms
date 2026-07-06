@@ -1,22 +1,23 @@
 import { SourceIcon } from "./Icons";
-import { SOURCE_TYPE_LABEL } from "../mockData";
+import { TRANSLATIONS } from "../translations";
 
-export default function TimelinePanel({ observations, selectedYear, onSelectYear, hasQueried }) {
+export default function TimelinePanel({ observations, selectedYear, onSelectYear, hasQueried, lang }) {
+  const t = TRANSLATIONS[lang || "en"];
+
   return (
     <aside className="panel panel-left">
       <div className="panel-header">
-        <h2>Evidence Timeline</h2>
+        <h2>{t.timelineTitle}</h2>
         <span className="panel-subtitle">
-          {hasQueried ? `${observations.length} sources` : "Draw a polygon to load evidence"}
+          {hasQueried ? `${observations.length} ${t.sources}` : t.drawToLoad}
         </span>
       </div>
 
       {!hasQueried && (
         <div className="empty-state">
-          <p>No parcel selected yet.</p>
+          <p>{t.noParcelSelected}</p>
           <p className="empty-state-hint">
-            Use the draw tool on the map to outline a parcel. HaMuzim will pull every
-            historical observation on file for that boundary.
+            {t.emptyStateHint}
           </p>
         </div>
       )}
@@ -36,9 +37,11 @@ export default function TimelinePanel({ observations, selectedYear, onSelectYear
                     <SourceIcon type={obs.type} className="icon" />
                     {obs.source}
                   </span>
-                  <span className="timeline-type">{SOURCE_TYPE_LABEL[obs.type] ?? obs.type}</span>
+                  <span className="timeline-type">{t.sourceTypes[obs.type] ?? obs.type}</span>
                 </span>
-                <span className={`badge badge-${obs.confidence}`}>{obs.confidence}</span>
+                <span className={`badge badge-${obs.confidence}`}>
+                  {t.confidence[obs.confidence] ?? obs.confidence}
+                </span>
               </button>
             </li>
           );
@@ -47,3 +50,4 @@ export default function TimelinePanel({ observations, selectedYear, onSelectYear
     </aside>
   );
 }
+

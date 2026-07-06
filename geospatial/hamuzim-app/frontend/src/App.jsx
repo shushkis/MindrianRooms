@@ -3,6 +3,7 @@ import TimelinePanel from "./components/TimelinePanel";
 import MapPanel from "./components/MapPanel";
 import ObservationsPanel from "./components/ObservationsPanel";
 import { queryPolygon } from "./api";
+import { TRANSLATIONS, translateParcel, translateObservations } from "./translations";
 
 export default function App() {
   const [lang, setLang] = useState("en");
@@ -28,18 +29,22 @@ export default function App() {
     }
   }
 
+  const translatedParcel = translateParcel(parcel, lang);
+  const translatedObservations = translateObservations(observations, lang);
+  const t = TRANSLATIONS[lang];
+
   return (
-    <div className="app-shell">
+    <div className="app-shell" dir={lang === "he" ? "rtl" : "ltr"}>
       <header className="app-header">
         <div className="app-brand">
           <span className="app-brand-mark">HM</span>
           <div>
-            <h1>HaMuzim</h1>
-            <span className="app-brand-tagline">Spatial Evidence Platform</span>
+            <h1>{t.brandName}</h1>
+            <span className="app-brand-tagline">{t.tagline}</span>
           </div>
         </div>
         <div className="app-header-right">
-          {loading && <span className="loading-indicator">Querying evidence...</span>}
+          {loading && <span className="loading-indicator">{t.loading}</span>}
           <div className="lang-toggle" role="group" aria-label="Language">
             <button className={lang === "en" ? "lang-active" : ""} onClick={() => setLang("en")}>
               EN
@@ -53,28 +58,32 @@ export default function App() {
 
       <div className="app-body">
         <TimelinePanel
-          observations={observations}
+          observations={translatedObservations}
           selectedYear={selectedYear}
           onSelectYear={setSelectedYear}
           hasQueried={hasQueried}
+          lang={lang}
         />
         <MapPanel
-          parcel={parcel}
-          observations={observations}
+          parcel={translatedParcel}
+          observations={translatedObservations}
           selectedYear={selectedYear}
           showOverlay={showOverlay}
           onToggleOverlay={() => setShowOverlay((v) => !v)}
           onPolygonComplete={handlePolygonComplete}
           hasQueried={hasQueried}
+          lang={lang}
         />
         <ObservationsPanel
-          parcel={parcel}
-          observations={observations}
+          parcel={translatedParcel}
+          observations={translatedObservations}
           selectedYear={selectedYear}
           onSelectYear={setSelectedYear}
           hasQueried={hasQueried}
+          lang={lang}
         />
       </div>
     </div>
   );
 }
+

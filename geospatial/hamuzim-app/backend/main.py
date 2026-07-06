@@ -14,7 +14,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response
 from pydantic import BaseModel
 
-from mock_data import DEMO_PARCEL, MOCK_AI_SUMMARY, OBSERVATIONS
+from mock_data import DEMO_PARCEL, MOCK_AI_SUMMARY, MOCK_AI_SUMMARY_HE, OBSERVATIONS
 from pdf_export import build_exhibit_pdf
 
 load_dotenv()
@@ -44,12 +44,14 @@ class QueryRequest(BaseModel):
 class SummaryRequest(BaseModel):
     observations: list | None = None
     parcel: dict | None = None
+    lang: str = "en"
 
 
 class ExportRequest(BaseModel):
     parcel: dict
     observations: list
     summary: str
+    lang: str = "en"
 
 
 # ---------- routes ----------
@@ -73,9 +75,10 @@ def generate_summary(req: SummaryRequest):
     """Generate the AI summary. Uses the Claude API if ANTHROPIC_API_KEY is
     set in the environment, otherwise returns the hardcoded mock summary."""
     api_key = os.environ.get("ANTHROPIC_API_KEY")
+    mock_sum = MOCK_AI_SUMMARY_HE if req.lang == "he" else MOCK_AI_SUMMARY
 
     if not api_key:
-        return {"summary": MOCK_AI_SUMMARY, "source": "mock"}
+        return {"summary": mock_sum, "source": "mock"}
 
     try:
         import anthropic
@@ -96,6 +99,12 @@ def generate_summary(req: SummaryRequest):
             "(HIGH/MEDIUM/LOW), and a recommended next action.\n\n"
             f"Observation record:\n{obs_text}"
         )
+        if req.lang == "he":
+            prompt += (
+                "\n\nWrite the summary in Hebrew. The output MUST be entirely in Hebrew. "
+                "The evidentiary strength rating should be written in Hebrew: "
+                "גבוהה for HIGH, בינונית for MEDIUM, נמוכה for LOW."
+            )
         message = client.messages.create(
             model="claude-sonnet-4-5",
             max_tokens=500,
@@ -106,12 +115,12 @@ def generate_summary(req: SummaryRequest):
         )
         return {"summary": text.strip(), "source": "claude"}
     except Exception as exc:  # noqa: BLE001 -- demo fallback, any failure -> mock
-        return {"summary": MOCK_AI_SUMMARY, "source": "mock", "error": str(exc)}
+        return {"summary": mock_sum, "source": "mock", "error": str(exc)}
 
 
 @app.post("/api/export-pdf")
 def export_pdf(req: ExportRequest):
-    pdf_bytes = build_exhibit_pdf(req.parcel, req.observations, req.summary)
+    pdf_bytes = build_exhibit_pdf(req.parcel, req.observations, req.summary, req.lang)
     return Response(
         content=pdf_bytes,
         media_type="application/pdf",

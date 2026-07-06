@@ -1,4 +1,5 @@
 import { DEMO_PARCEL, MOCK_AI_SUMMARY, OBSERVATIONS } from "./mockData";
+import { translateText } from "./translations";
 
 const BASE = "/api";
 
@@ -25,20 +26,20 @@ export async function queryPolygon(polygon) {
   return { parcel: DEMO_PARCEL, observations: OBSERVATIONS };
 }
 
-export async function generateSummary(observations, parcel) {
+export async function generateSummary(observations, parcel, lang = "en") {
   const res = await safeFetch("/summary", {
     method: "POST",
-    body: JSON.stringify({ observations, parcel }),
+    body: JSON.stringify({ observations, parcel, lang }),
   });
   if (res) return res.json();
-  return { summary: MOCK_AI_SUMMARY, source: "mock" };
+  return { summary: translateText(MOCK_AI_SUMMARY, lang), source: "mock" };
 }
 
-export async function exportPdf(parcel, observations, summary) {
+export async function exportPdf(parcel, observations, summary, lang = "en") {
   const res = await fetch(`${BASE}/export-pdf`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ parcel, observations, summary }),
+    body: JSON.stringify({ parcel, observations, summary, lang }),
   });
   if (!res.ok) throw new Error("PDF export failed");
   const blob = await res.blob();
@@ -51,3 +52,4 @@ export async function exportPdf(parcel, observations, summary) {
   a.remove();
   window.URL.revokeObjectURL(url);
 }
+
