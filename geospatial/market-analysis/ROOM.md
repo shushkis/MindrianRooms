@@ -17,3 +17,17 @@ Two markets in play: the wedge (legal land dispute professionals) and the platfo
 - How many active land dispute lawyers/firms in Israel use historical evidence today? What is their current toolchain and who supplies it?
 - What does Mordi's firm spend annually on survey experts, GIS contractors, or manual research for historical evidence? That number is the willingness-to-pay ceiling for the wedge.
 - Which adjacent applications (agriculture, infrastructure, insurance) have the shortest path from "same technical capability" to "paying customer"? Jurisdiction-independence matters here.
+
+<!-- BEGIN REFERENCES -->
+## Cross-References
+
+### Section links
+- (none)
+
+### Artifacts in this section
+- [[buyer-analysis|Buyer Analysis -- Three-Segment Map]]
+- [[jtbd-analysis|Jobs To Be Done -- Geospatial Legal Intelligence]]
+
+### Cross-section mentions (inbound)
+- (none -- inbound scan is Phase 90 scope)
+<!-- END REFERENCES -->

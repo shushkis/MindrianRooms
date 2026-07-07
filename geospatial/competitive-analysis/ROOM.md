@@ -17,3 +17,16 @@ ESRI/ArcGIS can do overlays. What no existing tool does is package the fusion ou
 - What do Mordi's colleagues use today? Manual GIS work, hired survey experts, commissioned reports? Understanding the workaround reveals the real competition.
 - Is there any legal-specific geospatial tooling (land surveying software, cadastral platforms) that includes provenance chain export? If yes, how does it fall short for dispute contexts?
 - Who serves the WWII UXO mapping market with historical imagery? Their methodology is closest to ours -- are they a competitor or a potential partner/acquihire signal?
+
+<!-- BEGIN REFERENCES -->
+## Cross-References
+
+### Section links
+- (none)
+
+### Artifacts in this section
+- [[competitive-landscape|Competitive Landscape -- Geospatial Intelligence Platform]]
+
+### Cross-section mentions (inbound)
+- (none -- inbound scan is Phase 90 scope)
+<!-- END REFERENCES -->

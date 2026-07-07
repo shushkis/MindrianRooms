@@ -27,3 +27,16 @@ Two founders with complementary and non-obvious strengths: a sensor fusion engin
 - What is Mordi's capacity as a design partner vs. as a co-founder? Is he full-time, part-time, or advisory?
 - What technical gaps exist? GIS-specific tooling expertise, legal data standards (court exhibit formats by jurisdiction), front-end for non-technical users?
 - Who is missing from the team -- a GIS domain expert, a business development person, a second engineer?
+
+<!-- BEGIN REFERENCES -->
+## Cross-References
+
+### Section links
+- (none)
+
+### Artifacts in this section
+- No artifacts yet in this section.
+
+### Cross-section mentions (inbound)
+- (none -- inbound scan is Phase 90 scope)
+<!-- END REFERENCES -->

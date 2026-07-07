@@ -17,3 +17,18 @@ Historical geospatial records -- aerial photos, cadastral maps, survey documents
 - What is the exact workflow Mordi follows today, step by step, from case intake to spatial evidence package? Where does he lose the most time?
 - What makes a case worth starting? The signal that a land dispute is winnable is currently a judgment call -- can it be systematized using the historical record before significant work is invested?
 - Is the problem bounded to contested legal boundaries, or does it generalize to any decision that requires reconciling historical spatial state with current ground truth?
+
+<!-- BEGIN REFERENCES -->
+## Cross-References
+
+### Section links
+- (none)
+
+### Artifacts in this section
+- [[initial-exploration|The Evidence Gap in Geospatial Dispute Resolution]]
+- [[legal-workflow-analysis|Legal Proceeding Workflow -- Full Map]]
+- [[yonatan-sagir-meeting|Meeting: Yonatan Sagir -- IRIS Program Debrief]]
+
+### Cross-section mentions (inbound)
+- (none -- inbound scan is Phase 90 scope)
+<!-- END REFERENCES -->
