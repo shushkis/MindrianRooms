@@ -31,3 +31,16 @@ Starter questions:
 1. What role does each person play in the venture -- technical vs domain vs commercial?
 2. What is the one capability gap that would most limit execution in each domain?
 3. Who is the first advisor or customer you would call tomorrow?
+
+<!-- BEGIN REFERENCES -->
+## Cross-References
+
+### Section links
+- (none)
+
+### Artifacts in this section
+- [[initial-exploration|Team: Elli & Mordi]]
+
+### Cross-section mentions (inbound)
+- (none -- inbound scan is Phase 90 scope)
+<!-- END REFERENCES -->

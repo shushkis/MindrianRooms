@@ -54,6 +54,18 @@ Upgraded to 4/5 GREEN.
 
 ---
 
+## Competitive Watch -- Orhitec (checked 2026-07-07)
+
+Flagged by Mordi: found a product from Orhitec GIS Ltd (Israel, founded 1999, ~140 government/municipal clients) that "does similar things."
+
+**Checked against Domains 3, 4, 7:**
+- Product scope: real-time land registry, building permits, property tax, land-use enforcement -- current administrative GIS/ERP for local authorities. No historical aerial imagery, no georeferencing of archival photos, no legal-admissibility evidence chain.
+- Searched specifically for ties to Israel Land Authority (רשות/מנהל מקרקעי ישראל), the Custodian of Government Property (ממונה על הרכוש הממשלתי), Ottoman-era records, and unregistered-land/cadastre work -- no documented connection found.
+- **Domain 3 (Industry Attractiveness) and Domain 4 (Sustainable Advantage): unchanged.** Orhitec is not in the historical-evidence/disputed-ownership niche; "zero direct rivals" stands.
+- **Domain 7 (Connectedness): watch item, not a downgrade.** Orhitec already sits inside the government/municipal procurement relationships this venture needs to break into (27 years of institutional trust). Not a capability threat today -- a distribution-speed risk if they ever extend from "manage current records" to "reconstruct historical ones." Track for re-check if they move toward archival/cadastral or ILA-adjacent products.
+
+---
+
 ## Strongest Domain
 
 **Domain 1: Target Segment Benefits -- 5/5**

@@ -23,3 +23,16 @@ Resolve in business-model/ first:
 - What is the cost to process one case end-to-end (compute, labor, QA)?
 - What is the revenue per case at Mordi's firm's willingness to pay?
 - At what case volume does the platform become worth building vs. staying service-oriented?
+
+<!-- BEGIN REFERENCES -->
+## Cross-References
+
+### Section links
+- (none)
+
+### Artifacts in this section
+- No artifacts yet in this section.
+
+### Cross-section mentions (inbound)
+- (none -- inbound scan is Phase 90 scope)
+<!-- END REFERENCES -->

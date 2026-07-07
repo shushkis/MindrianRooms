@@ -22,3 +22,16 @@ Starter questions:
 1. What does the current workflow look like for each problem -- who does what manually, and where does it break down?
 2. For Candidate A: what does the diagnosis and care pathway look like for Elli's son, and where is the biggest point of failure or frustration?
 3. For Candidate B: how many cases does Mordi handle per year, and what is the bottleneck -- data access, analysis time, or interpretation under legal scrutiny?
+
+<!-- BEGIN REFERENCES -->
+## Cross-References
+
+### Section links
+- (none)
+
+### Artifacts in this section
+- [[initial-exploration|Two Candidate Problems -- Initial Conversation]]
+
+### Cross-section mentions (inbound)
+- (none -- inbound scan is Phase 90 scope)
+<!-- END REFERENCES -->

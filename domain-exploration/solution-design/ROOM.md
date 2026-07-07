@@ -19,3 +19,16 @@ Solution design is on hold until the domain decision is made. Both candidates ha
 Starter questions:
 1. What is the minimum viable artifact that would prove the core technical thesis for each candidate?
 2. Are there existing tools that do 80% of what's needed -- and if so, what is the 20% gap that matters?
+
+<!-- BEGIN REFERENCES -->
+## Cross-References
+
+### Section links
+- (none)
+
+### Artifacts in this section
+- No artifacts yet in this section.
+
+### Cross-section mentions (inbound)
+- (none -- inbound scan is Phase 90 scope)
+<!-- END REFERENCES -->
