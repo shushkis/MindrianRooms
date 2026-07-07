@@ -27,6 +27,7 @@ A multi-source geospatial fusion platform with decision-level evidence fusion an
 ### Artifacts in this section
 - [[data-inventory|Data Source Inventory -- MVP Layer Map]]
 - [[initial-exploration|Platform Architecture: Multi-Source Fusion with Provenance]]
+- [[product-scope-data-fusion/product-scope-data-fusion|Product Scope Decision -- Data Fusion for Operational Conclusions, Not Document Forensics]]
 
 ### Cross-section mentions (inbound)
 - (none -- inbound scan is Phase 90 scope)
