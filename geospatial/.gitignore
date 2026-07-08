@@ -1,0 +1,5 @@
+# MindrianOS -- runtime files (not source of truth, regenerated each session)
+.mindrian/
+.snapshots/
+.deck-b64.txt
+room/.mindrian/

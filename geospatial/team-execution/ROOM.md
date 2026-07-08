@@ -40,3 +40,4 @@ Two founders with complementary and non-obvious strengths: a sensor fusion engin
 ### Cross-section mentions (inbound)
 - (none -- inbound scan is Phase 90 scope)
 <!-- END REFERENCES -->
+
