@@ -239,7 +239,7 @@
 
   <div class="chiprow">
     <div class="qchip green">Is it real?<div class="tip">Itamar independently re-derived the core problem unprompted; Biti Hills is a real lost case; 70% of West Bank parcels are unregistered.</div></div>
-    <div class="qchip yellow">Can we win?<div class="tip">The compounding-evidence moat is real, but the lead concept (Macro Risk Layer) is unbuilt, and team capacity as design-partner vs. co-founder is still an open question.</div></div>
+    <div class="qchip yellow">Can we win?<div class="tip">The two-layer moat (evidence corpus + codified judgment) is real if it can be built, but the lead concept (the reasoning layer) is unbuilt and its hardest CSF — codifying Mordi's judgment — hasn't started. Team capacity as design-partner vs. co-founder is also still open.</div></div>
     <div class="qchip yellow">Is it worth it?<div class="tip">Private-claimant economics are strong (1-2% of multi-million-NIS asset value per case), but the government buyer this WDP targets is slow B2G procurement with no TAM sizing yet.</div></div>
   </div>
 </header>
@@ -319,29 +319,31 @@
 
     <div class="pathcard prime">
       <div class="pathhead">
-        <h3>Macro Risk Layer <span class="chip draft" style="margin-left:8px;">Draft — not yet built</span></h3>
+        <h3>Reasoning Layer — Mordi's Judgment, Deployable <span class="chip draft" style="margin-left:8px;">Draft — not yet built</span></h3>
         <span class="pathtag">Targeted Development · Lead Concept</span>
       </div>
       <div class="diagram">
-        <svg viewBox="0 0 900 160" xmlns="http://www.w3.org/2000/svg">
-          <g class="flow-box"><rect x="10" y="55" width="170" height="60"/><text x="95" y="80" text-anchor="middle" font-size="12">All case-level</text><text x="95" y="97" text-anchor="middle" font-size="12">Observations</text></g>
-          <path class="flow-line" d="M180,85 H260"/>
-          <g class="flow-box"><rect x="260" y="55" width="180" height="60"/><text x="350" y="80" text-anchor="middle" font-size="12">Aggregate into</text><text x="350" y="97" text-anchor="middle" font-size="12">risk surface</text></g>
-          <path class="flow-line" d="M440,85 H520"/>
-          <g class="flow-box"><rect x="520" y="55" width="180" height="60"/><text x="610" y="80" text-anchor="middle" font-size="12">Regional dashboard</text><text x="610" y="97" text-anchor="middle" font-size="12">for policy review</text></g>
-          <path class="flow-line" d="M700,85 H780"/>
-          <g class="flow-box"><rect x="780" y="55" width="110" height="60"/><text x="835" y="80" text-anchor="middle" font-size="12">Flag unsettled</text><text x="835" y="97" text-anchor="middle" font-size="11">land arrangements</text></g>
+        <svg viewBox="0 0 900 200" xmlns="http://www.w3.org/2000/svg">
+          <g class="flow-box"><rect x="10" y="20" width="170" height="55"/><text x="95" y="44" text-anchor="middle" font-size="11">Mordi's case history</text><text x="95" y="60" text-anchor="middle" font-size="11">+ codified rules</text></g>
+          <g class="flow-box"><rect x="10" y="115" width="170" height="55"/><text x="95" y="139" text-anchor="middle" font-size="11">New case's</text><text x="95" y="155" text-anchor="middle" font-size="11">Observations</text></g>
+          <path class="flow-line" d="M180,47 H260 V90"/>
+          <path class="flow-line" d="M180,142 H260 V95"/>
+          <g class="flow-box"><rect x="260" y="72" width="170" height="55"/><text x="345" y="96" text-anchor="middle" font-size="11">Reasoning layer:</text><text x="345" y="112" text-anchor="middle" font-size="11">pattern-match + propose</text></g>
+          <path class="flow-line" d="M430,99 H510"/>
+          <g class="flow-box"><rect x="510" y="72" width="180" height="55" stroke-dasharray="6 4"/><text x="600" y="96" text-anchor="middle" font-size="11">DECISION GATE</text><text x="600" y="112" text-anchor="middle" font-size="10">human review + sign-off</text></g>
+          <path class="flow-line" d="M690,99 H770"/>
+          <g class="flow-box"><rect x="770" y="72" width="120" height="55"/><text x="830" y="96" text-anchor="middle" font-size="11">Filed verdict /</text><text x="830" y="112" text-anchor="middle" font-size="11">exhibit</text></g>
         </svg>
       </div>
-      <p style="font-size:14px;">Itamar's own unprompted reaction, aimed at סגן רמ"א's macro/policy layer rather than the field engineer who executes a single project. Different SKU, different buyer, same Observation engine as HaMuzim.</p>
+      <p style="font-size:14px;">Modeled on how Larry/MindrianOS itself works: the model pattern-matches to prior cases and proposes an analysis — citing every Observation and precedent it drew from — but never files anything. The human adjudicator holds the gate. What gets filed is what the human approved, never what the model asserted. Serves the same buyer (סגן רמ"א) with something sharper than a dashboard: Mordi-quality judgment available to every committee member, not only his own.</p>
       <div class="scorecard">
-        <span class="score-row miss">Row 1 · Locate</span>
+        <span class="score-row hit">Row 1 · Locate</span>
         <span class="score-row miss">Row 2 · Georeference</span>
-        <span class="score-row miss">Row 3 · Reconstruct</span>
-        <span class="score-row miss">Row 4 · Exhibit</span>
+        <span class="score-row hit">Row 3 · Reconstruct</span>
+        <span class="score-row hit">Row 4 · Exhibit</span>
         <span class="score-row hit">Row 5 · Cross-case memory</span>
       </div>
-      <div class="risk"><b>Biggest risk</b>An aggregate risk score is a policy tool, not a legal exhibit — if buyers conflate the two, a wrong regional call carries reputational risk the descriptive, case-level design doesn't have.</div>
+      <div class="risk"><b>Biggest risk</b>Two, stacked: (1) codifying 20 years of Mordi's tacit judgment into an explicit, auditable ruleset is unproven and may be the hardest problem in this build — harder than the fusion engineering; (2) if the gate is ever weakened — a proposal auto-accepted under time pressure without real review — this collapses back into the generative-liability posture the room already rejected once.</div>
     </div>
 
     <div class="pathcard">
@@ -416,13 +418,13 @@
         <div class="flip-face front">
           <div class="fnum">1</div>
           <h4>Target Segment + VP</h4>
-          <p>Turn "no registration by default → state ownership" into "resolved correctly," proven first at Mordi's committee.</p>
+          <p>Mordi's adjudication judgment, codified and gated, made available to every committee member — not a faster Mordi, a deployable one.</p>
           <span class="chip draft">Draft</span>
           <div class="flip-hint">click to flip</div>
         </div>
         <div class="flip-face back">
           <h4>Weakest Point</h4>
-          <p>VP is validated at the case level. The macro-buyer VP (the new lead concept) has zero built proof yet.</p>
+          <p>VP is validated at the case level, through Mordi himself. The deployed-to-other-adjudicators version has zero built proof yet — and depends on judgment extraction that hasn't started.</p>
         </div>
       </div>
     </div>
@@ -464,13 +466,13 @@
         <div class="flip-face front">
           <div class="fnum">4</div>
           <h4>Competitive Advantage</h4>
-          <p>Moat is the assembled, compounding evidence layer — not the algorithm, not the data.</p>
+          <p>Moat is now two-layered: the assembled evidence corpus, plus a codified expert-judgment layer. Esri can build a fusion algorithm; it cannot extract 20 years of Mordi's adjudication judgment.</p>
           <span class="chip draft">Draft</span>
           <div class="flip-hint">click to flip</div>
         </div>
         <div class="flip-face back">
           <h4>Weakest Point</h4>
-          <p>"10x" is real vs. bespoke services (weeks → minutes) but not vs. the actual primary competitor — doing nothing has no speed to beat.</p>
+          <p>The judgment layer is the moat's strongest claim and its least proven part — "hard to copy" is only true once the codification actually exists.</p>
         </div>
       </div>
     </div>
@@ -486,7 +488,7 @@
         </div>
         <div class="flip-face back">
           <h4>Weakest Point</h4>
-          <p>All connections are case-level. Zero named contact yet inside the macro-risk-layer buyer's office specifically.</p>
+          <p>All connections are case-level. Zero named contact yet inside the buyer's office for a judgment-extraction product specifically — a harder sell to explain than a dashboard.</p>
         </div>
       </div>
     </div>
@@ -496,13 +498,13 @@
         <div class="flip-face front">
           <div class="fnum">6</div>
           <h4>Ability to Execute (CSFs)</h4>
-          <p>5 identified: archive access, legal admissibility, OCR accuracy, fusion accuracy, Mordi-led sales motion.</p>
+          <p>6 identified: <b>codifying Mordi's tacit judgment into an auditable ruleset (new, likely hardest)</b>, archive access, legal admissibility, OCR accuracy, fusion accuracy, Mordi-led sales motion.</p>
           <span class="chip draft">Draft</span>
           <div class="flip-hint">click to flip</div>
         </div>
         <div class="flip-face back">
           <h4>Weakest Point</h4>
-          <p>CSF #2 — admissibility — is a legal/institutional risk. No amount of engineering fixes it on its own.</p>
+          <p>CSF #1 — judgment codification — has no scoped timeline or proof it converges. CSF #3 — admissibility — is a legal/institutional risk no engineering fixes on its own.</p>
         </div>
       </div>
     </div>
@@ -528,13 +530,13 @@
         <div class="flip-face front">
           <div class="fnum">8</div>
           <h4>Validation</h4>
-          <p>Itamar independently re-derived the core problem AND endorsed the macro-risk-layer concept — unprompted, uncoached.</p>
+          <p>Itamar independently re-derived the core problem, unprompted — real evidence the underlying problem is correctly diagnosed.</p>
           <span class="chip draft">Draft</span>
           <div class="flip-hint">click to flip</div>
         </div>
         <div class="flip-face back">
           <h4>Weakest Point</h4>
-          <p>The Biti Hills technical PoC — actual proof the reconstruction works — is still an open item, never executed.</p>
+          <p>Two open PoCs now, not one: the Biti Hills reconstruction PoC (never executed), and a new, unscoped one — does a codified version of Mordi's judgment actually match Mordi's real judgment on held-out cases?</p>
         </div>
       </div>
     </div>
@@ -543,7 +545,7 @@
 
   <div class="callout method" style="margin-top:34px;">
     <h4>Reading the Verdict</h4>
-    <p>3 of 8 domains are <span class="chip solid">Solid</span>. 5 are real but <span class="chip draft">Draft</span> — thin, not fake. That's an honest <span class="chip verdict-onramp">On-Ramp</span> read, not a <span class="chip verdict-go">Go</span>: the case-level engine works and is proven; the macro lead concept is a credible bet on an unbuilt product with a slow B2G buyer and no market sizing yet.</p>
+    <p>3 of 8 domains are <span class="chip solid">Solid</span>. 5 are real but <span class="chip draft">Draft</span> — thin, not fake. That's an honest <span class="chip verdict-onramp">On-Ramp</span> read, not a <span class="chip verdict-go">Go</span>: the case-level engine works and is proven; the reasoning-layer lead concept is a credible, sharper bet than a dashboard, but it trades a slow-B2G-buyer risk for a harder, unscoped knowledge-elicitation risk — codifying Mordi's judgment is not yet started.</p>
   </div>
 </section>
 
