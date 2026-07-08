@@ -1,54 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="MindrianOS -- Mullins Seven Domains Deck">
-<title>HaMuzim - Mullins Seven Domains - MindrianOS</title>
+<title>HaMuzim - שבעת התחומים של מוליינס - MindrianOS</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--red:#A63D2F;--blue:#1E3A6E;--yellow:#C8A43C;--green:#2A6B5E;--bg:#0a0a0f;--surface:#12121a;--border:#1a1a2a;--cream:#f5f0e8;--muted:#888}
-body{background:var(--bg);color:var(--cream);font-family:'Inter',system-ui,sans-serif;overflow:hidden}
+body{background:var(--bg);color:var(--cream);font-family:'Inter',system-ui,sans-serif;overflow:hidden;direction:rtl}
 .header{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--bg);display:flex;align-items:center;padding:8px 20px;gap:12px;height:40px}
 .header::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red) 30%,var(--blue) 50%,var(--yellow) 70%,var(--green) 100%)}
 .logo{display:flex;align-items:center;gap:6px;text-decoration:none}
 .logo svg{height:16px;width:auto}
 .logo span{font-family:'Bebas Neue',sans-serif;font-size:13px;color:var(--muted);letter-spacing:1.5px}
-.deck-title{font-size:12px;font-weight:600;color:#666;text-transform:uppercase;letter-spacing:1px}
-.progress{position:fixed;top:40px;left:0;height:2px;background:var(--yellow);transition:width .3s;z-index:100}
+.deck-title{font-size:12px;font-weight:600;color:#666}
+.progress{position:fixed;top:40px;right:0;height:2px;background:var(--yellow);transition:width .3s;z-index:100}
 .deck{position:relative;width:100vw;height:100vh;overflow:hidden}
 @media(min-width:769px){.deck{max-width:calc(100vh*16/9);max-height:calc(100vw*9/16);margin:auto;position:absolute;inset:0}}
-.slide{position:absolute;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:80px 60px 60px;opacity:0;visibility:hidden;transition:opacity .4s;background:var(--bg);overflow:auto}
+.slide{position:absolute;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:80px 60px 60px;opacity:0;visibility:hidden;transition:opacity .4s;background:var(--bg);overflow:auto;text-align:right}
 .slide.active{opacity:1;visibility:visible}
-.slide-label{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--yellow);margin-bottom:8px;border:1px solid var(--border);display:inline-block;padding:2px 10px;border-radius:3px}
-.slide h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(26px,4.5vw,48px);line-height:1.1;margin-bottom:16px;letter-spacing:1px}
+.slide-label{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--yellow);margin-bottom:8px;border:1px solid var(--border);display:inline-block;padding:2px 10px;border-radius:3px}
+.slide h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(24px,4.2vw,44px);line-height:1.2;margin-bottom:16px;letter-spacing:.5px;font-family:'Inter',system-ui,sans-serif;font-weight:800}
 .slide h2 em{font-style:normal;color:var(--red)}
-.slide p{font-size:clamp(13px,1.8vw,17px);color:#ccc;line-height:1.6;max-width:900px}
+.slide p{font-size:clamp(13px,1.8vw,17px);color:#ccc;line-height:1.7;max-width:900px}
 .slide-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:20px;width:100%}
 .slide-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px}
-.slide-card h3{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--yellow);margin-bottom:6px;letter-spacing:1px}
-.slide-card p{font-size:12.5px;color:#aaa;line-height:1.5}
+.slide-card h3{font-size:16px;font-weight:700;color:var(--yellow);margin-bottom:6px}
+.slide-card p{font-size:12.5px;color:#aaa;line-height:1.6}
 .stat-row{display:flex;gap:32px;margin-top:20px;flex-wrap:wrap}
-.stat{text-align:center}.stat-val{font-size:clamp(24px,3.5vw,40px);font-weight:700;font-family:'Bebas Neue',sans-serif;letter-spacing:1px}.stat-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
-.domain-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:12.5px}
-.domain-table th{text-align:left;padding:7px 10px;color:var(--muted);font-size:9.5px;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--border)}
-.domain-table td{padding:7px 10px;border-bottom:1px solid var(--border);color:#ccc;vertical-align:top}
-.glyph{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px}
+.stat{text-align:center}.stat-val{font-size:clamp(24px,3.5vw,40px);font-weight:700;font-family:'Bebas Neue',sans-serif;letter-spacing:1px}.stat-label{font-size:11px;color:var(--muted)}
+.domain-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:12px}
+.domain-table th{text-align:right;padding:6px 8px;color:var(--muted);font-size:9.5px;border-bottom:1px solid var(--border)}
+.domain-table td{padding:6px 8px;border-bottom:1px solid var(--border);color:#ccc;vertical-align:top}
+.glyph{display:inline-block;width:10px;height:10px;border-radius:2px;margin-left:6px}
 .g-green{background:var(--green)}.g-yellow{background:var(--yellow)}.g-red{background:var(--red)}
 .score-big{font-family:'Bebas Neue',sans-serif;font-weight:700}
-.verdict-box{margin-top:20px;padding:20px 24px;border:2px solid var(--green);border-radius:8px;background:rgba(42,107,94,.08)}
-.verdict-box h3{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--green);letter-spacing:2px}
-.watch-box{margin-top:16px;padding:16px 20px;border:1px solid var(--yellow);border-radius:8px;background:rgba(200,164,60,.08)}
-.watch-box h4{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--yellow);letter-spacing:1px;margin-bottom:6px}
-.watch-box p{font-size:12.5px;color:#ccc}
-.buyer-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px}
-.buyer-table th{text-align:right;padding:8px 12px;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--border)}
-.buyer-table td{padding:8px 12px;border-bottom:1px solid var(--border);color:#ccc;text-align:right}
+.verdict-box{margin-top:16px;padding:16px 20px;border:2px solid var(--green);border-radius:8px;background:rgba(42,107,94,.08)}
+.verdict-box h3{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--green);letter-spacing:2px}
+.watch-box{margin-top:14px;padding:14px 18px;border:1px solid var(--yellow);border-radius:8px;background:rgba(200,164,60,.08)}
+.watch-box h4{font-size:15px;font-weight:700;color:var(--yellow);margin-bottom:5px}
+.watch-box p{font-size:12px;color:#ccc}
+.buyer-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
+.buyer-table th{text-align:right;padding:7px 10px;color:var(--muted);font-size:10px;border-bottom:1px solid var(--border)}
+.buyer-table td{padding:7px 10px;border-bottom:1px solid var(--border);color:#ccc}
 .buyer-table tr:first-child td{color:var(--yellow);font-weight:600}
-.rtl{direction:rtl;font-family:'Inter',system-ui,sans-serif}
-ol.reco{margin-top:16px;padding-right:0;padding-left:0}
-ol.reco li{font-size:13.5px;color:#ccc;line-height:1.6;margin-bottom:10px;list-style-position:inside}
+ol.reco{margin-top:12px;padding-right:20px}
+ol.reco li{font-size:13px;color:#ccc;line-height:1.6;margin-bottom:8px}
 ol.reco li b{color:var(--yellow)}
 .mondrian-footer{position:fixed;bottom:0;left:0;right:0;display:flex;height:3px;z-index:100}
 .mondrian-footer span:nth-child(1){flex:3;background:var(--red)}.mondrian-footer span:nth-child(2){flex:1;background:var(--blue)}.mondrian-footer span:nth-child(3){flex:2;background:var(--yellow)}.mondrian-footer span:nth-child(4){flex:1;background:var(--green)}
@@ -56,152 +55,124 @@ ol.reco li b{color:var(--yellow)}
 .nav button{background:rgba(255,255,255,.08);border:none;color:var(--cream);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:16px;transition:all .2s}
 .nav button:hover{background:rgba(255,255,255,.15)}
 .nav .counter{font-size:12px;color:var(--muted)}
-.mondrian-blocks{position:absolute;right:-20px;top:-20px;opacity:.15}
+.mondrian-blocks{position:absolute;left:-20px;top:-20px;opacity:.15}
 @media(max-width:900px){.slide{padding:60px 32px 48px}.slide-grid{grid-template-columns:1fr}.stat-row{gap:16px;flex-wrap:wrap}}
 </style>
 </head>
 <body>
 
 <div class="header">
-<a class="logo" href="#" target="_blank">
+<a class="logo" href="#">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="0" y="0" width="10" height="10" fill="#A63D2F"/><rect x="12" y="0" width="12" height="5" fill="#C8A43C"/><rect x="12" y="7" width="12" height="3" fill="#1E3A6E"/><rect x="0" y="12" width="5" height="12" fill="#2A6B5E"/><rect x="7" y="12" width="17" height="12" fill="#15151f" stroke="#2a2a3a" stroke-width="0.3"/></svg>
 <span>MINDRIAN</span></a>
-<span class="deck-title">HaMuzim -- Mullins Seven Domains</span>
+<span class="deck-title">HaMuzim -- שבעת התחומים של מוליינס</span>
 </div>
 
 <div class="progress" id="progress"></div>
 
 <div class="deck">
 
-<!-- SLIDE 1: TITLE -->
+<!-- 1: שער -->
 <div class="slide active">
 <svg class="mondrian-blocks" width="260" height="260" viewBox="0 0 300 300"><rect x="200" y="0" width="100" height="80" fill="var(--red)"/><rect x="200" y="90" width="100" height="60" fill="var(--blue)"/><rect x="200" y="160" width="60" height="140" fill="var(--yellow)"/><rect x="270" y="160" width="30" height="140" fill="var(--green)"/></svg>
-<span class="slide-label">Opportunity Screening</span>
-<h2>HaMuzim <em>x</em> Mullins Seven Domains</h2>
-<p style="font-size:18px;color:var(--cream);max-width:700px">Applying John Mullins' "New Business Road Test" to a geospatial-legal venture: reconstructing historical land evidence for unregistered parcel disputes.</p>
+<span class="slide-label">סינון הזדמנות עסקית</span>
+<h2>HaMuzim <em>×</em> שבעת התחומים של מוליינס</h2>
+<p style="font-size:18px;color:var(--cream);max-width:700px">יישום מודל "מבחן הדרך העסקית החדש" של ג'ון מוליינס על מיזם גיאו-משפטי: שחזור ראיות היסטוריות לסכסוכי בעלות על קרקע לא רשומה.</p>
 <div class="stat-row">
-<div class="stat"><div class="stat-val" style="color:var(--green)">7/7</div><div class="stat-label">Domains GREEN</div></div>
-<div class="stat"><div class="stat-val" style="color:var(--yellow)">GO</div><div class="stat-label">Verdict</div></div>
-<div class="stat"><div class="stat-val" style="color:var(--blue)">2</div><div class="stat-label">Buyer Segments</div></div>
+<div class="stat"><div class="stat-val" style="color:var(--green)">7/7</div><div class="stat-label">דומיינים ירוקים</div></div>
+<div class="stat"><div class="stat-val" style="color:var(--yellow)">GO</div><div class="stat-label">ורדיקט</div></div>
+<div class="stat"><div class="stat-val" style="color:var(--blue)">2</div><div class="stat-label">פלחי קונים</div></div>
 </div>
 </div>
 
-<!-- SLIDE 2: THE PROBLEM -->
+<!-- 2: הבעיה -->
 <div class="slide">
-<span class="slide-label">Well-Defined Problem</span>
-<h2>The <em>Evidence Gap</em></h2>
+<span class="slide-label">הבעיה המוגדרת היטב</span>
+<h2>פער <em>הראיות</em></h2>
 <div class="slide-grid">
-<div class="slide-card"><h3>Big Market</h3><p>How can land registration authorities reach a legally defensible verdict when historical evidence is fragmented across disconnected archives unlinked to geographic coordinates -- resolving disputed parcels that today default to the state by procedural failure rather than by fact?</p></div>
-<div class="slide-card"><h3>MVP</h3><p>How can we help the state identify parcels where private ownership cannot be proven, given that 70% of West Bank land is unregistered and historical records are disconnected from geographic coordinates?</p></div>
+<div class="slide-card"><h3>השוק הגדול</h3><p>איך רשויות רישום מקרקעין יכולות להגיע להכרעה שתעמוד במבחן משפטי, כאשר ראיות היסטוריות מפוזרות בארכיונים מנותקים וללא קואורדינטות גיאוגרפיות -- ולפתור חלקות שכיום נופלות למדינה מכשל פרוצדורלי ולא מעובדה?</p></div>
+<div class="slide-card"><h3>ה-MVP</h3><p>איך עוזרים למדינה לזהות חלקות שבהן לא ניתן להוכיח בעלות פרטית, כאשר 70% מקרקעות הגדה המערבית אינן רשומות והרישומים ההיסטוריים מנותקים מהמיקום הגיאוגרפי?</p></div>
 </div>
 </div>
 
-<!-- SLIDE 3: THE MODEL -->
+<!-- 3: המודל + כרטיס ציונים -->
 <div class="slide">
-<span class="slide-label">The Framework</span>
-<h2>Mullins' <em>Seven Domains</em></h2>
-<p>Three categories, seven questions -- the most rigorous opportunity-screening model for validation-stage ventures.</p>
-<div class="slide-grid" style="grid-template-columns:1fr 1fr 1fr">
-<div class="slide-card"><h3>Market</h3><p>1. Target Segment Benefits<br>2. Market Attractiveness (Macro)</p></div>
-<div class="slide-card"><h3>Industry</h3><p>3. Industry Attractiveness<br>4. Sustainable Advantage</p></div>
-<div class="slide-card"><h3>Team</h3><p>5. Mission &amp; Risk Propensity<br>6. Ability to Execute<br>7. Connectedness</p></div>
-</div>
-<p style="margin-top:16px;font-size:12.5px;color:var(--muted)">Rule: the weakest domain caps the opportunity. GREENs don't rescue REDs.</p>
-</div>
-
-<!-- SLIDE 4: SCORE CARD -->
-<div class="slide">
-<span class="slide-label">Score Card</span>
-<h2>Where <em>HaMuzim</em> Lands</h2>
+<span class="slide-label">המודל וכרטיס הציונים</span>
+<h2>שבעה <em>תחומים</em>, שלוש קטגוריות</h2>
+<p>שוק (1-2) &middot; ענף (3-4) &middot; צוות (5-7). כלל הזהב: התחום החלש ביותר קובע את תקרת ההזדמנות -- ירוקים לא מצילים אדומים.</p>
 <table class="domain-table">
-<tr><th>#</th><th>Domain</th><th>Score</th><th>Evidence</th></tr>
-<tr><td>1</td><td>Target Segment Benefits</td><td><span class="glyph g-green"></span><span class="score-big">5/5</span></td><td>Pain is irreversible; land worth millions vs. 20-50K NIS report cost.</td></tr>
-<tr><td>2</td><td>Market Attractiveness</td><td><span class="glyph g-green"></span><span class="score-big">4/5</span></td><td>70% of West Bank parcels unregistered; government mandate + budget.</td></tr>
-<tr><td>3</td><td>Industry Attractiveness</td><td><span class="glyph g-green"></span><span class="score-big">4/5</span></td><td>Low supplier power; substitute = doing nothing. See live update, next slide.</td></tr>
-<tr><td>4</td><td>Sustainable Advantage</td><td><span class="glyph g-green"></span><span class="score-big">4/5</span></td><td>Assembled evidence layer compounds -- every case enriches all prior cases.</td></tr>
-<tr><td>5</td><td>Mission &amp; Risk</td><td><span class="glyph g-green"></span><span class="score-big">4/5</span></td><td>Founder-market fit: land dispute lawyer + 11-year sensor-fusion engineer.</td></tr>
-<tr><td>6</td><td>Ability to Execute</td><td><span class="glyph g-green"></span><span class="score-big">4/5</span></td><td>Ottoman OCR/NLP: resolved from YELLOW -- engineering task, not research.</td></tr>
-<tr><td>7</td><td>Connectedness</td><td><span class="glyph g-green"></span><span class="score-big">4/5</span></td><td>Founder IS the buyer and channel; regulator validated unprompted.</td></tr>
+<tr><th>#</th><th>תחום</th><th>ציון</th><th>עדות</th></tr>
+<tr><td>1</td><td>תועלת לפלח היעד</td><td><span class="glyph g-green"></span><span class="score-big">5/5</span></td><td>כאב בלתי הפיך; קרקע בשווי מיליונים מול עלות דוח נמוכה.</td></tr>
+<tr><td>2</td><td>אטרקטיביות השוק</td><td><span class="glyph g-green"></span><span class="score-big">4/5</span></td><td>70% מהקרקע בגדה לא רשומה; מנדט ותקציב ממשלתיים.</td></tr>
+<tr><td>3</td><td>אטרקטיביות הענף</td><td><span class="glyph g-green"></span><span class="score-big">4/5</span></td><td>ראה עדכון תחרות חי בשקף הבא.</td></tr>
+<tr><td>4</td><td>יתרון בר-קיימא</td><td><span class="glyph g-green"></span><span class="score-big">4/5</span></td><td>שכבת הראיות המצטברת היא ה-moat -- כל תיק מעשיר את כולם.</td></tr>
+<tr><td>5</td><td>שליחות וסיכון</td><td><span class="glyph g-green"></span><span class="score-big">4/5</span></td><td>התאמת מייסדים: עו"ד סכסוכי קרקע + מהנדס מיזוג חיישנים.</td></tr>
+<tr><td>6</td><td>יכולת ביצוע</td><td><span class="glyph g-green"></span><span class="score-big">4/5</span></td><td>OCR/NLP עות'מאני -- שודרג מ-YELLOW, ראה שקף הבא.</td></tr>
+<tr><td>7</td><td>קישוריות</td><td><span class="glyph g-green"></span><span class="score-big">4/5</span></td><td>המייסד הוא גם הקונה וגם ערוץ ההפצה.</td></tr>
 </table>
 </div>
 
-<!-- SLIDE 5: STRONGEST -->
+<!-- 4: דומיינים בולטים -->
 <div class="slide">
-<span class="slide-label">Strongest Domain</span>
-<h2>Domain 1 -- <em>Irreversible Pain</em></h2>
-<p>When a parcel defaults to the state, the private claimant loses everything permanently. A system that changes that outcome -- even probabilistically -- has a near-unlimited willingness-to-pay ceiling relative to its cost. No other domain in this analysis has this property.</p>
-<div class="stat-row">
-<div class="stat"><div class="stat-val" style="color:var(--yellow)">5/5</div><div class="stat-label">Score</div></div>
-<div class="stat"><div class="stat-val" style="color:var(--green)">8/10</div><div class="stat-label">JTBD Gap</div></div>
+<span class="slide-label">התחום החזק והתחום שנפתר</span>
+<h2>דומיין 1 <em>וגם</em> דומיין 6</h2>
+<div class="slide-grid">
+<div class="slide-card"><h3>דומיין 1 -- כאב בלתי הפיך (5/5)</h3><p>כשחלקה נופלת למדינה, התובע הפרטי מפסיד הכל לצמיתות. מערכת שמשנה את התוצאה -- אפילו הסתברותית -- נהנית מתקרת נכונות-לשלם כמעט בלתי מוגבלת ביחס לעלות.</p></div>
+<div class="slide-card"><h3>דומיין 6 -- OCR עות'מאני (שודרג ל-4/5)</h3><p>סומן תחילה כ-YELLOW. שודרג לאחר שהתברר: קיימת קהילת מחקר פעילה למודלי OCR עות'מאניים (דיוק 88-97%), ותיקון שגיאות מבוסס LLM מגיע לשיעור שגיאה של 1.16%. משימת הנדסה של 2-3 חודשים, לא מחקר פתוח.</p></div>
 </div>
 </div>
 
-<!-- SLIDE 6: WEAKEST, RESOLVED -->
+<!-- 5: עדכון תחרות חי -->
 <div class="slide">
-<span class="slide-label">Weakest Domain -- Resolved In-Session</span>
-<h2>Domain 6 -- <em>Ottoman OCR/NLP</em></h2>
-<p>Initially flagged YELLOW. Upgraded to GREEN after establishing: an active Ottoman-Turkish OCR research community exists (Osmanlica.com, 88-97% character accuracy), and LLM-based error correction on Ottoman text reaches a 1.16% character error rate. The plan: existing OCR as a base, plus a small fine-tuned LLM for correction and structuring -- a standard 2-3 month engineering sprint, not an open research problem.</p>
-</div>
-
-<!-- SLIDE 7: LIVE COMPETITIVE UPDATE -->
-<div class="slide">
-<span class="slide-label">Live Update -- Diligence Never Stops</span>
-<h2>Domain 3 -- <em>Re-Checked</em></h2>
-<p>Two real competitors surfaced after this analysis was first written -- a reminder that a Mullins score card is a snapshot, not a verdict.</p>
+<span class="slide-label">בדיקת נאותות אף פעם לא נגמרת</span>
+<h2>דומיין 3 -- <em>נבדק מחדש</em></h2>
+<p>שני מתחרים אמיתיים עלו לאחר כתיבת הניתוח -- תזכורת שכרטיס ציונים של מוליינס הוא תמונת מצב, לא פסק דין.</p>
 <div class="watch-box">
-<h4>Orhitec GIS (Israel, est. 1999)</h4>
-<p>Real-time land registry / permits / tax GIS for local authorities. No historical imagery, no Ottoman records, no unregistered-land focus. Not a capability threat -- a distribution-speed watch item (27 years of government trust).</p>
+<h4>Orhitec GIS (ישראל, הוקמה 1999)</h4>
+<p>GIS לניהול רישום קרקע שוטף, היתרים ומיסוי לרשויות מקומיות. ללא תצלומי אוויר היסטוריים, ללא מסמכים עות'מאניים, ללא מיקוד בקרקע לא רשומה. לא איום יכולת -- סימון מעקב על מהירות הפצה (27 שנות אמון ממשלתי).</p>
 </div>
 <div class="watch-box">
-<h4>GEOward (Israel, 22 years)</h4>
-<p>Manual-expert aerial photo interpretation as legal evidence -- serves private real-estate lawyers and municipalities on already-registered land. Genuinely direct on capability; different customer (private disputes, not the Custodian / unregistered land / Ottoman documents).</p>
+<h4>GEOward (ישראל, 22 שנה)</h4>
+<p>פענוח מומחה-ידני של תצלומי אוויר כראיה משפטית -- משרת עורכי דין ורשויות מקומיות בסכסוכי קרקע פרטיים על קרקע כבר רשומה. תחרות ישירה ביכולת; לקוח שונה (סכסוכים פרטיים, לא הגורם הממשלתי / קרקע לא רשומה / מסמכים עות'מאניים).</p>
 </div>
-<p style="margin-top:12px;font-size:12.5px;color:var(--muted)">Net: "zero direct rivals" narrows to "zero rivals in the specific niche," not "zero competitors in the category." Domain 3 stands at GREEN with a flagged narrowing -- worth a live re-score before the next commitment gate.</p>
+<p style="margin-top:10px;font-size:12px;color:var(--muted)">מסקנה: "אין מתחרה ישיר" מצטמצם ל"אין מתחרה בנישה הספציפית," לא "אין תחרות בקטגוריה." דומיין 3 נשאר ירוק עם סימון לצמצום -- ראוי לבדיקה חוזרת לפני שער ההחלטה הבא.</p>
 </div>
 
-<!-- SLIDE 8: BUYER SEGMENTS -->
+<!-- 6: שוק היעד, ורדיקט והמלצות -->
 <div class="slide">
-<span class="slide-label">Go-To-Market</span>
-<h2>Who <em>Buys</em> First</h2>
-<table class="buyer-table rtl">
-<tr><th>שלב</th><th>מסלול</th><th>מניע</th><th>קונה</th></tr>
-<tr><td><b>MVP</b></td><td>B2G</td><td>איתור קרקע לא רשומה &larr; ביסוס בעלות מדינה</td><td>ממונה על הרכוש הממשלתי</td></tr>
-<tr><td>MVP / Scale</td><td>B2G</td><td>יעילות תפעולית, פחות עררים</td><td>סגן רמ"א</td></tr>
-<tr><td>Big Market</td><td>B2B via law firms</td><td>הוכחת בעלות וזכייה ברישום</td><td>תובע פרטי / יזם</td></tr>
+<span class="slide-label">שוק יעד, ורדיקט והמלצות</span>
+<h2>GO -- <em>בעיניים פקוחות</em></h2>
+<table class="buyer-table">
+<tr><th>שלב</th><th>מסלול</th><th>קונה</th></tr>
+<tr><td><b>MVP</b></td><td>B2G</td><td>הגורם הממשלתי האחראי על נכסי מדינה</td></tr>
+<tr><td>הרחבת שוק</td><td>B2B דרך משרדי עו"ד</td><td>תובע פרטי / יזם</td></tr>
 </table>
-<p style="margin-top:14px;font-size:12.5px;color:var(--muted)">Corrected sequence: the state is the primary MVP customer. The private-claimant segment is addressed only in the big-market expansion phase -- kept structurally separate to avoid the conflict-of-interest risk flagged this session.</p>
-</div>
-
-<!-- SLIDE 9: VERDICT + RECOMMENDATIONS -->
-<div class="slide">
-<span class="slide-label">Verdict</span>
-<h2>GO -- <em>With Eyes Open</em></h2>
-<div class="verdict-box"><h3>GO</h3><p style="margin-top:6px">All 7 domains GREEN. No blockers. Weakest domain resolved in-session.</p></div>
+<div class="verdict-box"><h3>GO</h3><p style="margin-top:6px;font-size:13px">כל 7 הדומיינים ירוקים. אין חסמים. התחום החלש ביותר נפתר בישיבה.</p></div>
 <ol class="reco">
-<li><b>Move immediately to the Biti Hills PoC.</b> Public data only -- reconstruct missing cultivation evidence retroactively.</li>
-<li><b>MVP customer: the Custodian of Government Property.</b> Founder has the working relationship; the PoC triggers the conversation.</li>
-<li><b>Ottoman NLP: don't build from scratch.</b> Evaluate existing OCR models, fine-tune on a small labeled corpus -- a 2-3 month sprint.</li>
-<li><b>Big-market expansion:</b> private claimants, once the state-side product is proven -- same engine, opposite query direction, structurally separated.</li>
+<li><b>הוכחת היתכנות (PoC) על נתונים ציבוריים בלבד</b> -- שחזור רטרואקטיבי של ראיית עיבוד חסרה, ללא צורך בגישה למידע מוגבל.</li>
+<li><b>לקוח MVP: הגורם הממשלתי.</b> קשר עבודה קיים; ה-PoC מפעיל את השיחה.</li>
+<li><b>OCR עות'מאני: לא לבנות מאפס.</b> להעריך מודלים קיימים, לכוונן על קורפוס מתויג קטן -- ספרינט של 2-3 חודשים.</li>
+<li><b>הרחבת שוק:</b> תובעים פרטיים, לאחר הוכחת הצד הממשלתי -- אותו מנוע, כיוון שאילתה הפוך, מופרד מבנית.</li>
 </ol>
 </div>
 
-<!-- SLIDE 10: CLOSING -->
+<!-- 7: לדיון -->
 <div class="slide">
-<span class="slide-label">Discussion</span>
-<h2>Questions <em>for the Room</em></h2>
+<span class="slide-label">לדיון</span>
+<h2>שאלות <em>לכיתה</em></h2>
 <div class="slide-grid">
-<div class="slide-card"><h3>The Political Risk</h3><p>Is a tool whose MVP customer is a state land authority in a disputed-territory context fundable -- and by whom?</p></div>
-<div class="slide-card"><h3>The Scope Line</h3><p>Where should "data-fusion evidence" end and "document-authenticity forensics" begin -- and who owns that boundary?</p></div>
+<div class="slide-card"><h3>הסיכון הפוליטי</h3><p>האם כלי שלקוח ה-MVP שלו הוא רשות מקרקעין ממשלתית באזור שנוי במחלוקת בר-מימון -- ועל ידי מי?</p></div>
+<div class="slide-card"><h3>גבול ההיקף</h3><p>איפה "ראיה מבוססת הצלבת דאטה" צריכה להיפסק ו"פורנזיקת מקוריות מסמכים" צריכה להתחיל -- ומי קובע את הגבול הזה?</p></div>
 </div>
-<p style="margin-top:20px;color:var(--muted);font-size:12.5px">Prepared with MindrianOS -- Mullins Seven Domains applied to HaMuzim, 2026-07-07.</p>
+<p style="margin-top:20px;color:var(--muted);font-size:12px">הוכן באמצעות MindrianOS -- שבעת התחומים של מוליינס יושמו על HaMuzim, 2026-07-07.</p>
 </div>
 
 </div><!-- /deck -->
 
 <div class="nav">
-<button onclick="prev()">&#8592;</button>
-<span class="counter"><span id="cur">1</span> / <span id="tot">10</span></span>
-<button onclick="next()">&#8594;</button>
+<button onclick="next()">&#8592;</button>
+<span class="counter"><span id="cur">1</span> / <span id="tot">7</span></span>
+<button onclick="prev()">&#8594;</button>
 </div>
 
 <div class="mondrian-footer"><span></span><span></span><span></span><span></span></div>
@@ -211,7 +182,7 @@ let c=1;const t=document.querySelectorAll('.slide').length;
 document.getElementById('tot').textContent=t;
 function show(n){if(n<1)n=1;if(n>t)n=t;c=n;document.querySelectorAll('.slide').forEach((s,i)=>s.classList.toggle('active',i===n-1));document.getElementById('cur').textContent=n;document.getElementById('progress').style.width=(n/t*100)+'%'}
 function next(){show(c+1)}function prev(){show(c-1)}
-document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();next()}if(e.key==='ArrowLeft'){e.preventDefault();prev()}if(e.key==='Home'){e.preventDefault();show(1)}if(e.key==='End'){e.preventDefault();show(t)}});
+document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key===' '){e.preventDefault();next()}if(e.key==='ArrowRight'){e.preventDefault();prev()}if(e.key==='Home'){e.preventDefault();show(1)}if(e.key==='End'){e.preventDefault();show(t)}});
 show(1);
 </script>
 </body>
