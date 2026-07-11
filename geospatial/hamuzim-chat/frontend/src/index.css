@@ -99,6 +99,28 @@ button {
   color: var(--accent);
 }
 
+.app-header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.btn-lang {
+  padding: 6px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-2);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-lang:hover {
+  color: var(--text-1);
+  border-color: var(--accent);
+}
+
 /* ---------- chat body ---------- */
 
 .chat-body {
@@ -374,4 +396,39 @@ button {
 .btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+/* ---------- RTL support (2026-07-11) ---------- */
+/* Same attribute-selector convention as the sibling hamuzim-app/index.css:
+   scope every mirrored rule under [dir="rtl"], set on .app-shell by App.jsx
+   when the language toggle is set to Hebrew. */
+
+[dir="rtl"] {
+  font-family: "Heebo", "Inter", system-ui, sans-serif;
+}
+
+[dir="rtl"] .msg-row-user {
+  align-items: flex-start;
+}
+
+[dir="rtl"] .msg-row-assistant {
+  align-items: flex-end;
+}
+
+[dir="rtl"] .evidence-card,
+[dir="rtl"] .evidence-card-obs li {
+  text-align: right;
+}
+
+[dir="rtl"] .evidence-card-top {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .chat-input {
+  text-align: right;
+}
+
+[dir="rtl"] .suggestion-row,
+[dir="rtl"] .chat-input-row {
+  flex-direction: row-reverse;
 }

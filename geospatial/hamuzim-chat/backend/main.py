@@ -55,6 +55,9 @@ class ChatMessage(BaseModel):
 class ChatRequest(BaseModel):
     message: str
     history: list[ChatMessage] = []
+    lang: str = "en"  # "en" or "he" -- drives fallback message language and
+    # is passed to Gemini as a hint; Gemini also just reads the query
+    # language directly, this is a backstop for a Hebrew UI + English query.
 
 
 # ---------- routes ----------
@@ -75,12 +78,12 @@ def list_parcels():
 def chat(req: ChatRequest):
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
-        return _mock_chat_reply(req.message)
+        return _mock_chat_reply(req.message, req.lang)
 
     try:
-        return _gemini_chat_reply(req.message, req.history, api_key)
+        return _gemini_chat_reply(req.message, req.history, api_key, req.lang)
     except Exception as exc:  # noqa: BLE001 -- demo fallback, any failure -> mock
-        fallback = _mock_chat_reply(req.message)
+        fallback = _mock_chat_reply(req.message, req.lang)
         fallback["error"] = str(exc)
         return fallback
 
@@ -101,7 +104,13 @@ SYSTEM_PROMPT = (
     "5. If the question has nothing to do with parcels, land evidence, or "
     "this case data (e.g. weather, small talk, general knowledge), do not "
     "call search_parcels at all -- say plainly that you can only answer "
-    "questions about the parcel evidence in this system."
+    "questions about the parcel evidence in this system.\n"
+    "6. Respond in the same language the user's message is written in. If "
+    "they write in Hebrew, answer in Hebrew (use the finding_he/name_he "
+    "fields from search results when present), citations still use the "
+    "parcel ID and year exactly as given. If the interface language hint "
+    "says Hebrew but the message itself is in English, still answer in "
+    "English -- the message's actual language wins."
 )
 
 # Cheapest current Flash-Lite model with a workable free tier as of this
@@ -145,7 +154,7 @@ GEMINI_TOOL = {
 }
 
 
-def _gemini_chat_reply(message: str, history: list[ChatMessage], api_key: str) -> dict:
+def _gemini_chat_reply(message: str, history: list[ChatMessage], api_key: str, lang: str = "en") -> dict:
     from google import genai
 
     client = genai.Client(api_key=api_key)
@@ -158,7 +167,8 @@ def _gemini_chat_reply(message: str, history: list[ChatMessage], api_key: str) -
     # prototype, so we just fold prior turns into the input text instead of
     # wiring true server-side session tracking.
     convo = "".join(f"{h.role}: {h.content}\n" for h in history)
-    full_input = f"{convo}user: {message}" if convo else message
+    lang_hint = "[interface language: Hebrew] " if lang == "he" else ""
+    full_input = f"{convo}user: {lang_hint}{message}" if convo else f"{lang_hint}{message}"
 
     interaction = client.interactions.create(
         model=GEMINI_MODEL,
@@ -212,11 +222,14 @@ _SIGNAL_KEYWORDS = {
     # Order matters: checked top-to-bottom, first match wins. More specific
     # signals go first so e.g. "cultivation loss" resolves to abandonment
     # rather than the generic "cultivation" keyword winning by coincidence.
-    "abandonment": ["abandon", "unmanaged", "decline", "loss"],
-    "construction": ["construct", "building", "structure", "encroach"],
-    "document": ["document", "cadastral", "registry", "record"],
-    "dispute": ["dispute", "claim", "overlapping"],
-    "cultivation": ["cultivat", "farm", "agricultur", "grove"],
+    # Hebrew keys added 2026-07-11, same ordering discipline -- this is
+    # still substring matching, not real morphology, so it won't catch
+    # every inflected form, only the common ones.
+    "abandonment": ["abandon", "unmanaged", "decline", "loss", "נטיש", "נטישה", "ירידה"],
+    "construction": ["construct", "building", "structure", "encroach", "בני", "מבנה", "חדיר"],
+    "document": ["document", "cadastral", "registry", "record", "מסמך", "קדסטר", "רישום"],
+    "dispute": ["dispute", "claim", "overlapping", "מחלוקת", "תביע", "חופפ"],
+    "cultivation": ["cultivat", "farm", "agricultur", "grove", "עיבוד", "חקלא", "מטע"],
 }
 
 
@@ -237,6 +250,16 @@ def _parcel_name_fragments() -> list[tuple[str, str]]:
         name = re.split(r"\s+--\s+|\s*\(", name)[0].strip()
         if name:
             fragments.append((name.lower(), name))
+
+        name_he = parcel.get("name_he")
+        if name_he:
+            name_he = re.split(r"\s+--\s+|\s*\(", name_he)[0].strip()
+            # Strip a leading "חלקה X - " / "חלקת ... - " prefix, mirroring
+            # the English "Parcel X - " strip, so e.g. "רכס צפוני" matches
+            # on its own rather than needing the full "חלקה ב' - רכס צפוני".
+            name_he = re.sub(r"^חלק(?:ה|ת)[^-]*-\s*", "", name_he).strip()
+            if name_he:
+                fragments.append((name_he.lower(), name_he))
     return fragments
 
 
@@ -275,25 +298,38 @@ def _naive_parse_query(text: str) -> dict:
     return filters
 
 
-def _mock_chat_reply(message: str) -> dict:
+def _mock_chat_reply(message: str, lang: str = "en") -> dict:
     filters = _naive_parse_query(message)
     matches = search_parcels(**filters)
+    he = lang == "he"
 
     if not matches:
         reply = (
-            "No mock parcels matched that query (source: rule-based fallback, "
+            "לא נמצאו חלקות התואמות לשאילתה (מקור: גיבוי מבוסס-כללים, "
+            "GEMINI_API_KEY לא מוגדר). נסו לשאול על עיבוד, בנייה, נטישה או "
+            "מסמכים, ואפשר עם טווח שנים, למשל \"אובדן עיבוד מאז 2015\"."
+            if he
+            else "No mock parcels matched that query (source: rule-based fallback, "
             "no GEMINI_API_KEY set). Try asking about cultivation, "
             "construction, abandonment, or document signals, optionally "
             "with a year range, e.g. \"cultivation loss since 2015\"."
         )
     else:
         lines = [
-            f"Found {len(matches)} parcel(s) matching your query "
+            f"נמצאו {len(matches)} חלקות התואמות לשאילתה "
+            "(מקור: גיבוי מבוסס-כללים, GEMINI_API_KEY לא מוגדר):"
+            if he
+            else f"Found {len(matches)} parcel(s) matching your query "
             "(source: rule-based fallback, no GEMINI_API_KEY set):"
         ]
         for m in matches:
             years = ", ".join(str(o["year"]) for o in m["matching_observations"])
-            lines.append(f"- {m['parcel_name']} ({m['parcel_id']}): matching observations in {years}.")
+            name = m.get("parcel_name_he", m["parcel_name"]) if he else m["parcel_name"]
+            lines.append(
+                f"- {name} ({m['parcel_id']}): תצפיות תואמות בשנים {years}."
+                if he
+                else f"- {name} ({m['parcel_id']}): matching observations in {years}."
+            )
         reply = "\n".join(lines)
 
     return {"reply": reply, "evidence": matches, "source": "mock"}
