@@ -314,6 +314,45 @@ button {
   border: 1px solid var(--accent);
 }
 
+.badge-confidence {
+  margin-left: 6px;
+  font-size: 9px;
+  padding: 2px 6px;
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  background: transparent;
+}
+
+[dir="rtl"] .badge-confidence {
+  margin-left: 0;
+  margin-right: 6px;
+}
+
+/* "unverified" is not a graded confidence like high/medium/low -- it means
+   "real source, not yet analyzed." Deliberately louder styling so it can
+   never be mistaken for an analyzed finding at a glance. */
+.badge-confidence-unverified {
+  border-color: #b8860b;
+  color: #b8860b;
+  font-weight: 700;
+}
+
+.evidence-card-obs-unverified {
+  background: rgba(184, 134, 11, 0.08);
+  border-left: 2px solid #b8860b;
+  padding-left: 6px;
+  margin-left: -6px;
+}
+
+[dir="rtl"] .evidence-card-obs-unverified {
+  border-left: none;
+  border-right: 2px solid #b8860b;
+  padding-left: 0;
+  padding-right: 6px;
+  margin-left: 0;
+  margin-right: -6px;
+}
+
 /* ---------- footer / input ---------- */
 
 .chat-footer {

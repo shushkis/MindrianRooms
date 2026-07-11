@@ -149,6 +149,10 @@ GEMINI_TOOL = {
                 "type": "string",
                 "description": "Free-text keyword matched against the parcel name and observation findings.",
             },
+            "parcel_id": {
+                "type": "string",
+                "description": "Exact parcel ID (e.g. \"P-004\") when the user names a specific parcel by ID. Prefer this over keyword when an ID is given directly.",
+            },
         },
     },
 }
@@ -285,11 +289,19 @@ def _naive_parse_query(text: str) -> dict:
         filters["date_from"] = int(between_match.group(1))
         filters["date_to"] = int(between_match.group(2))
 
+    # Direct parcel-ID lookup: "tell me about P-001" has no signal/date/
+    # keyword cue either -- found this the hard way testing the PEF-1880
+    # addition, where a bare ID query silently came back empty even on the
+    # real Gemini path, because the tool had no parcel_id parameter at all.
+    id_match = re.search(r"\bP-0*(\d+)\b", text, re.IGNORECASE)
+    if id_match:
+        filters["parcel_id"] = f"P-{int(id_match.group(1)):03d}"
+
     # Free-text name match: "tell me about Biti Hills" has no signal-type or
     # date cue at all, so without this the fallback would come back empty
     # even though the parcel exists -- try each known parcel name fragment
     # as a keyword before giving up.
-    if "keyword" not in filters:
+    if "keyword" not in filters and "parcel_id" not in filters:
         for fragment_lower, fragment_original in _parcel_name_fragments():
             if fragment_lower in lower:
                 filters["keyword"] = fragment_original

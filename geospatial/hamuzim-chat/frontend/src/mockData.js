@@ -17,6 +17,13 @@ export const PARCELS = [
     center: [35.12075, 31.6499],
     primary_signal: "cultivation",
     observations: [
+      // REAL source, unlike every other entry in this file -- confirmed
+      // public domain (Wikimedia Commons: Crown Copyright, UK government
+      // work pre-1976; also held by the National Library of Israel).
+      // Deliberately incomplete: which of the 26 sheets covers this exact
+      // parcel, and what it shows, has NOT been visually verified. Do not
+      // add a specific finding claim until someone has actually looked.
+      { year: 1880, source: "Survey of Western Palestine (Palestine Exploration Fund / UK Ordnance Survey)", source_he: "הסקר של פלשתינה המערבית (קרן החקר הבריטית לפלסטין)", type: "document", finding: "Real historical survey map series confirmed to cover this region and confirmed public domain. Exact sheet number and any cultivation/boundary detail for this specific parcel have not been visually verified yet -- flagged as a real source to investigate, not an analyzed finding.", finding_he: "סדרת מפות סקר היסטורית אמיתית, המכסה אזור זה ומאושרת כנחלת הכלל. מספר הגיליון המדויק וטרם אומתו חזותית -- מסומן כמקור אמיתי לבדיקה, לא כממצא שנותח.", confidence: "unverified", signal_tags: ["document"] },
       { year: 1959, source: "Israeli Survey Institute", source_he: "מרכז למיפוי ישראל (מפ\"י)", type: "aerial", finding: "Terraced agricultural land visible. Stone boundary walls present.", finding_he: "נראית קרקע חקלאית מדורגת. קירות גבול מאבן קיימים.", confidence: "high", signal_tags: ["cultivation"] },
       { year: 1967, source: "Israeli Survey Institute", source_he: "מרכז למיפוי ישראל (מפ\"י)", type: "aerial", finding: "Olive grove in northern section. Active cultivation marks in southern section.", finding_he: "מטע זיתים בחלק הצפוני. סימני עיבוד פעילים בחלק הדרומי.", confidence: "high", signal_tags: ["cultivation"] },
       { year: 1984, source: "Landsat 4", source_he: "Landsat 4", type: "satellite", finding: "NDVI signal indicates active vegetation. 68% of polygon cultivated.", finding_he: "אות NDVI מצביע על צמחייה פעילה. 68% מהחלקה מעובדים.", confidence: "medium", signal_tags: ["cultivation"] },
@@ -143,15 +150,17 @@ function parcelNameFragments() {
   return fragments;
 }
 
-export function searchParcels({ signal_type, date_from, date_to, keyword } = {}) {
+export function searchParcels({ signal_type, date_from, date_to, keyword, parcel_id } = {}) {
   // No filters supplied is "no query," not "match everything" -- an
   // off-topic question (e.g. "how's the weather") must never come back as
   // all parcels. Mirrors the same fix in backend/mock_data.py.
-  if (!signal_type && !date_from && !date_to && !keyword) return [];
+  if (!signal_type && !date_from && !date_to && !keyword && !parcel_id) return [];
 
   const kw = keyword ? keyword.toLowerCase() : null;
+  const pid = parcel_id ? parcel_id.trim().toUpperCase() : null;
   const matches = [];
   for (const parcel of PARCELS) {
+    if (pid && parcel.id.toUpperCase() !== pid) continue;
     const hits = parcel.observations.filter((obs) => {
       if (signal_type && !obs.signal_tags.includes(signal_type)) return false;
       if (date_from && obs.year < date_from) return false;
@@ -204,7 +213,14 @@ export function naiveParseQuery(text) {
     filters.date_to = parseInt(between[2], 10);
   }
 
-  if (!filters.keyword) {
+  // Direct parcel-ID lookup: "tell me about P-001" has no signal/date/
+  // keyword cue either -- mirrors the same fix in backend/main.py.
+  const idMatch = text.match(/\bP-0*(\d+)\b/i);
+  if (idMatch) {
+    filters.parcel_id = `P-${String(idMatch[1]).padStart(3, "0")}`;
+  }
+
+  if (!filters.keyword && !filters.parcel_id) {
     for (const [fragLower, fragOriginal] of parcelNameFragments()) {
       if (lower.includes(fragLower)) {
         filters.keyword = fragOriginal;

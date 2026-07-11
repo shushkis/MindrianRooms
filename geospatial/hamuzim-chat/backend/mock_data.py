@@ -35,6 +35,27 @@ PARCELS = [
         "primary_signal": "cultivation",
         "observations": [
             {
+                # REAL source, unlike every other entry in this file -- and
+                # deliberately incomplete. Confirmed public domain (Wikimedia
+                # Commons: Crown Copyright, UK government work pre-1976; also
+                # held by the National Library of Israel). What is NOT
+                # confirmed: which of the 26 sheets covers this exact parcel,
+                # or what it actually shows here -- nobody has looked yet.
+                # `confidence: "unverified"` exists specifically so this
+                # can't silently read as an analyzed finding like the rest
+                # of this file. Do not add cultivation_pct or a specific
+                # finding_he claim until someone has actually opened the map.
+                "year": 1880,
+                "source": "Survey of Western Palestine (Palestine Exploration Fund / UK Ordnance Survey)",
+                "source_he": "הסקר של פלשתינה המערבית (קרן החקר הבריטית לפלסטין)",
+                "type": "document",
+                "finding": "Real historical survey map series confirmed to cover this region and confirmed public domain. Exact sheet number and any cultivation/boundary detail for this specific parcel have not been visually verified yet -- flagged as a real source to investigate, not an analyzed finding.",
+                "finding_he": "סדרת מפות סקר היסטורית אמיתית, המכסה אזור זה ומאושרת כנחלת הכלל. מספר הגיליון המדויק ופרטי עיבוד/גבול עבור חלקה זו ספציפית טרם אומתו חזותית -- מסומן כמקור אמיתי לבדיקה, לא כממצא שנותח.",
+                "confidence": "unverified",
+                "cultivation_pct": None,
+                "signal_tags": ["document"],
+            },
+            {
                 "year": 1959,
                 "source": "Israeli Survey Institute",
                 "source_he": "מרכז למיפוי ישראל (מפ\"י)",
@@ -522,8 +543,8 @@ PARCELS = [
 SIGNAL_TYPES = ["cultivation", "construction", "abandonment", "document", "dispute"]
 
 
-def search_parcels(signal_type=None, date_from=None, date_to=None, keyword=None):
-    """Filter PARCELS by signal type / date range / keyword.
+def search_parcels(signal_type=None, date_from=None, date_to=None, keyword=None, parcel_id=None):
+    """Filter PARCELS by signal type / date range / keyword / parcel ID.
 
     This is the one and only "retrieval" step in the whole prototype: a plain
     list comprehension over hardcoded JSON. No embeddings, no SQL, no real
@@ -539,13 +560,21 @@ def search_parcels(signal_type=None, date_from=None, date_to=None, keyword=None)
 
     Keyword matching checks both the English and Hebrew name/finding fields,
     so a Hebrew keyword extracted from a Hebrew query still matches.
+
+    parcel_id (e.g. "P-004") is a direct lookup, found the hard way: a bare
+    "tell me about P-001" query has no signal/date/keyword cue at all, and
+    without this, the model correctly (but unhelpfully) reported "no
+    evidence" instead of finding the parcel by its own ID.
     """
-    if not any([signal_type, date_from, date_to, keyword]):
+    if not any([signal_type, date_from, date_to, keyword, parcel_id]):
         return []
 
     kw = keyword.lower() if keyword else None
+    pid = parcel_id.strip().upper() if parcel_id else None
     matches = []
     for parcel in PARCELS:
+        if pid and parcel["id"].upper() != pid:
+            continue
         hits = []
         for obs in parcel["observations"]:
             if signal_type and signal_type not in obs.get("signal_tags", []):

@@ -35,6 +35,7 @@ export const TRANSLATIONS = {
       high: "High",
       medium: "Medium",
       low: "Low",
+      unverified: "Unverified — source only",
     },
   },
   he: {
@@ -68,6 +69,7 @@ export const TRANSLATIONS = {
       high: "גבוהה",
       medium: "בינונית",
       low: "נמוכה",
+      unverified: "לא מאומת — מקור בלבד",
     },
   },
 };

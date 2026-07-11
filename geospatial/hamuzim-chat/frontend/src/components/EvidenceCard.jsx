@@ -4,6 +4,7 @@ export default function EvidenceCard({ evidence, lang = "en" }) {
   const { parcel_id, parcel_name, parcel_name_he, primary_signal, center, matching_observations } = evidence;
   const he = lang === "he";
   const signalLabels = t(lang, "signalLabels");
+  const confidenceLabels = t(lang, "confidenceLabels");
   const displayName = he ? parcel_name_he || parcel_name : parcel_name;
 
   return (
@@ -20,8 +21,15 @@ export default function EvidenceCard({ evidence, lang = "en" }) {
       )}
       <ul className="evidence-card-obs">
         {matching_observations.map((obs) => (
-          <li key={obs.year}>
-            <span className="evidence-card-year">{obs.year}</span>
+          <li key={obs.year} className={obs.confidence === "unverified" ? "evidence-card-obs-unverified" : ""}>
+            <span className="evidence-card-year">
+              {obs.year}
+              {obs.confidence && (
+                <span className={`badge badge-confidence badge-confidence-${obs.confidence}`}>
+                  {confidenceLabels[obs.confidence] ?? obs.confidence}
+                </span>
+              )}
+            </span>
             <span className="evidence-card-source">{he ? obs.source_he || obs.source : obs.source}</span>
             <span className="evidence-card-finding">{he ? obs.finding_he || obs.finding : obs.finding}</span>
           </li>
