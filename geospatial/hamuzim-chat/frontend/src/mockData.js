@@ -78,6 +78,20 @@ export const PARCELS = [
       { year: 2024, source: "Sentinel-2", type: "satellite", finding: "Structure footprint unchanged since 2019. Encroachment unresolved.", confidence: "high", signal_tags: ["construction"] },
     ],
   },
+  {
+    id: "P-007",
+    name: "Biti Hills - Demo Reconstruction (inspired by the real committee case; details fictionalized)",
+    center: [35.10725, 31.65825],
+    primary_signal: "dispute",
+    observations: [
+      { year: 1958, source: "Israeli Survey Institute", type: "aerial", finding: "Sparse cultivation visible in the eastern section only.", confidence: "medium", signal_tags: ["cultivation"] },
+      { year: 1965, source: "Israeli Survey Institute", type: "aerial", finding: "Cultivation extended westward. Young olive saplings visible.", confidence: "high", signal_tags: ["cultivation"] },
+      { year: 1984, source: "Landsat 4", type: "satellite", finding: "Mature olive grove visible. Full historical extent not determinable from this image alone.", confidence: "low", signal_tags: ["cultivation"] },
+      { year: 1991, source: "Applicant-submitted witness testimony", type: "document", finding: "Testimony claims continuous cultivation since 1958. No imagery exists for 1966-1983 to corroborate.", confidence: "low", signal_tags: ["document", "dispute"] },
+      { year: 1996, source: "Landsat 5", type: "satellite", finding: "Cultivation signal stable relative to 1984 baseline.", confidence: "medium", signal_tags: ["cultivation"] },
+      { year: 2003, source: "Committee ruling (demo reconstruction)", type: "document", finding: "Cultivation shown at both endpoints (1965, 1984) but the continuous 10-year window could not be established due to the 1966-1983 imagery gap. Registration denied.", confidence: "high", signal_tags: ["document", "dispute"] },
+    ],
+  },
 ];
 
 export const SIGNAL_TYPES = ["cultivation", "construction", "abandonment", "document", "dispute"];
