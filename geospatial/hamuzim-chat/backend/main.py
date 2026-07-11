@@ -204,6 +204,26 @@ _SIGNAL_KEYWORDS = {
 }
 
 
+def _parcel_name_fragments() -> list[tuple[str, str]]:
+    """(lowercased searchable fragment, original-cased fragment) pairs derived
+    from each parcel's name, so a free-text query can match a parcel by name
+    even though this fallback has no real NLP. Strips the boilerplate
+    "Parcel X - " prefix and any "(Demo...)" suffix so e.g. "Biti Hills" and
+    "North Ridge" are both matchable, not just the full formal name."""
+    fragments = []
+    for parcel in PARCELS:
+        name = re.sub(r"^Demo Parcel\s*-\s*", "", parcel["name"])
+        name = re.sub(r"^Parcel\s+[A-Z]\s*-\s*", "", name)
+        # Cut at the first "(", or " -- ", whichever comes first -- both are
+        # boilerplate separators (" (Demo)" / " -- Demo Reconstruction (...)")
+        # that would otherwise stay glued to the real name and stop it
+        # matching a short natural query like "biti hills".
+        name = re.split(r"\s+--\s+|\s*\(", name)[0].strip()
+        if name:
+            fragments.append((name.lower(), name))
+    return fragments
+
+
 def _naive_parse_query(text: str) -> dict:
     lower = text.lower()
     filters: dict = {}
@@ -225,6 +245,16 @@ def _naive_parse_query(text: str) -> dict:
     if between_match:
         filters["date_from"] = int(between_match.group(1))
         filters["date_to"] = int(between_match.group(2))
+
+    # Free-text name match: "tell me about Biti Hills" has no signal-type or
+    # date cue at all, so without this the fallback would come back empty
+    # even though the parcel exists -- try each known parcel name fragment
+    # as a keyword before giving up.
+    if "keyword" not in filters:
+        for fragment_lower, fragment_original in _parcel_name_fragments():
+            if fragment_lower in lower:
+                filters["keyword"] = fragment_original
+                break
 
     return filters
 
