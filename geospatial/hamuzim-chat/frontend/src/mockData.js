@@ -80,7 +80,7 @@ export const PARCELS = [
   },
   {
     id: "P-007",
-    name: "Biti Hills - Demo Reconstruction (inspired by the real committee case; details fictionalized)",
+    name: "Biti Hills -- Demo Reconstruction (inspired by the real committee case; details fictionalized)",
     center: [35.10725, 31.65825],
     primary_signal: "dispute",
     observations: [
@@ -108,6 +108,11 @@ const SIGNAL_KEYWORDS = {
 };
 
 export function searchParcels({ signal_type, date_from, date_to, keyword } = {}) {
+  // No filters supplied is "no query," not "match everything" -- an
+  // off-topic question (e.g. "how's the weather") must never come back as
+  // all parcels. Mirrors the same fix in backend/mock_data.py.
+  if (!signal_type && !date_from && !date_to && !keyword) return [];
+
   const kw = keyword ? keyword.toLowerCase() : null;
   const matches = [];
   for (const parcel of PARCELS) {
@@ -131,6 +136,20 @@ export function searchParcels({ signal_type, date_from, date_to, keyword } = {})
   return matches;
 }
 
+function parcelNameFragments() {
+  // Mirrors backend/main.py's _parcel_name_fragments(): strips boilerplate
+  // ("Demo Parcel - ", "Parcel X - ", trailing "(Demo...)" / " -- Demo...")
+  // so a short natural query like "biti hills" can match the real name.
+  const fragments = [];
+  for (const parcel of PARCELS) {
+    let name = parcel.name.replace(/^Demo Parcel\s*-\s*/, "");
+    name = name.replace(/^Parcel\s+[A-Z]\s*-\s*/, "");
+    name = name.split(/\s+--\s+|\s*\(/)[0].trim();
+    if (name) fragments.push([name.toLowerCase(), name]);
+  }
+  return fragments;
+}
+
 export function naiveParseQuery(text) {
   const lower = text.toLowerCase();
   const filters = {};
@@ -152,6 +171,15 @@ export function naiveParseQuery(text) {
   if (between) {
     filters.date_from = parseInt(between[1], 10);
     filters.date_to = parseInt(between[2], 10);
+  }
+
+  if (!filters.keyword) {
+    for (const [fragLower, fragOriginal] of parcelNameFragments()) {
+      if (lower.includes(fragLower)) {
+        filters.keyword = fragOriginal;
+        break;
+      }
+    }
   }
 
   return filters;
