@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MordiOS — 5-Minute Pitch</title>
+<style>
+  :root{
+    --paper:#F7F5F0; --ink:#0E0E0E; --white:#FFFFFF;
+    --red:#D72129; --blue:#1A4FA0; --yellow:#F4C20D; --green:#1E8E57;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%; overflow:hidden; background:var(--ink);}
+  body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; color:var(--ink);}
+
+  .deck{position:relative; width:100vw; height:100vh;}
+  .slide{
+    position:absolute; inset:0; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; padding:6vh 6vw;
+    opacity:0; pointer-events:none; transition:opacity .45s ease;
+    background:var(--paper);
+  }
+  .slide.active{opacity:1; pointer-events:auto;}
+
+  .kicker{
+    position:absolute; top:28px; left:38px; font-size:12px; font-weight:800;
+    text-transform:uppercase; letter-spacing:0.22em; color:var(--red);
+  }
+  .pagenum{
+    position:absolute; top:28px; right:38px; font-size:12px; font-weight:800;
+    color:var(--ink); opacity:.5; letter-spacing:0.1em;
+  }
+
+  /* ---- dots ---- */
+  .dots{position:absolute; bottom:26px; left:50%; transform:translateX(-50%); display:flex; gap:10px; z-index:20;}
+  .dot{width:12px; height:12px; border:2px solid var(--ink); background:transparent; cursor:pointer;}
+  .dot.on{background:var(--ink);}
+  .slide.dark ~ .dots .dot, .dark-mode .dots .dot{border-color:var(--white);}
+
+  .navhint{position:absolute; bottom:24px; right:38px; font-size:11px; color:var(--ink); opacity:.45; letter-spacing:0.08em; text-transform:uppercase;}
+
+  /* click zones */
+  .zone{position:absolute; top:0; bottom:0; width:18%; z-index:15; cursor:pointer;}
+  .zone.left{left:0;} .zone.right{right:0;}
+
+  /* ================= SLIDE 1 — HOOK/PROBLEM ================= */
+  #s1{gap:22px;}
+  .strip{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; width:100%; max-width:1180px;}
+  .panel{border:3px solid var(--ink); background:var(--white); aspect-ratio:1/1; position:relative; overflow:hidden;}
+  .panel svg{width:100%; height:100%;}
+  .panel.meme{background:var(--ink); display:flex; align-items:center; justify-content:center; text-align:center;}
+  .panel.meme .memetxt{color:var(--yellow); font-weight:800; font-size:clamp(18px,3vw,30px); letter-spacing:-0.01em; line-height:1.15; padding:0 10px;}
+  .caption1{font-size:clamp(16px,2.2vw,24px); font-weight:700; text-align:center; max-width:900px;}
+  .caption1 b{color:var(--red);}
+  .devicewm{position:absolute; bottom:70px; left:38px; font-size:11px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; opacity:.6;}
+
+  /* ================= SLIDE 2 — SOLUTION ================= */
+  #s2{gap:26px;}
+  .beforeicon{position:absolute; top:26%; left:6vw; opacity:.35;}
+  .chatmock{
+    width:100%; max-width:760px; border:3px solid var(--ink); background:var(--white);
+  }
+  .chatmock .qrow{background:var(--blue); color:var(--white); padding:16px 20px; font-size:17px; font-weight:600;}
+  .chatmock .arow{padding:18px 20px; font-size:15.5px; line-height:1.55;}
+  .chatmock .cites{display:flex; gap:8px; flex-wrap:wrap; padding:0 20px 18px;}
+  .citepill{border:2px solid var(--ink); font-size:11px; font-weight:800; padding:4px 9px; text-transform:uppercase; letter-spacing:0.04em;}
+  .s2label{font-size:clamp(20px,2.6vw,30px); font-weight:800; text-align:center;}
+  .s2label span{color:var(--blue);}
+
+  /* ================= SLIDE 3 — WHY BETTER / DREAM BIG ================= */
+  #s3{gap:24px;}
+  .bigline{font-size:clamp(24px,4vw,46px); font-weight:800; text-align:center; line-height:1.15; max-width:1000px;}
+  .bigline .old{color:var(--red); text-decoration:line-through; text-decoration-thickness:4px;}
+  .bigline .new{color:var(--green);}
+  .italyrow{display:flex; align-items:center; gap:34px; max-width:1080px; width:100%;}
+  .italymap{flex-shrink:0;}
+  .s3q{border:3px solid var(--ink); background:var(--white); flex:1;}
+  .s3q .qrow{background:var(--ink); color:var(--yellow); padding:14px 18px; font-size:15px; font-weight:700;}
+  .s3q .arow{padding:14px 18px; font-size:14px; line-height:1.5;}
+  .scaleline{font-size:15px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; text-align:center;}
+  .scaleline b{color:var(--blue);}
+
+  /* ================= SLIDE 4 — TEAM / CLOSE ================= */
+  #s4{background:var(--ink); gap:34px;}
+  #s4 .teamrow{display:flex; gap:40px; flex-wrap:wrap; justify-content:center;}
+  .avcard{width:280px; border:3px solid var(--white); background:transparent; padding:22px; color:var(--white);}
+  .avcard .av{width:64px; height:64px; border:3px solid var(--white); border-radius:50%; margin-bottom:14px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:22px;}
+  .avcard h3{font-size:19px; font-weight:800; margin-bottom:8px;}
+  .avcard p{font-size:13.5px; line-height:1.5; opacity:.85;}
+  .closewrap{text-align:center;}
+  .closewrap h1{color:var(--white); font-size:clamp(40px,7vw,86px); font-weight:800; letter-spacing:-0.02em;}
+  .closewrap h1 span{color:var(--yellow);}
+  .closewrap p{color:var(--white); opacity:.7; font-size:16px; margin-top:10px; letter-spacing:0.04em;}
+
+  @media (max-width:760px){
+    .strip{grid-template-columns:1fr 1fr;}
+    .italyrow{flex-direction:column;}
+    .zone{width:24%;}
+  }
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- SLIDE 1 : HOOK -> PROBLEM -->
+  <section class="slide active" id="s1">
+    <div class="kicker">MordiOS</div>
+    <div class="pagenum">01 / 04</div>
+    <div class="strip">
+      <div class="panel">
+        <svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#fff"/>
+          <line x1="100" y1="20" x2="100" y2="180" stroke="#0E0E0E" stroke-width="3" stroke-dasharray="6 6"/>
+          <circle cx="55" cy="80" r="16" fill="none" stroke="#D72129" stroke-width="4"/>
+          <line x1="55" y1="96" x2="55" y2="140" stroke="#D72129" stroke-width="4"/>
+          <line x1="55" y1="108" x2="30" y2="128" stroke="#D72129" stroke-width="4"/>
+          <line x1="55" y1="108" x2="80" y2="128" stroke="#D72129" stroke-width="4"/>
+          <line x1="55" y1="140" x2="38" y2="170" stroke="#D72129" stroke-width="4"/>
+          <line x1="55" y1="140" x2="72" y2="170" stroke="#D72129" stroke-width="4"/>
+          <circle cx="145" cy="80" r="16" fill="none" stroke="#1A4FA0" stroke-width="4"/>
+          <line x1="145" y1="96" x2="145" y2="140" stroke="#1A4FA0" stroke-width="4"/>
+          <line x1="145" y1="108" x2="120" y2="128" stroke="#1A4FA0" stroke-width="4"/>
+          <line x1="145" y1="108" x2="170" y2="128" stroke="#1A4FA0" stroke-width="4"/>
+          <line x1="145" y1="140" x2="128" y2="170" stroke="#1A4FA0" stroke-width="4"/>
+          <line x1="145" y1="140" x2="162" y2="170" stroke="#1A4FA0" stroke-width="4"/>
+          <text x="55" y="55" text-anchor="middle" font-size="15" font-weight="800" fill="#D72129">MINE</text>
+          <text x="145" y="55" text-anchor="middle" font-size="15" font-weight="800" fill="#1A4FA0">MINE</text>
+        </svg>
+      </div>
+      <div class="panel">
+        <svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#fff"/>
+          <rect x="30" y="120" width="140" height="14" fill="#0E0E0E"/>
+          <rect x="40" y="106" width="120" height="14" fill="#F4C20D" stroke="#0E0E0E" stroke-width="2"/>
+          <rect x="35" y="92" width="130" height="14" fill="#fff" stroke="#0E0E0E" stroke-width="2"/>
+          <rect x="45" y="78" width="110" height="14" fill="#F4C20D" stroke="#0E0E0E" stroke-width="2"/>
+          <rect x="38" y="64" width="124" height="14" fill="#fff" stroke="#0E0E0E" stroke-width="2"/>
+          <circle cx="100" cy="150" r="14" fill="none" stroke="#0E0E0E" stroke-width="4"/>
+          <line x1="90" y1="146" x2="94" y2="150" stroke="#0E0E0E" stroke-width="3"/>
+          <line x1="94" y1="150" x2="90" y2="154" stroke="#0E0E0E" stroke-width="3"/>
+          <line x1="110" y1="146" x2="106" y2="150" stroke="#0E0E0E" stroke-width="3"/>
+          <line x1="106" y1="150" x2="110" y2="154" stroke="#0E0E0E" stroke-width="3"/>
+          <text x="100" y="185" text-anchor="middle" font-size="12" font-weight="800" fill="#0E0E0E">MORDI, 3AM</text>
+        </svg>
+      </div>
+      <div class="panel meme"><div class="memetxt">7 YEARS<br>LATER.</div></div>
+      <div class="panel">
+        <svg viewBox="0 0 200 200"><rect width="200" height="200" fill="#fff"/>
+          <rect x="75" y="90" width="50" height="70" rx="24" fill="none" stroke="#0E0E0E" stroke-width="4"/>
+          <line x1="60" y1="160" x2="140" y2="160" stroke="#0E0E0E" stroke-width="4"/>
+          <text x="100" y="115" text-anchor="middle" font-size="11" font-weight="800" fill="#0E0E0E">R.I.P.</text>
+          <circle cx="150" cy="70" r="14" fill="none" stroke="#1E8E57" stroke-width="4"/>
+          <line x1="150" y1="84" x2="150" y2="115" stroke="#1E8E57" stroke-width="4"/>
+          <line x1="150" y1="95" x2="130" y2="108" stroke="#1E8E57" stroke-width="4"/>
+          <line x1="150" y1="95" x2="140" y2="80" stroke="#1E8E57" stroke-width="4"/>
+          <path d="M118,55 h35 v20 l-8,-6 h-27 z" fill="#fff" stroke="#0E0E0E" stroke-width="3"/>
+          <text x="135" y="69" text-anchor="middle" font-size="9" font-weight="800" fill="#0E0E0E">YES. IT WAS</text>
+          <text x="135" y="79" text-anchor="middle" font-size="9" font-weight="800" fill="#0E0E0E">YOUR LAND.</text>
+        </svg>
+      </div>
+    </div>
+    <p class="caption1">This is how long a verdict takes <b>today</b>.</p>
+    <div class="devicewm">MordiOS &middot; Ron &amp; Eli</div>
+  </section>
+
+  <!-- SLIDE 2 : SOLUTION -->
+  <section class="slide" id="s2">
+    <div class="kicker">The Solution</div>
+    <div class="pagenum">02 / 04</div>
+    <p class="s2label">Stop searching layers. <span>Ask.</span></p>
+    <div class="chatmock">
+      <div class="qrow">"Which parcels near Gush Etzion show cultivation loss since 1967?"</div>
+      <div class="arow">3 parcels match. P-004 shows continuous cultivation through 1972, abandonment signal from 1984 onward. Confidence: high.</div>
+      <div class="cites">
+        <span class="citepill">Parcel P-004</span>
+        <span class="citepill">1972 aerial survey</span>
+        <span class="citepill">1984 Landsat</span>
+        <span class="citepill">high confidence</span>
+      </div>
+    </div>
+    <p style="font-size:13px; opacity:.6; font-weight:700; text-transform:uppercase; letter-spacing:0.08em;">Grounded. Cited. Every claim traces to a source — no source, no answer.</p>
+  </section>
+
+  <!-- SLIDE 3 : WHY BETTER + DREAM BIG -->
+  <section class="slide" id="s3">
+    <div class="kicker">Why It's Different</div>
+    <div class="pagenum">03 / 04</div>
+    <p class="bigline"><span class="old">Weeks of expert testimony.</span><br><span class="new">One grounded answer. Minutes.</span></p>
+    <div class="italyrow">
+      <svg class="italymap" width="140" height="200" viewBox="0 0 140 200">
+        <path d="M60,10 L75,40 L70,70 L85,90 L80,120 L95,150 L75,190 L60,160 L65,120 L50,90 L60,60 Z" fill="#fff" stroke="#0E0E0E" stroke-width="3"/>
+        <circle cx="68" cy="95" r="6" fill="#D72129"/>
+      </svg>
+      <div class="s3q">
+        <div class="qrow">"Show me places in Italy with likely abandonment, low ownership contest, and public-sale eligibility — even unlisted."</div>
+        <div class="arow">Same engine. Different geography, different question — because the evidence layer, not the legal wrapper, is the product.</div>
+      </div>
+    </div>
+    <p class="scaleline">Small: <b>Mordi's office.</b> Big: <b>every GIS query, everywhere.</b> The GPT moment for GIS.</p>
+  </section>
+
+  <!-- SLIDE 4 : TEAM + CLOSE -->
+  <section class="slide dark" id="s4">
+    <div class="kicker" style="color:#F4C20D;">Why Us</div>
+    <div class="pagenum" style="color:#fff; opacity:.5;">04 / 04</div>
+    <div class="teamrow">
+      <div class="avcard">
+        <div class="av">M</div>
+        <h3>Mordi</h3>
+        <p>Land-dispute lawyer, special forces veteran. He isn't a customer — he IS the domain.</p>
+      </div>
+      <div class="avcard">
+        <div class="av">E</div>
+        <h3>Elli</h3>
+        <p>Sensor fusion + autonomous systems, 11+ years. Built the hardest 20% first.</p>
+      </div>
+    </div>
+    <div class="closewrap">
+      <h1>Mordi<span>OS</span></h1>
+      <p>GROUND TRUTH, ON DEMAND.</p>
+    </div>
+  </section>
+
+  <div class="zone left" onclick="go(-1)"></div>
+  <div class="zone right" onclick="go(1)"></div>
+  <div class="dots" id="dots"></div>
+  <div class="navhint">&larr; &rarr; to navigate</div>
+</div>
+
+<script>
+  var slides = document.querySelectorAll('.slide');
+  var dotsEl = document.getElementById('dots');
+  var i = 0;
+  slides.forEach(function(_, idx){
+    var d = document.createElement('div');
+    d.className = 'dot' + (idx===0?' on':'');
+    d.onclick = function(e){ e.stopPropagation(); show(idx); };
+    dotsEl.appendChild(d);
+  });
+  function show(n){
+    i = Math.max(0, Math.min(slides.length-1, n));
+    slides.forEach(function(s, idx){ s.classList.toggle('active', idx===i); });
+    dotsEl.querySelectorAll('.dot').forEach(function(d, idx){ d.classList.toggle('on', idx===i); });
+  }
+  function go(delta){ show(i+delta); }
+  document.addEventListener('keydown', function(e){
+    if(e.key==='ArrowRight' || e.key===' ') go(1);
+    if(e.key==='ArrowLeft') go(-1);
+  });
+</script>
+</body>
+</html>
