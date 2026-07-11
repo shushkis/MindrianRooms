@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HaMuzim -- רשימת משימות פתוחות - MindrianOS</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--red:#A63D2F;--blue:#1E3A6E;--yellow:#C8A43C;--green:#2A6B5E;--bg:#0a0a0f;--surface:#12121a;--border:#1a1a2a;--cream:#f5f0e8;--muted:#888}
+body{background:var(--bg);color:var(--cream);font-family:'Inter',system-ui,sans-serif;padding:0 0 60px}
+.header{background:var(--bg);display:flex;align-items:center;padding:14px 32px;gap:12px;position:relative}
+.header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red) 30%,var(--blue) 50%,var(--yellow) 70%,var(--green) 100%)}
+.logo{display:flex;align-items:center;gap:6px}
+.logo svg{height:18px;width:auto}
+.logo span{font-family:'Bebas Neue',sans-serif;font-size:15px;color:var(--muted);letter-spacing:1.5px}
+.title-block{padding:32px}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,4vw,42px);letter-spacing:1px}
+h1 em{font-style:normal;color:var(--red)}
+.subtitle{color:var(--muted);font-size:13px;margin-top:6px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 32px}
+.group{margin-top:36px}
+.group-title{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--yellow);border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:14px}
+table{width:100%;border-collapse:collapse}
+th{text-align:right;padding:8px 12px;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--border)}
+td{padding:12px;border-bottom:1px solid var(--border);font-size:13.5px;color:#ddd;vertical-align:top}
+tr:hover td{background:rgba(255,255,255,.02)}
+.pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:10.5px;font-weight:600;letter-spacing:.5px}
+.p-urgent{background:rgba(166,61,47,.18);color:#e08070;border:1px solid var(--red)}
+.p-week{background:rgba(200,164,60,.18);color:#e0c878;border:1px solid var(--yellow)}
+.p-ongoing{background:rgba(30,58,110,.18);color:#88a8e0;border:1px solid var(--blue)}
+.p-external{background:rgba(42,107,94,.18);color:#78c0ac;border:1px solid var(--green)}
+.deadline{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--cream);white-space:nowrap}
+.done{color:var(--green);font-weight:600}
+.footer-note{max-width:1100px;margin:40px auto 0;padding:0 32px;color:var(--muted);font-size:11.5px}
+.mondrian-footer{position:fixed;bottom:0;left:0;right:0;display:flex;height:3px}
+.mondrian-footer span:nth-child(1){flex:3;background:var(--red)}.mondrian-footer span:nth-child(2){flex:1;background:var(--blue)}.mondrian-footer span:nth-child(3){flex:2;background:var(--yellow)}.mondrian-footer span:nth-child(4){flex:1;background:var(--green)}
+</style>
+</head>
+<body>
+
+<div class="header">
+<div class="logo">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="0" y="0" width="10" height="10" fill="#A63D2F"/><rect x="12" y="0" width="12" height="5" fill="#C8A43C"/><rect x="12" y="7" width="12" height="3" fill="#1E3A6E"/><rect x="0" y="12" width="5" height="12" fill="#2A6B5E"/><rect x="7" y="12" width="17" height="12" fill="#15151f" stroke="#2a2a3a" stroke-width="0.3"/></svg>
+<span>MINDRIAN</span>
+</div>
+</div>
+
+<div class="title-block wrap">
+<h1>HaMuzim -- <em>רשימת משימות</em> פתוחות</h1>
+<div class="subtitle">מצב נכון ל-2026-07-07 | סשן mos:mullins</div>
+</div>
+
+<div class="wrap">
+
+<div class="group">
+<div class="group-title">דחוף -- מחר</div>
+<table>
+<tr><th>משימה</th><th>סטטוס</th><th>דדליין</th><th>עדיפות</th></tr>
+<tr><td>הצגת הכיתה -- דק Mullins Seven Domains</td><td class="done">מוכן (10 שקפים, כולל עדכון תחרות חי)</td><td class="deadline">2026-07-08</td><td><span class="pill p-urgent">מחר</span></td></tr>
+</table>
+</div>
+
+<div class="group">
+<div class="group-title">השבוע</div>
+<table>
+<tr><th>משימה</th><th>סטטוס</th><th>דדליין</th><th>עדיפות</th></tr>
+<tr><td>עדכון דומיין 3 ב-Mullins (GREEN&rarr;YELLOW בעקבות GEOward) + הערת Forensic Architecture על חסם #1</td><td>לא בוצע</td><td class="deadline">2026-07-09</td><td><span class="pill p-week">השבוע</span></td></tr>
+<tr><td>תיעוד מחקר התחרות המלא (GEOward, OnGeo, Mundi, Cadasta, Medici, Forensic Architecture) כארטיפקט תחת competitive-analysis</td><td>קיים רק בצ'אט</td><td class="deadline">2026-07-11</td><td><span class="pill p-week">השבוע</span></td></tr>
+<tr><td>מסמך risk-mitigation (8 החסמים + תשובות) תחת business-model</td><td>לא נכתב</td><td class="deadline">2026-07-11</td><td><span class="pill p-week">השבוע</span></td></tr>
+<tr><td>תיוק שני תיקי בית המשפט (9252 + 2728/22) כ-case study תחת problem-definition</td><td>מוזכר בהפניה בלבד</td><td class="deadline">2026-07-11</td><td><span class="pill p-week">השבוע</span></td></tr>
+<tr><td>תיוק תבנית שאלון הראיונות כארטיפקט תחת problem-definition (מעבר לקובץ הוורד)</td><td>וורד מוכן, לא מתויק</td><td class="deadline">2026-07-11</td><td><span class="pill p-week">השבוע</span></td></tr>
+</table>
+</div>
+
+<div class="group">
+<div class="group-title">מתמשך / בלי דדליין קשיח</div>
+<table>
+<tr><th>משימה</th><th>סטטוס</th><th>דדליין</th><th>עדיפות</th></tr>
+<tr><td>בניית דק מלא בסטייל Feynman דרך /mos:deck (למצגת משקיעים/פיץ', לא לכיתה)</td><td>נבחר סטייל, לא נבנה</td><td class="deadline">ללא</td><td><span class="pill p-ongoing">מתמשך</span></td></tr>
+<tr><td>מילוי סקשנים ריקים: financial-model, legal-ip, team-execution</td><td>ריק</td><td class="deadline">לפני שיחת מימון הבאה</td><td><span class="pill p-ongoing">מתמשך</span></td></tr>
+<tr><td>מעקב Orhitec/GEOward -- בדיקה חוזרת אם הם זזים לכיוון ארכיוני/עות'מאני</td><td>סומן למעקב</td><td class="deadline">בדיקה רבעונית</td><td><span class="pill p-ongoing">מתמשך</span></td></tr>
+</table>
+</div>
+
+<div class="group">
+<div class="group-title">חיצוני -- שלך (מרדי), לא של Larry</div>
+<table>
+<tr><th>משימה</th><th>סטטוס</th><th>דדליין</th><th>עדיפות</th></tr>
+<tr><td>ביצוע 5 ראיונות (רמ"י, הממונה, מפ"י, טאבו, מנהל אזרחי) לפי השאלון, 30-45 דק' כל אחד</td><td>שאלון מוכן</td><td class="deadline">לתאם בעצמך</td><td><span class="pill p-external">שלך</span></td></tr>
+<tr><td>העלאת תמלולי הראיונות לניתוח מול דומיינים 1/3/6/7</td><td>ממתין לראיונות</td><td class="deadline">אחרי כל ראיון</td><td><span class="pill p-external">שלך</span></td></tr>
+</table>
+</div>
+
+</div>
+
+<div class="footer-note">נוצר אוטומטית ע"י Larry / MindrianOS מתוך היסטוריית הסשן. דדליינים הם הצעה על בסיס דחיפות יחסית, לא מחייבים.</div>
+
+<div class="mondrian-footer"><span></span><span></span><span></span><span></span></div>
+</body>
+</html>
