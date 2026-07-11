@@ -447,7 +447,15 @@ def search_parcels(signal_type=None, date_from=None, date_to=None, keyword=None)
     Returns a list of {parcel_id, parcel_name, center, primary_signal,
     matching_observations} for every parcel with at least one observation
     that passes all supplied filters.
+
+    No filters supplied is treated as "no query," not "match everything" --
+    an off-topic or unparseable question (e.g. "how's the weather") must
+    never come back as all 7 parcels. If you actually want the full mock
+    universe, use the /api/parcels debug route, not this function.
     """
+    if not any([signal_type, date_from, date_to, keyword]):
+        return []
+
     kw = keyword.lower() if keyword else None
     matches = []
     for parcel in PARCELS:

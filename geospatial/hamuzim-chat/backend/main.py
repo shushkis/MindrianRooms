@@ -93,7 +93,11 @@ SYSTEM_PROMPT = (
     "3. If search_parcels returns nothing, say so plainly -- do not "
     "speculate or invent a finding.\n"
     "4. Keep answers concise (3-6 sentences) and evidentiary in tone: this "
-    "supports legal exhibits, not casual chat."
+    "supports legal exhibits, not casual chat.\n"
+    "5. If the question has nothing to do with parcels, land evidence, or "
+    "this case data (e.g. weather, small talk, general knowledge), do not "
+    "call search_parcels at all -- say plainly that you can only answer "
+    "questions about the parcel evidence in this system."
 )
 
 TOOLS = [
