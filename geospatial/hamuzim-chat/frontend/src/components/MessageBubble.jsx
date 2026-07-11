@@ -1,7 +1,7 @@
 import EvidenceCard from "./EvidenceCard";
 
 const SOURCE_LABEL = {
-  claude: "Claude (tool-calling)",
+  gemini: "Gemini (function-calling)",
   mock: "Rule-based fallback -- no API key",
   "mock-offline": "Offline fallback -- backend unreachable",
 };

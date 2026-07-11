@@ -10,11 +10,15 @@ engineering is the retrieval contract: every answer must be backed by
 evidence cards next to the reply -- so the chat can never state a finding
 without a parcel ID and observation year to point at.
 
-If ANTHROPIC_API_KEY is set, /api/chat runs an actual Claude tool-calling
-loop against `search_parcels`. If it isn't, a small rule-based parser reads
-the message for signal-type / date / keyword cues and calls the same
-`search_parcels()` directly -- so the demo still runs standalone, and the
-"mock" path is exercising the real filter, not just returning canned text.
+If GEMINI_API_KEY is set, /api/chat runs an actual Gemini function-calling
+loop (google-genai SDK, Interactions API) against `search_parcels`. If it
+isn't, a small rule-based parser reads the message for signal-type / date /
+keyword cues and calls the same `search_parcels()` directly -- so the demo
+still runs standalone, and the "mock" path is exercising the real filter,
+not just returning canned text.
+
+Switched from Anthropic to Gemini for cost: Gemini's Flash-Lite tier has a
+free-tier quota generous enough for a live class demo, no billing needed.
 """
 
 import json
@@ -69,19 +73,19 @@ def list_parcels():
 
 @app.post("/api/chat")
 def chat(req: ChatRequest):
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         return _mock_chat_reply(req.message)
 
     try:
-        return _claude_chat_reply(req.message, req.history, api_key)
+        return _gemini_chat_reply(req.message, req.history, api_key)
     except Exception as exc:  # noqa: BLE001 -- demo fallback, any failure -> mock
         fallback = _mock_chat_reply(req.message)
         fallback["error"] = str(exc)
         return fallback
 
 
-# ---------- Claude tool-calling path ----------
+# ---------- Gemini function-calling path ----------
 
 SYSTEM_PROMPT = (
     "You are the HaMuzim Chat assistant, answering questions about a small "
@@ -100,93 +104,105 @@ SYSTEM_PROMPT = (
     "questions about the parcel evidence in this system."
 )
 
-TOOLS = [
-    {
-        "name": "search_parcels",
-        "description": (
-            "Search the mock parcel evidence database. Filter by signal "
-            "type, a year range, and/or a free-text keyword. Returns every "
-            "parcel with at least one observation matching all supplied "
-            "filters, including the matching observation records."
-        ),
-        "input_schema": {
-            "type": "object",
-            "properties": {
-                "signal_type": {
-                    "type": "string",
-                    "enum": SIGNAL_TYPES,
-                    "description": "Restrict to observations tagged with this signal type.",
-                },
-                "date_from": {
-                    "type": "integer",
-                    "description": "Earliest observation year to include (inclusive).",
-                },
-                "date_to": {
-                    "type": "integer",
-                    "description": "Latest observation year to include (inclusive).",
-                },
-                "keyword": {
-                    "type": "string",
-                    "description": "Free-text keyword matched against the parcel name and observation findings.",
-                },
+# Cheapest current Flash-Lite model with a workable free tier as of this
+# writing (2026-07) -- verified against ai.google.dev/gemini-api/docs/models,
+# not assumed from memory, since Google deprecates model IDs on a matter of
+# months (gemini-2.0-flash was retired 2026-06-01). If this ever 404s,
+# check that page again before assuming the code is broken.
+GEMINI_MODEL = "gemini-3.1-flash-lite"
+
+GEMINI_TOOL = {
+    "type": "function",
+    "name": "search_parcels",
+    "description": (
+        "Search the mock parcel evidence database. Filter by signal "
+        "type, a year range, and/or a free-text keyword. Returns every "
+        "parcel with at least one observation matching all supplied "
+        "filters, including the matching observation records."
+    ),
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "signal_type": {
+                "type": "string",
+                "enum": SIGNAL_TYPES,
+                "description": "Restrict to observations tagged with this signal type.",
+            },
+            "date_from": {
+                "type": "integer",
+                "description": "Earliest observation year to include (inclusive).",
+            },
+            "date_to": {
+                "type": "integer",
+                "description": "Latest observation year to include (inclusive).",
+            },
+            "keyword": {
+                "type": "string",
+                "description": "Free-text keyword matched against the parcel name and observation findings.",
             },
         },
-    }
-]
+    },
+}
 
 
-def _claude_chat_reply(message: str, history: list[ChatMessage], api_key: str) -> dict:
-    import anthropic
+def _gemini_chat_reply(message: str, history: list[ChatMessage], api_key: str) -> dict:
+    from google import genai
 
-    client = anthropic.Anthropic(api_key=api_key)
-    messages = [{"role": h.role, "content": h.content} for h in history]
-    messages.append({"role": "user", "content": message})
-
+    client = genai.Client(api_key=api_key)
     evidence: list[dict] = []
-    response = client.messages.create(
-        model="claude-sonnet-4-5",
-        max_tokens=800,
-        system=SYSTEM_PROMPT,
-        tools=TOOLS,
-        messages=messages,
+
+    # The Interactions API manages multi-turn state server-side via
+    # previous_interaction_id, but the frontend sends a flat history array
+    # per request (no interaction_id tracked client-side) -- same "no real
+    # conversation persistence" limitation already documented for this whole
+    # prototype, so we just fold prior turns into the input text instead of
+    # wiring true server-side session tracking.
+    convo = "".join(f"{h.role}: {h.content}\n" for h in history)
+    full_input = f"{convo}user: {message}" if convo else message
+
+    interaction = client.interactions.create(
+        model=GEMINI_MODEL,
+        system_instruction=SYSTEM_PROMPT,
+        input=full_input,
+        tools=[GEMINI_TOOL],
     )
 
-    # Tool-calling loop: Claude may call search_parcels one or more times
-    # before it has enough grounding to answer.
+    # Function-calling loop: Gemini may call search_parcels one or more
+    # times before it has enough grounding to answer.
     max_turns = 4
     turns = 0
-    while response.stop_reason == "tool_use" and turns < max_turns:
+    while turns < max_turns:
+        fc_steps = [s for s in interaction.steps if s.type == "function_call"]
+        if not fc_steps:
+            break
         turns += 1
-        assistant_content = [block.model_dump() for block in response.content]
-        messages.append({"role": "assistant", "content": assistant_content})
 
-        tool_results = []
-        for block in response.content:
-            if block.type == "tool_use" and block.name == "search_parcels":
-                result = search_parcels(**block.input)
-                evidence.extend(result)
-                tool_results.append(
-                    {
-                        "type": "tool_result",
-                        "tool_use_id": block.id,
-                        "content": json.dumps(result),
-                    }
-                )
-        messages.append({"role": "user", "content": tool_results})
+        results = []
+        for step in fc_steps:
+            result = search_parcels(**step.arguments)
+            evidence.extend(result)
+            results.append(
+                {
+                    "type": "function_result",
+                    "name": step.name,
+                    "call_id": step.id,
+                    "result": [{"type": "text", "text": json.dumps(result)}],
+                }
+            )
 
-        response = client.messages.create(
-            model="claude-sonnet-4-5",
-            max_tokens=800,
-            system=SYSTEM_PROMPT,
-            tools=TOOLS,
-            messages=messages,
+        interaction = client.interactions.create(
+            model=GEMINI_MODEL,
+            system_instruction=SYSTEM_PROMPT,
+            input=results,
+            tools=[GEMINI_TOOL],
+            previous_interaction_id=interaction.id,
         )
 
-    text = "".join(block.text for block in response.content if getattr(block, "type", None) == "text")
+    text = getattr(interaction, "output_text", "") or ""
     return {
         "reply": text.strip() or "No answer produced -- try rephrasing the question.",
         "evidence": _dedupe_evidence(evidence),
-        "source": "claude",
+        "source": "gemini",
     }
 
 
@@ -266,14 +282,14 @@ def _mock_chat_reply(message: str) -> dict:
     if not matches:
         reply = (
             "No mock parcels matched that query (source: rule-based fallback, "
-            "no ANTHROPIC_API_KEY set). Try asking about cultivation, "
+            "no GEMINI_API_KEY set). Try asking about cultivation, "
             "construction, abandonment, or document signals, optionally "
             "with a year range, e.g. \"cultivation loss since 2015\"."
         )
     else:
         lines = [
             f"Found {len(matches)} parcel(s) matching your query "
-            "(source: rule-based fallback, no ANTHROPIC_API_KEY set):"
+            "(source: rule-based fallback, no GEMINI_API_KEY set):"
         ]
         for m in matches:
             years = ", ".join(str(o["year"]) for o in m["matching_observations"])
