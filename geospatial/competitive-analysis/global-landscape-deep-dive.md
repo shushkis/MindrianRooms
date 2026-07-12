@@ -1,4 +1,6 @@
 ---
+title: Global Deep Dive -- Who Else Touches This Problem
+status: draft
 source: web-research
 date: 2026-07-06
 based-on: multi-query web search (satellite/aerial legal evidence, historical
@@ -137,7 +139,7 @@ The real risks are:
   software (they have the imagery access and legal credibility; they'd
   need to build the fusion + AI layer).
 - Whether courts/committees in this specific jurisdiction (Israeli
-  land-dispute committees, per the Biti Hills precedent already on file)
+  land-dispute committees, per patterns already seen in practice)
   will accept an AI-generated summary the same way they accept a named
   expert's signed report -- an evidentiary-weight question, not a
   technology question.

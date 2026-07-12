@@ -36,3 +36,6 @@ role_blend:
 
 ## What Drives Him
 Elli thinks at platform level. He's not building a legal tool -- he's building a fusion methodology that happens to debut in legal. The decision to stay at platform level (not drill into applications) is intentional and worth respecting.
+
+## Standing Constraints (read every session -- do not re-derive, just obey)
+- **Never use "Biti Hills" as a case study, demo target, or named example.** (Set 2026-07-12.) That case represents a narrow, non-representative slice of the registration process, and there are exposure/confidentiality concerns around its specific facts and the company name. It was raised exactly once, for exactly one purpose: to let Larry learn what a committee decision looks like and the general logic of committee rulings -- not to anchor product or demo work. If a concrete anchor case is needed for a PoC/demo, ask the user for one rather than defaulting to it. See `.context/rejection-log.md` for full context.

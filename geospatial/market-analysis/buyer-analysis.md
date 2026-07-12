@@ -1,4 +1,6 @@
 ---
+title: Buyer Analysis -- Three-Segment Map
+status: draft
 source: larry-session
 date: 2026-07-01
 section: market-analysis
@@ -45,10 +47,10 @@ Each has a different procurement path and willingness-to-pay logic.
 
 ## Buyer 3: היזם / הצד הפרטי (Private Developer / Land Claimant)
 
-**Role:** Party claiming rights to a disputed parcel (Biti Hills archetype)
+**Role:** Party claiming rights to a disputed parcel
 
 **Motivation:** Win the case
-- Biti Hills lost -- not because the truth was absent, but because the evidence was not found
+- The recurring pattern: cases are lost not because the truth was absent, but because the evidence was not found
 - Land value: several million NIS per typical parcel
 - A 20,000-50,000 NIS report that changes the outcome is not an expense -- it is the cheapest bet available
 
@@ -72,24 +74,29 @@ Each has a different procurement path and willingness-to-pay logic.
 
 ## Economics (Private Claimant Segment)
 
-- Typical parcel value in Biti Hills area: several million NIS
+- Typical parcel value in a representative disputed-land area: several million NIS
 - Willingness to pay: 1-2% of asset value = 20,000-50,000 NIS per case report
 - Reference: claimant already pays lawyers, surveyors, expert witnesses
-- Biti Hills outcome: lost because temporal aerial evidence of continuous cultivation was unavailable -- exactly what HaMuzim produces
+- Recurring loss pattern: cases lost because temporal aerial evidence of continuous cultivation was unavailable -- exactly what HaMuzim produces
 
 ---
 
-## Biti Hills as Case Study (Confirmed)
+## Anchor Case for PoC/Demo (Pending Selection)
 
-Mordi confirmed Biti Hills is the ideal case study. Decisions to be filed when received.
+**Standing constraint (2026-07-12, see `.context/rejection-log.md`):** no
+previously-discussed case should be defaulted to as the PoC/demo anchor --
+narrow, non-representative facts and confidentiality both cut against it.
+The full PoC workup lives in `solution-design/public-archive-poc-concept.md`;
+an anchor case still needs to be picked with the user before execution.
 
-Why it works as a demo:
-- Case is public record
-- Failure mode is known and specific: could not prove 10 years of continuous cultivation
+What makes a case work as a demo (general criteria, not tied to any specific
+prior case):
+- Case is public record (verdict, not a sealed committee file)
+- Failure mode is known and specific: could not prove N years of continuous cultivation
 - Public aerial data layer may be sufficient to reconstruct the missing evidence retroactively
-- If the public layer answers what the court could not answer -- that IS the demo
+- If the public layer answers what the original proceeding could not -- that IS the demo
 
-Planned use:
+Planned use, once a case is chosen:
 1. Technical PoC: reconstruct missing evidence using public data only
 2. Pitch to סגן רמ"א: "Here is a case your system closed with the wrong outcome. Here is what was missing."
 3. Pitch to private claimants: "Here is what losing a case looks like when the evidence existed but was not found."
@@ -98,7 +105,7 @@ Planned use:
 
 ## Open Items
 
-- [ ] Biti Hills court decisions to be filed (Mordi to send)
+- [ ] Pick a suitable anchor case with the user (do not default to a previously-discussed case)
 - [ ] Size the total addressable volume: how many cases per year come before committees like Mordi's, across all of Judea and Samaria?
 - [ ] Define MVP scope: what is the minimum output that gets סגן רמ"א into a serious conversation?
 - [ ] Pricing model for private claimant segment (per-case vs. subscription for law firms)

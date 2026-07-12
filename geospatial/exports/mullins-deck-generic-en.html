@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="MindrianOS -- Mullins Seven Domains Deck (Generic, EN)">
+<title>HaMuzim - Mullins Seven Domains - Generic Version</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--red:#A63D2F;--blue:#1E3A6E;--yellow:#C8A43C;--green:#2A6B5E;--bg:#0a0a0f;--surface:#12121a;--border:#1a1a2a;--cream:#f5f0e8;--muted:#888}
+body{background:var(--bg);color:var(--cream);font-family:'Inter',system-ui,sans-serif;overflow:hidden;direction:ltr}
+.header{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--bg);display:flex;align-items:center;padding:8px 20px;gap:12px;height:40px}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red) 30%,var(--blue) 50%,var(--yellow) 70%,var(--green) 100%)}
+.logo{display:flex;align-items:center;gap:6px;text-decoration:none}
+.logo svg{height:16px;width:auto}
+.logo span{font-family:'Bebas Neue',sans-serif;font-size:13px;color:var(--muted);letter-spacing:1.5px}
+.deck-title{font-size:12px;font-weight:600;color:#666}
+.progress{position:fixed;top:40px;left:0;height:2px;background:var(--yellow);transition:width .3s;z-index:100}
+.deck{position:relative;width:100vw;height:100vh;overflow:hidden}
+@media(min-width:769px){.deck{max-width:calc(100vh*16/9);max-height:calc(100vw*9/16);margin:auto;position:absolute;inset:0}}
+.slide{position:absolute;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:80px 60px 60px;opacity:0;visibility:hidden;transition:opacity .4s;background:var(--bg);overflow:auto;text-align:left}
+.slide.active{opacity:1;visibility:visible}
+.slide-label{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--yellow);margin-bottom:8px;border:1px solid var(--border);display:inline-block;padding:2px 10px;border-radius:3px}
+.slide h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(24px,4.2vw,44px);line-height:1.2;margin-bottom:16px;letter-spacing:.5px;font-family:'Inter',system-ui,sans-serif;font-weight:800}
+.slide h2 em{font-style:normal;color:var(--red)}
+.slide p{font-size:clamp(13px,1.8vw,17px);color:#ccc;line-height:1.7;max-width:900px}
+.slide-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:20px;width:100%}
+.slide-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:16px}
+.slide-card h3{font-size:16px;font-weight:700;color:var(--yellow);margin-bottom:6px}
+.slide-card p{font-size:12.5px;color:#aaa;line-height:1.6}
+.stat-row{display:flex;gap:32px;margin-top:20px;flex-wrap:wrap}
+.stat{text-align:center}.stat-val{font-size:clamp(24px,3.5vw,40px);font-weight:700;font-family:'Bebas Neue',sans-serif;letter-spacing:1px}.stat-label{font-size:11px;color:var(--muted)}
+.domain-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:12px}
+.domain-table th{text-align:left;padding:6px 8px;color:var(--muted);font-size:9.5px;border-bottom:1px solid var(--border)}
+.domain-table td{padding:6px 8px;border-bottom:1px solid var(--border);color:#ccc;vertical-align:top}
+.glyph{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px}
+.g-green{background:var(--green)}.g-yellow{background:var(--yellow)}.g-red{background:var(--red)}
+.score-big{font-family:'Bebas Neue',sans-serif;font-weight:700}
+.verdict-box{margin-top:16px;padding:16px 20px;border:2px solid var(--green);border-radius:8px;background:rgba(42,107,94,.08)}
+.verdict-box h3{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--green);letter-spacing:2px}
+.watch-box{margin-top:14px;padding:14px 18px;border:1px solid var(--yellow);border-radius:8px;background:rgba(200,164,60,.08)}
+.watch-box h4{font-size:15px;font-weight:700;color:var(--yellow);margin-bottom:5px}
+.watch-box p{font-size:12px;color:#ccc}
+.buyer-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
+.buyer-table th{text-align:left;padding:7px 10px;color:var(--muted);font-size:10px;border-bottom:1px solid var(--border)}
+.buyer-table td{padding:7px 10px;border-bottom:1px solid var(--border);color:#ccc}
+.buyer-table tr:first-child td{color:var(--yellow);font-weight:600}
+ol.reco{margin-top:12px;padding-left:20px}
+ol.reco li{font-size:13px;color:#ccc;line-height:1.6;margin-bottom:8px}
+ol.reco li b{color:var(--yellow)}
+.mondrian-footer{position:fixed;bottom:0;left:0;right:0;display:flex;height:3px;z-index:100}
+.mondrian-footer span:nth-child(1){flex:3;background:var(--red)}.mondrian-footer span:nth-child(2){flex:1;background:var(--blue)}.mondrian-footer span:nth-child(3){flex:2;background:var(--yellow)}.mondrian-footer span:nth-child(4){flex:1;background:var(--green)}
+.nav{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:16px;z-index:100}
+.nav button{background:rgba(255,255,255,.08);border:none;color:var(--cream);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:16px;transition:all .2s}
+.nav button:hover{background:rgba(255,255,255,.15)}
+.nav .counter{font-size:12px;color:var(--muted)}
+.mondrian-blocks{position:absolute;right:-20px;top:-20px;opacity:.15}
+@media(max-width:900px){.slide{padding:60px 32px 48px}.slide-grid{grid-template-columns:1fr}.stat-row{gap:16px;flex-wrap:wrap}}
+</style>
+</head>
+<body>
+
+<div class="header">
+<a class="logo" href="#">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="0" y="0" width="10" height="10" fill="#A63D2F"/><rect x="12" y="0" width="12" height="5" fill="#C8A43C"/><rect x="12" y="7" width="12" height="3" fill="#1E3A6E"/><rect x="0" y="12" width="5" height="12" fill="#2A6B5E"/><rect x="7" y="12" width="17" height="12" fill="#15151f" stroke="#2a2a3a" stroke-width="0.3"/></svg>
+<span>MINDRIAN</span></a>
+<span class="deck-title">HaMuzim -- Mullins Seven Domains (Generic Version)</span>
+</div>
+
+<div class="progress" id="progress"></div>
+
+<div class="deck">
+
+<!-- 1: Cover -->
+<div class="slide active">
+<svg class="mondrian-blocks" width="260" height="260" viewBox="0 0 300 300"><rect x="200" y="0" width="100" height="80" fill="var(--red)"/><rect x="200" y="90" width="100" height="60" fill="var(--blue)"/><rect x="200" y="160" width="60" height="140" fill="var(--yellow)"/><rect x="270" y="160" width="30" height="140" fill="var(--green)"/></svg>
+<span class="slide-label">Business Opportunity Screen</span>
+<h2>HaMuzim <em>×</em> Mullins Seven Domains</h2>
+<p style="font-size:18px;color:var(--cream);max-width:700px">A geo-legal venture: reconstructing historical evidence for disputed, unregistered land ownership.</p>
+<div class="stat-row">
+<div class="stat"><div class="stat-val" style="color:var(--green)">7/7</div><div class="stat-label">Domains Green</div></div>
+<div class="stat"><div class="stat-val" style="color:var(--yellow)">GO</div><div class="stat-label">Verdict</div></div>
+<div class="stat"><div class="stat-val" style="color:var(--blue)">2</div><div class="stat-label">Buyer Segments</div></div>
+</div>
+</div>
+
+<!-- 2: Problem -->
+<div class="slide">
+<span class="slide-label">The Well-Defined Problem</span>
+<h2>The <em>Evidence</em> Gap</h2>
+<div class="slide-grid">
+<div class="slide-card"><h3>Big Market</h3><p>How do we reach a legally defensible verdict when historical evidence is scattered across disconnected archives with no coordinates -- and resolve parcels that default away by procedural failure, not by fact?</p></div>
+<div class="slide-card"><h3>The MVP</h3><p>How do we identify parcels where private ownership cannot be proven, when 70% of the region's land is unregistered and historical records are disconnected from geographic location?</p></div>
+</div>
+</div>
+
+<!-- 3: Model + scorecard -->
+<div class="slide">
+<span class="slide-label">The Model and the Scorecard</span>
+<h2>Seven <em>Domains</em>, Three Categories</h2>
+<p>Market (1-2) &middot; Industry (3-4) &middot; Team (5-7). The weakest domain sets the ceiling -- greens don't rescue a red.</p>
+<table class="domain-table">
+<tr><th>#</th><th>Domain</th><th>Score</th><th>Evidence</th></tr>
+<tr><td>1</td><td>Target Segment Benefits</td><td><span class="glyph g-green"></span><span class="score-big">5/5</span></td><td>Irreversible pain; high value, low cost.</td></tr>
+<tr><td>2</td><td>Market Attractiveness</td><td><span class="glyph g-green"></span><span class="score-big">4/5</span></td><td>70% of land unregistered; public mandate and budget.</td></tr>
+<tr><td>3</td><td>Industry Attractiveness</td><td><span class="glyph g-green"></span><span class="score-big">4/5</span></td><td>No direct rival in the niche -- see next slide.</td></tr>
+<tr><td>4</td><td>Sustainable Advantage</td><td><span class="glyph g-green"></span><span class="score-big">4/5</span></td><td>Compounding evidence layer = moat; every case strengthens the next.</td></tr>
+<tr><td>5</td><td>Mission &amp; Risk</td><td><span class="glyph g-green"></span><span class="score-big">4/5</span></td><td>Founder fit: legal + technical coverage.</td></tr>
+<tr><td>6</td><td>Ability to Execute</td><td><span class="glyph g-green"></span><span class="score-big">4/5</span></td><td>Historical-script OCR upgraded from YELLOW -- see next slide.</td></tr>
+<tr><td>7</td><td>Connectedness</td><td><span class="glyph g-green"></span><span class="score-big">4/5</span></td><td>Founder is both the buyer and the distribution channel.</td></tr>
+</table>
+</div>
+
+<!-- 4: Standout domains -->
+<div class="slide">
+<span class="slide-label">The Strongest Domain and the One We Resolved</span>
+<h2>Domain 1 <em>and</em> Domain 6</h2>
+<div class="slide-grid">
+<div class="slide-card"><h3>Domain 1 -- Irreversible Pain (5/5)</h3><p>When a parcel defaults away, the claimant loses everything, permanently. A system that changes that outcome -- even probabilistically -- is worth almost any price.</p></div>
+<div class="slide-card"><h3>Domain 6 -- Historical-Script OCR (Upgraded to 4/5)</h3><p>Flagged YELLOW at first. Existing models already hit 88-97% accuracy, and LLM-based correction gets to a 1.16% error rate. A 2-3 month engineering sprint -- not an open research problem.</p></div>
+</div>
+</div>
+
+<!-- 5: Competitive re-check (generic) -->
+<div class="slide">
+<span class="slide-label">Due Diligence Never Really Ends</span>
+<h2>Domain 3 -- <em>Re-checked</em></h2>
+<p>Two adjacent-market players surfaced after the initial analysis -- a reminder that a Mullins scorecard is a snapshot, not a verdict.</p>
+<div class="watch-box">
+<h4>Player A -- Established Government/Municipal GIS</h4>
+<p>Ongoing registry, permitting, and taxation for local authorities. No historical aerial imagery, no legacy-script documents, no focus on unregistered land. Not a capability threat -- a distribution-speed watch item only.</p>
+</div>
+<div class="watch-box">
+<h4>Player B -- Manual Expert Aerial-Photo Interpretation</h4>
+<p>Serves law firms and private disputes over land that is already registered. Capability overlap, not customer overlap -- different audience, different land status.</p>
+</div>
+<p style="margin-top:10px;font-size:12px;color:var(--muted)">Conclusion: no direct rival in the specific niche. Domain 3 stays green, flagged for re-check before the next decision gate.</p>
+</div>
+
+<!-- 6: Target market, verdict, recommendations -->
+<div class="slide">
+<span class="slide-label">Target Market, Verdict &amp; Recommendations</span>
+<h2>GO -- <em>Eyes Open</em></h2>
+<table class="buyer-table">
+<tr><th>Stage</th><th>Path</th><th>Buyer</th></tr>
+<tr><td><b>MVP</b></td><td>B2G</td><td>Government body responsible for state land assets</td></tr>
+<tr><td>Market expansion</td><td>B2B via law firms</td><td>Private claimant / developer</td></tr>
+</table>
+<div class="verdict-box"><h3>GO</h3><p style="margin-top:6px;font-size:13px">All 7 domains green. No blockers. The weakest domain was resolved in-session.</p></div>
+<ol class="reco">
+<li><b>PoC on public data only</b> -- retroactively reconstruct the missing possession evidence.</li>
+<li><b>MVP customer: the government body.</b> An existing working relationship kicks off the conversation.</li>
+<li><b>Historical-script OCR: don't build from scratch.</b> Fine-tune an existing model -- a 2-3 month sprint.</li>
+<li><b>Market expansion:</b> private claimants, same engine, reversed query direction.</li>
+</ol>
+</div>
+
+<!-- 7: Discussion -->
+<div class="slide">
+<span class="slide-label">For Discussion</span>
+<h2>Questions <em>for Class</em></h2>
+<div class="slide-grid">
+<div class="slide-card"><h3>Political Risk</h3><p>How does a tool whose MVP customer is a government authority in a contested region get funded -- and by whom?</p></div>
+<div class="slide-card"><h3>Scope Boundary</h3><p>Where does "cross-referenced data evidence" stop and "document authenticity forensics" start -- and who draws that line?</p></div>
+</div>
+<p style="margin-top:20px;color:var(--muted);font-size:12px">Prepared with MindrianOS -- Mullins Seven Domains, generic version with no identifying parties.</p>
+</div>
+
+</div><!-- /deck -->
+
+<div class="nav">
+<button onclick="prev()">&#8592;</button>
+<span class="counter"><span id="cur">1</span> / <span id="tot">7</span></span>
+<button onclick="next()">&#8594;</button>
+</div>
+
+<div class="mondrian-footer"><span></span><span></span><span></span><span></span></div>
+
+<script>
+let c=1;const t=document.querySelectorAll('.slide').length;
+document.getElementById('tot').textContent=t;
+function show(n){if(n<1)n=1;if(n>t)n=t;c=n;document.querySelectorAll('.slide').forEach((s,i)=>s.classList.toggle('active',i===n-1));document.getElementById('cur').textContent=n;document.getElementById('progress').style.width=(n/t*100)+'%'}
+function next(){show(c+1)}function prev(){show(c-1)}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();next()}if(e.key==='ArrowLeft'){e.preventDefault();prev()}if(e.key==='Home'){e.preventDefault();show(1)}if(e.key==='End'){e.preventDefault();show(t)}});
+show(1);
+</script>
+</body>
+</html>

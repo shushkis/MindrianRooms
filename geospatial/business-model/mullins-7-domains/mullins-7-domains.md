@@ -1,4 +1,7 @@
 ---
+title: Mullins 7 Domains -- HaMuzim
+source: larry-session
+status: verified
 framework: mullins-7-domains
 generated: 2026-07-01
 participants: Mordi Verzberger, Elli Eidelman, Larry
@@ -88,7 +91,7 @@ The pain is irreversible and the economics are clear. When a parcel defaults to 
 
 ## Recommendations
 
-1. **Move immediately to Biti Hills PoC.** Public data only. Reconstruct the missing cultivation evidence retroactively. If the public layer answers what the court couldn't answer -- that is the demo, the pitch, and the proof simultaneously.
+1. **Move immediately to a public-data PoC.** Pick a suitable anchor case with the user (see `solution-design/public-archive-poc-concept.md` -- do not default to a previously-discussed case). Public data only. Reconstruct the missing cultivation evidence retroactively. If the public layer answers what the original proceeding couldn't -- that is the demo, the pitch, and the proof simultaneously.
 
 2. **MVP customer: the state (ממונה על הרכוש הממשלתי).** The system scans unregistered parcels, finds land with no provable private owner, and surfaces it for state registration. Mordi has the working relationship. PoC triggers the conversation.
 

@@ -1,4 +1,6 @@
 ---
+title: Product Decision -- Reasoning Layer, Mordi's Judgment Deployable
+status: active
 source: larry-session
 date: 2026-07-08
 section: solution-design
@@ -71,8 +73,8 @@ problem, and no one has scoped how long it takes or whether it converges.
   ruleset.
 - Road Test domain 8 (Validation): a new open item -- validating that the
   codified ruleset actually matches Mordi's real judgment, not just that
-  the reconstruction pipeline works (the existing Biti Hills PoC item is
-  necessary but no longer sufficient).
+  the reconstruction pipeline works (the existing public-archive PoC item,
+  see `public-archive-poc-concept.md`, is necessary but no longer sufficient).
 
 ## Open Items
 
