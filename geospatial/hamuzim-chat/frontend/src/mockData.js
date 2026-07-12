@@ -98,8 +98,8 @@ export const PARCELS = [
   },
   {
     id: "P-007",
-    name: "Biti Hills -- Demo Reconstruction (inspired by the real committee case; details fictionalized)",
-    name_he: "גבעות ביתי -- שחזור הדגמה (בהשראת המקרה האמיתי בוועדה; הפרטים בדויים)",
+    name: "Parcel G - Evidentiary Gap (Demo)",
+    name_he: "חלקה ז' - פער ראייתי (הדגמה)",
     center: [35.10725, 31.65825],
     primary_signal: "dispute",
     observations: [
@@ -130,7 +130,7 @@ const SIGNAL_KEYWORDS = {
 function parcelNameFragments() {
   // Mirrors backend/main.py's _parcel_name_fragments(): strips boilerplate
   // ("Demo Parcel - ", "Parcel X - ", trailing "(Demo...)" / " -- Demo...")
-  // so a short natural query like "biti hills" / "ביתי" can match the real
+  // so a short natural query like "evidentiary gap" / "פער ראייתי" can match the real
   // name. Includes both English and Hebrew name fragments.
   const fragments = [];
   for (const parcel of PARCELS) {
