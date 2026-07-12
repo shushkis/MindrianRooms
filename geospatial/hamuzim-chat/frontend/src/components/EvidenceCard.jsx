@@ -1,21 +1,19 @@
-const SIGNAL_LABEL = {
-  cultivation: "Cultivation",
-  construction: "Construction",
-  abandonment: "Abandonment",
-  document: "Document",
-  dispute: "Dispute",
-};
+import { t } from "../translations";
 
-export default function EvidenceCard({ evidence }) {
-  const { parcel_id, parcel_name, primary_signal, center, matching_observations } = evidence;
+export default function EvidenceCard({ evidence, lang = "en" }) {
+  const { parcel_id, parcel_name, parcel_name_he, primary_signal, center, matching_observations } = evidence;
+  const he = lang === "he";
+  const signalLabels = t(lang, "signalLabels");
+  const confidenceLabels = t(lang, "confidenceLabels");
+  const displayName = he ? parcel_name_he || parcel_name : parcel_name;
 
   return (
     <div className="evidence-card">
       <div className="evidence-card-top">
         <span className="evidence-card-id">{parcel_id}</span>
-        <span className="badge badge-signal">{SIGNAL_LABEL[primary_signal] ?? primary_signal}</span>
+        <span className="badge badge-signal">{signalLabels[primary_signal] ?? primary_signal}</span>
       </div>
-      <div className="evidence-card-name">{parcel_name}</div>
+      <div className="evidence-card-name">{displayName}</div>
       {center && (
         <div className="evidence-card-coords">
           {center[1].toFixed(4)}, {center[0].toFixed(4)}
@@ -23,10 +21,17 @@ export default function EvidenceCard({ evidence }) {
       )}
       <ul className="evidence-card-obs">
         {matching_observations.map((obs) => (
-          <li key={obs.year}>
-            <span className="evidence-card-year">{obs.year}</span>
-            <span className="evidence-card-source">{obs.source}</span>
-            <span className="evidence-card-finding">{obs.finding}</span>
+          <li key={obs.year} className={obs.confidence === "unverified" ? "evidence-card-obs-unverified" : ""}>
+            <span className="evidence-card-year">
+              {obs.year}
+              {obs.confidence && (
+                <span className={`badge badge-confidence badge-confidence-${obs.confidence}`}>
+                  {confidenceLabels[obs.confidence] ?? obs.confidence}
+                </span>
+              )}
+            </span>
+            <span className="evidence-card-source">{he ? obs.source_he || obs.source : obs.source}</span>
+            <span className="evidence-card-finding">{he ? obs.finding_he || obs.finding : obs.finding}</span>
           </li>
         ))}
       </ul>
