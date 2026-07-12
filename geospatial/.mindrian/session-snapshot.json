@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "session_id": "sess-1783796197306",
-  "snapshot_at": "2026-07-11T18:56:37.306Z",
+  "session_id": "sess-1783866467167",
+  "snapshot_at": "2026-07-12T14:27:47.167Z",
   "active_room": "C:/Users/ורצברגר/MindrianRooms/geospatial",
   "sections": {
     "business-model": {
@@ -9,7 +9,7 @@
         "exists": true,
         "identity_text": "---\r\nsection: business-model\r\npurpose: Define revenue model, unit economics, and go-to-market for both wedge and platform\r\nstage_relevance:\r\n  - Discovery\r\n  - Design\r\ndefault_methodologies:\r\n  - structure-argument\r\n  - lean-canvas\r\n  - scenario-plan\r\n---\r\n\r\nThe platform ambition and the wedge go-to-market need different business model thinking. The legal application may justify per-case pricing; the platform layer suggests SaaS or API licensing.\r\n\r\n## Open Questions\r\n\r\n- Per-case or subscription? Mordi's case intake filter (pre-decision scan) suggests a low-cost, high-volume entry product separate from the full dispute support package.\r\n- Is this sold to lawyers directly, to law firms as practice tooling, or to government cadastral agencies as infrastructure?\r\n- What is the platform licensing model when other developers or firms build applications on top? API pricing, white-label, revenue share?\r\n- Who is the first check-writer -- Mordi's firm as design partner, or an outside paying customer from day one?",
         "references": [],
-        "last_updated_at": "2026-07-08T14:26:15Z"
+        "last_updated_at": "2026-07-11T19:01:02Z"
       },
       "state": {
         "exists": false,
@@ -43,9 +43,19 @@
             "target": "competitive-landscape",
             "type": "section",
             "label": "Competitive Landscape -- Geospatial Intelligence Platform"
+          },
+          {
+            "target": "global-landscape-deep-dive",
+            "type": "section",
+            "label": "Global Deep Dive -- Who Else Touches This Problem"
+          },
+          {
+            "target": "orhitec-review",
+            "type": "section",
+            "label": "Competitor Review -- Orhitec GIS Group"
           }
         ],
-        "last_updated_at": "2026-07-08T14:26:15Z"
+        "last_updated_at": "2026-07-11T19:01:02Z"
       },
       "state": {
         "exists": false,
@@ -75,7 +85,7 @@
         "exists": true,
         "identity_text": "---\r\nsection: financial-model\r\npurpose: Build financial projections once business model is defined\r\nstage_relevance:\r\n  - Design\r\n  - Investment\r\ndefault_methodologies:\r\n  - scenario-plan\r\n  - build-thesis\r\n---\r\n\r\nFinancial modeling is premature until the business model question is resolved. This section opens when pricing, customer segment, and unit economics are clearer.\r\n\r\n## Prerequisite\r\n\r\nResolve in business-model/ first:\r\n- Per-case vs. subscription pricing for the legal wedge\r\n- Platform licensing model for downstream applications\r\n- Whether Mordi's firm is a paying customer or a design-partner arrangement\r\n\r\n## Open Questions (placeholder until business model lands)\r\n\r\n- What is the cost to process one case end-to-end (compute, labor, QA)?\r\n- What is the revenue per case at Mordi's firm's willingness to pay?\r\n- At what case volume does the platform become worth building vs. staying service-oriented?",
         "references": [],
-        "last_updated_at": "2026-07-08T14:26:15Z"
+        "last_updated_at": "2026-07-11T19:01:02Z"
       },
       "state": {
         "exists": false,
@@ -105,7 +115,7 @@
         "exists": true,
         "identity_text": "---\r\nsection: legal-ip\r\npurpose: Track legal structure, IP strategy, and jurisdiction considerations\r\nstage_relevance:\r\n  - Discovery\r\n  - Design\r\ndefault_methodologies:\r\n  - structure-argument\r\n  - map-unknowns\r\n---\r\n\r\nTwo distinct legal dimensions: the IP around the platform methodology, and the jurisdiction-specific legal standards that govern what counts as admissible evidence in land disputes.\r\n\r\n## Open Questions\r\n\r\n- Is the fusion methodology (decision-level provenance chain architecture) novel enough to protect? Or is the moat operational (data + workflow) rather than IP-based?\r\n- What are the admissibility standards for geospatial evidence in Israeli courts? What format, what chain of custody documentation, what expert certification is required?\r\n- If the platform expands beyond Israel, which jurisdictions have similar dispute structures and what are their evidence standards? EU land registry systems differ significantly from common law systems.\r\n- What entity structure makes sense -- Israeli company, dual-registration, or incorporated elsewhere from day one?",
         "references": [],
-        "last_updated_at": "2026-07-08T14:26:15Z"
+        "last_updated_at": "2026-07-11T19:01:02Z"
       },
       "state": {
         "exists": false,
@@ -146,7 +156,7 @@
             "label": "Jobs To Be Done -- Geospatial Legal Intelligence"
           }
         ],
-        "last_updated_at": "2026-07-08T14:26:15Z"
+        "last_updated_at": "2026-07-11T19:01:02Z"
       },
       "state": {
         "exists": false,
@@ -190,9 +200,14 @@
             "target": "yonatan-sagir-meeting",
             "type": "section",
             "label": "Meeting: Yonatan Sagir -- IRIS Program Debrief"
+          },
+          {
+            "target": "itamar-water-infra-meeting",
+            "type": "section",
+            "label": "Meeting: Itamar -- Water Infrastructure Engineer, Customer Discovery"
           }
         ],
-        "last_updated_at": "2026-07-08T14:26:15Z"
+        "last_updated_at": "2026-07-11T19:01:02Z"
       },
       "state": {
         "exists": false,
@@ -236,9 +251,14 @@
             "target": "product-scope-data-fusion/product-scope-data-fusion",
             "type": "artifact",
             "label": "Product Scope Decision -- Data Fusion for Operational Conclusions, Not Document Forensics"
+          },
+          {
+            "target": "hamuzim-chat-decision",
+            "type": "section",
+            "label": "Product Decision -- HaMuzim Chat: A Conversational Sibling to HaMuzim"
           }
         ],
-        "last_updated_at": "2026-07-08T14:26:15Z"
+        "last_updated_at": "2026-07-11T19:01:02Z"
       },
       "state": {
         "exists": false,
@@ -268,7 +288,7 @@
         "exists": true,
         "identity_text": "---\r\nsection: team-execution\r\npurpose: Document team strengths, gaps, and the unfair advantages this pairing brings\r\nstage_relevance:\r\n  - Discovery\r\n  - Validation\r\ndefault_methodologies:\r\n  - think-hats\r\n  - analyze-needs\r\n  - leadership\r\n---\r\n\r\nTwo founders with complementary and non-obvious strengths: a sensor fusion engineer with autonomous systems experience and a combat-tested lawyer with deep domain expertise and existing customer relationships.\r\n\r\n## Team As Filed\r\n\r\n**Elli** -- Software architect, sensor fusion and autonomous vehicles (11+ years). Israeli Air Force test center veteran. Electronics practical engineer + BSc Computer Science + MSc Bioengineering. Technical lead and product architect.\r\n\r\n**Mordi** -- Lawyer + LLM. Land dispute resolution specialist using historical aerial photos and archival documents. Israeli Army (special forces). First distribution channel -- his firm is the design partner and the first customer signal.\r\n\r\n## Unfair Advantages\r\n- Mordi is not just a customer, he IS the domain. He has already validated the concept internally. His colleagues confirmed value. That is pre-product market signal.\r\n- Elli's sensor fusion background maps directly to the hardest technical problems: correspondence identification across historical imagery, multi-source registration, georeferencing under degraded conditions.\r\n\r\n## Open Questions\r\n\r\n- What is Mordi's capacity as a design partner vs. as a co-founder? Is he full-time, part-time, or advisory?\r\n- What technical gaps exist? GIS-specific tooling expertise, legal data standards (court exhibit formats by jurisdiction), front-end for non-technical users?\r\n- Who is missing from the team -- a GIS domain expert, a business development person, a second engineer?",
         "references": [],
-        "last_updated_at": "2026-07-08T14:26:15Z"
+        "last_updated_at": "2026-07-11T19:01:02Z"
       },
       "state": {
         "exists": false,

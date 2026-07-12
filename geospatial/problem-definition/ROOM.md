@@ -28,7 +28,9 @@ Historical geospatial records -- aerial photos, cadastral maps, survey documents
 - [[initial-exploration|The Evidence Gap in Geospatial Dispute Resolution]]
 - [[legal-workflow-analysis|Legal Proceeding Workflow -- Full Map]]
 - [[yonatan-sagir-meeting|Meeting: Yonatan Sagir -- IRIS Program Debrief]]
+- [[itamar-water-infra-meeting|Meeting: Itamar -- Water Infrastructure Engineer, Customer Discovery]]
 
 ### Cross-section mentions (inbound)
 - (none -- inbound scan is Phase 90 scope)
 <!-- END REFERENCES -->
+

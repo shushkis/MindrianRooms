@@ -1,0 +1,12 @@
+# MindrianOS -- runtime files (not source of truth, regenerated each session)
+.mindrian/
+.snapshots/
+.deck-b64.txt
+room/.mindrian/
+
+# Scratch transcription working files -- contain raw/partial transcript of a
+# sensitive recording (district appraiser meeting). Never commit these; the
+# distilled, reviewed entry goes into problem-definition/ once ready instead.
+.tmp-transcribe.py
+.tmp-transcribe.log
+.tmp-transcript.txt
