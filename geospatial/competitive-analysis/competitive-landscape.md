@@ -1,4 +1,6 @@
 ---
+title: Competitive Landscape -- Geospatial Intelligence Platform
+status: draft
 source: larry-analysis
 date: 2026-06-24
 based-on: mordi-verdict, yonatan-meeting, jtbd-analysis
@@ -20,10 +22,10 @@ You keep: Mordi as domain expert and first customer
 ## The Four Competitive Realities
 
 ### 1. No spatial evidence used at all (most common)
-The Biti Hills verdict is the proof: the applicant had witnesses, testimony,
+A recurring pattern in practice is the proof: the applicant has witnesses, testimony,
 an expert document examiner -- and no temporal aerial evidence.
-They could not prove 10 years of continuous cultivation.
-The committee said: we can see olive trees. We cannot determine who tended them when.
+They cannot prove 10 years of continuous cultivation.
+The committee's position, in that pattern: we can see olive trees. We cannot determine who tended them when.
 
 THIS IS YOUR PRIMARY COMPETITION: doing nothing.
 You are not replacing a tool. You are creating a category of evidence.

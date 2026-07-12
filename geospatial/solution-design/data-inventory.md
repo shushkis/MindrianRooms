@@ -78,12 +78,12 @@ The one archive that both matters most and is least accessible in bulk today is 
 | Mordi's case files | Legal case evidence | Mordi Verzberger | Requires Mordi authorization + client consent |
 | Jordan DLS pre-1967 archive | Registry + cadastral maps | Jordan Dept. of Lands and Survey | Access path unconfirmed -- needs direct inquiry |
 
-## Key Insight: Biti Hills PoC May Not Require Restricted Layer
+## Key Insight: A Public-Verdict PoC May Not Require the Restricted Layer
 
-The Biti Hills verdict is public. The missing evidence in that case was temporal aerial proof of continuous cultivation -- which falls in the public layer (Survey Institute aerials + PalOpenMaps historical cadastral).
+The general pattern seen in public committee/court verdicts: the missing evidence is often temporal aerial proof of continuous cultivation -- which falls entirely in the public layer (Survey Institute aerials + PalOpenMaps historical cadastral). See `public-archive-poc-concept.md` for the full workup -- **no specific named case should be used as the PoC anchor without asking the user first** (standing constraint, `.context/rejection-log.md`, 2026-07-12).
 
-**PoC hypothesis:** Reconstruct the missing evidence retroactively using public data only.
-If the public layer answers the question the court couldn't answer -- that IS the demo.
+**PoC hypothesis:** Reconstruct this class of missing evidence retroactively using public data only.
+If the public layer answers a question the original proceeding couldn't -- that IS the demo.
 No restricted data needed to prove the system.
 
 ## MVP Scope Decision (Pending)
@@ -91,7 +91,7 @@ No restricted data needed to prove the system.
 - Phase 1: Build fusion pipeline on public layer only
 - Phase 2: Request access to restricted archives once working system exists
   - Stronger ask: "Here is what the system produces on public data. Access unlocks X more."
-- Fallback: If public layer is insufficient for Biti Hills, identify alternative case with full public evidence coverage
+- Fallback: If public layer is insufficient for the chosen anchor case, pick a different case with full public evidence coverage
 
 ## Next Step: Enumerate GIS Layers
 

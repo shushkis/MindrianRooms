@@ -1,4 +1,6 @@
 ---
+title: Legal Proceeding Workflow -- Full Map
+status: draft
 source: larry-session
 date: 2026-07-01
 section: problem-definition
@@ -91,7 +93,7 @@ The committee must rule on three distinct questions. Each maps to a product modu
 **Common failure modes:**
 - Cannot produce temporal aerial evidence of continuous cultivation
 - Expert opinion is challengeable under cross-examination (subjective interpretation)
-- Biti Hills: applicant had witnesses, document expert, and testimony -- but could not prove 10 years of continuous cultivation. Lost.
+- Recurring pattern seen in practice: applicant has witnesses, document expert, and testimony -- but cannot prove 10 years of continuous cultivation. Lost.
 
 **HaMuzim Module 3:**
 - Automated aerial photo time series: 1959 → 1967 → 1972 → 1984 → ... → 2024
@@ -153,7 +155,7 @@ Ready for court submission.
 
 ## Open Items
 
-- [ ] Biti Hills court decisions to be filed (Mordi to send)
+- [ ] Pick a suitable anchor case with the user for PoC/demo work (do not default to a previously-discussed case -- standing constraint, `.context/rejection-log.md`, 2026-07-12)
 - [ ] Quantify: how many cases per year end without registration across all committees in Judea and Samaria?
 - [ ] Define MVP scope: which module is the entry point for the first demo?
 - [ ] Pricing model for private claimant segment
