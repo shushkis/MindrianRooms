@@ -1,27 +1,27 @@
 ---
-computed: 2026-07-12T15:31:55Z
+computed: 2026-07-13T14:27:42Z
 venture_stage: Validation
-total_entries: 19
+total_entries: 20
 ---
 # Data Room State
 
 ## Sections
 | Section | Entries | Progress | Status | Last Updated |
 |---------|---------|----------|--------|-------------|
-| business-model | 0 | 0/5 | Empty | 2026-07-11 |
-| competitive-analysis | 3 | 3/5 | Well-developed | 2026-07-12 |
-| exports | 0 | 0/5 | Empty | - |
-| financial-model | 0 | 0/5 | Empty | 2026-07-11 |
-| funding | 1 | 1/5 | Active | 2026-07-11 |
-| hamuzim-app | 1 | 1/5 | Active | 2026-07-08 |
-| hamuzim-chat | 1 | 1/5 | Active | 2026-07-11 |
-| legal-ip | 0 | 0/5 | Empty | 2026-07-11 |
-| market-analysis | 2 | 2/5 | Active | 2026-07-12 |
-| opportunity-bank | 1 | 1/5 | Active | 2026-07-11 |
-| problem-definition | 5 | 5/5 | Well-developed | 2026-07-12 |
-| room | 0 | 0/5 | Empty | - |
-| solution-design | 5 | 5/5 | Well-developed | 2026-07-12 |
-| team-execution | 0 | 0/5 | Empty | 2026-07-11 |
+| business-model | 0 | 0/6 | Empty | 2026-07-11 |
+| competitive-analysis | 3 | 3/6 | Well-developed | 2026-07-12 |
+| exports | 0 | 0/6 | Empty | - |
+| financial-model | 0 | 0/6 | Empty | 2026-07-11 |
+| funding | 1 | 1/6 | Active | 2026-07-11 |
+| hamuzim-app | 1 | 1/6 | Active | 2026-07-08 |
+| hamuzim-chat | 1 | 1/6 | Active | 2026-07-11 |
+| legal-ip | 0 | 0/6 | Empty | 2026-07-11 |
+| market-analysis | 2 | 2/6 | Active | 2026-07-12 |
+| opportunity-bank | 1 | 1/6 | Active | 2026-07-11 |
+| problem-definition | 5 | 5/6 | Well-developed | 2026-07-13 |
+| room | 0 | 0/6 | Empty | - |
+| solution-design | 6 | 6/6 | Well-developed | 2026-07-13 |
+| team-execution | 0 | 0/6 | Empty | 2026-07-11 |
 
 ## Gaps
 - business-model: No entries. Consider defining your revenue model.

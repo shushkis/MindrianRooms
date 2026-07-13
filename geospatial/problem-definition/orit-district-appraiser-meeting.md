@@ -90,11 +90,17 @@ to Tabu), she declined: "what's registered is already registered" -- she
 is not interested in the confirmed-registration layer. She wants the layer
 that *precedes* registration -- the contested, unresolved evidence layer --
 because that's where her actual work sits, and because roughly 70% of the
-relevant land area has not been through final registration. **This is a
-direct, independent confirmation of the room's core thesis** (the closed
-first-registration layer is the real target, not the registered-land
-layer) from a working professional inside the buyer organization, not from
-Mordi's own framing.
+relevant land area has not been through final registration. **This is
+strong, but not fully independent, confirmation of the room's core thesis**
+(the closed first-registration layer is the real target, not the
+registered-land layer): the "70%" figure matches what's already in the
+room's own Mullins deck, and this discussion happened *after* Mordi walked
+her through that deck. With no speaker diarization on this transcript, it
+can't be ruled out that she was echoing a number she'd just been shown
+rather than recalling it cold from her own professional knowledge -- she'd
+plausibly know it either way, but it should be treated as corroborating,
+not as a clean independent data point, until checked against a source that
+wasn't just primed by the pitch.
 
 ## Legal Ambiguity Signal (New)
 
@@ -135,9 +141,12 @@ conversational/agent interaction model over a traditional GIS panel.
 
 ## Open Items Raised
 
-- Test whether "committee precedent / judgment-support" should become the
-  primary MVP wedge instead of, or ahead of, the multi-layer fusion panel --
-  needs a direct follow-up question in the next interview.
+- ~~Test whether "committee precedent / judgment-support" should become the
+  primary MVP wedge~~ **Resolved 2026-07-13:** deferred as an optional
+  future vertical, not adopted as MVP wedge. See
+  `solution-design/appraiser-vertical-sequencing-decision.md` for the
+  decision and revisit triggers. Core tool (Module 1/2/3, government-buyer
+  MVP) stays the focus.
 - Follow up on the internally-built appraiser agent inside the Chief
   Appraiser's office -- a real buy-vs-build competitive signal, not
   hypothetical.
