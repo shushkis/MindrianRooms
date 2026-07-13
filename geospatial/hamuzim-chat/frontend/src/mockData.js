@@ -1,4 +1,4 @@
-// HaMuzim Chat -- client-side mock mirror.
+// GroundTruth (formerly "HaMuzim Chat") -- client-side mock mirror.
 //
 // Keep this in sync with backend/mock_data.py by hand -- there's no shared
 // source of truth between the two languages in this prototype. This is

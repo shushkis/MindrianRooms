@@ -1,11 +1,14 @@
-// HaMuzim Chat -- UI translations. Same pattern as the sibling hamuzim-app's
-// translations.js: one flat dictionary per language, looked up by key.
-// Toggle default is "en" (for you/Elli building), switchable to "he" for
-// the real customer, who is a Hebrew speaker working West Bank cases.
+// GroundTruth (formerly "HaMuzim Chat") -- UI translations. Same pattern as
+// the sibling hamuzim-app's translations.js: one flat dictionary per
+// language, looked up by key. Toggle default is "en" (for you/Elli
+// building), switchable to "he" for the real customer, who is a Hebrew
+// speaker working West Bank cases. Brand name stays in Latin script in
+// both languages (common practice for tech brand names); only the
+// tagline and copy translate.
 
 export const TRANSLATIONS = {
   en: {
-    brandName: "HaMuzim Chat",
+    brandName: "GroundTruth",
     tagline: "Ask the evidence, not the map",
     langToggle: "עברית",
     thinking: "thinking…",
@@ -39,7 +42,7 @@ export const TRANSLATIONS = {
     },
   },
   he: {
-    brandName: "צ'אט המוזים",
+    brandName: "GroundTruth",
     tagline: "שאלו את הראיות, לא את המפה",
     langToggle: "English",
     thinking: "חושב…",

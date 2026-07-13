@@ -1,4 +1,4 @@
-"""HaMuzim Chat -- FastAPI backend.
+"""GroundTruth (formerly "HaMuzim Chat") -- FastAPI backend.
 
 Sibling prototype to hamuzim-app. Where HaMuzim proves "draw a parcel, get a
 timeline," this proves "ask a question, get a cited answer across cases."
@@ -42,7 +42,7 @@ from real_data import query_openstreetmap
 
 load_dotenv()
 
-app = FastAPI(title="HaMuzim Chat API", version="0.1.0")
+app = FastAPI(title="GroundTruth API", version="0.1.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -72,7 +72,7 @@ class ChatRequest(BaseModel):
 
 @app.get("/api/health")
 def health():
-    return {"status": "ok", "service": "hamuzim-chat-backend"}
+    return {"status": "ok", "service": "groundtruth-backend"}
 
 
 @app.get("/api/parcels")
@@ -99,7 +99,7 @@ def chat(req: ChatRequest):
 # ---------- Gemini function-calling path ----------
 
 SYSTEM_PROMPT = (
-    "You are the HaMuzim Chat assistant. You have two tools, and they are "
+    "You are the GroundTruth assistant. You have two tools, and they are "
     "NOT interchangeable:\n"
     "- search_parcels: the FICTIONAL demo evidence set (parcels P-001..P-007). "
     "Use this for anything about the case-evidence parcels -- cultivation, "

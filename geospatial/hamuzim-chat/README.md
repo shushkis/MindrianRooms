@@ -1,4 +1,6 @@
-# HaMuzim Chat
+# GroundTruth
+
+(Formerly "HaMuzim Chat" -- renamed 2026-07-13, same app, same folder.)
 
 Sibling prototype to `../hamuzim-app`. Where HaMuzim proves "draw a parcel,
 get a timeline," this proves "ask a question, get a cited answer across

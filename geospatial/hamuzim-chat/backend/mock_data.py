@@ -1,4 +1,4 @@
-# HaMuzim Chat -- Mock data layer
+# GroundTruth (formerly "HaMuzim Chat") -- Mock data layer
 #
 # No real database, no real satellite/document pipeline. This is a small,
 # fully fictional set of parcels (all clearly labeled "Demo") used to prove

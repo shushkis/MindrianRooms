@@ -12,7 +12,7 @@ export async function sendChatMessage(message, history = [], lang = "en") {
     if (!res.ok) throw new Error(`/chat -> ${res.status}`);
     return await res.json();
   } catch (err) {
-    console.warn("[HaMuzim Chat] backend unreachable, using local mock.", err);
+    console.warn("[GroundTruth] backend unreachable, using local mock.", err);
     return mockChatReply(message, lang);
   }
 }

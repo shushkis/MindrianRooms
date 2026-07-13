@@ -1,4 +1,4 @@
-"""HaMuzim Chat -- real, live data sources (as opposed to mock_data.py's
+"""GroundTruth -- real, live data sources (as opposed to mock_data.py's
 fictional demo parcels).
 
 First one: OpenStreetMap, via its public Nominatim geocoding API. Confirmed
