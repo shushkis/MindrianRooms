@@ -1,5 +1,29 @@
 # Deploying GroundTruth to Render
 
+## Already live (2026-07-13)
+
+Deployed once already, directly via Render's API (not just written up and
+assumed to work): both services are up and the full chat flow -- including
+CORS from browser to backend -- is confirmed working end to end.
+
+- Frontend: https://groundtruth-frontend-441b.onrender.com
+- Backend: https://groundtruth-api-igku.onrender.com (the bare root path
+  404s with `{"detail":"Not Found"}` -- that's FastAPI's normal behavior
+  for an undefined route, not a broken deploy; only `/api/health`,
+  `/api/parcels`, and `/api/chat` are real routes)
+
+Correction, learned by actually deploying rather than trusted from docs:
+**service URLs are NOT deterministically `https://<name>.onrender.com`.**
+Render appended a random suffix in practice (`-igku`, `-441b`). Whatever
+the docs say, verify the real assigned URL after creating a service,
+before wiring the other service's env var to a guessed clean URL --
+that guess was wrong here and needed a follow-up fix (see below).
+
+If these services ever get deleted/recreated, everything below still
+applies -- the instructions don't assume today's specific service names.
+
+---
+
 This needs your live participation at a few steps (GitHub connection,
 account login, entering the secret key) -- nothing here can be done on
 your behalf. Two paths: the Blueprint (faster, uses `render.yaml`) or
@@ -31,8 +55,13 @@ syntax has moved on since this was written 2026-07-13).
    **Environment** tab and set `GEMINI_API_KEY` to your real key (the
    blueprint deliberately leaves this blank -- `sync: false` means "you
    fill this in by hand," not "skip it").
-5. Wait for both services to build. Visit
-   `https://groundtruth-frontend.onrender.com`.
+5. Wait for both services to build. Render will assign each a real URL --
+   check the dashboard for what it actually is, don't assume it matches
+   the service name (see the correction above). If the assigned frontend
+   URL doesn't match what `render.yaml` guessed for `ALLOWED_ORIGINS`,
+   update that env var on the backend to the real URL and trigger a manual
+   redeploy -- env var changes don't take effect until the process
+   restarts.
 
 If step 3 fails because Render's blueprint syntax has changed since this
 was written, use Path B instead -- don't fight the YAML.
@@ -41,21 +70,23 @@ was written, use Path B instead -- don't fight the YAML.
 
 **Backend:**
 1. **New** -> **Web Service** -> connect the repo.
-2. Root Directory: `hamuzim-chat/backend`
+2. Root Directory: `geospatial/hamuzim-chat/backend` (this is a monorepo --
+   the app isn't at the repo root)
 3. Runtime: Python 3
 4. Build Command: `pip install -r requirements.txt`
 5. Start Command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
 6. Add environment variables:
    - `GEMINI_API_KEY` = your real key
-   - `ALLOWED_ORIGINS` = `https://groundtruth-frontend.onrender.com`
-     (Render tells you the exact frontend URL once you've named that
-     service in the next section -- come back and set this after.)
-7. Create. Note the backend's URL once it's live (e.g.
-   `https://groundtruth-api.onrender.com`).
+   - `ALLOWED_ORIGINS` = leave a placeholder for now, e.g.
+     `https://placeholder.onrender.com` -- you'll fix this after the
+     frontend exists and you know its real URL (which will NOT just be
+     the service name -- Render adds a random suffix in practice).
+7. Create. Once live, copy the backend's real assigned URL from the
+   dashboard.
 
 **Frontend:**
 1. **New** -> **Static Site** -> connect the same repo.
-2. Root Directory: `hamuzim-chat/frontend`
+2. Root Directory: `geospatial/hamuzim-chat/frontend` (same monorepo note)
 3. Build Command: `npm install && npm run build`
 4. Publish Directory: `dist`
 5. Add environment variable:

@@ -3,9 +3,12 @@
 # has changed this syntax since, the dashboard's manual setup (see DEPLOY.md)
 # works regardless of whether this file parses cleanly.
 #
-# Service URLs are deterministic: https://<name>.onrender.com -- that's why
-# the cross-references below (ALLOWED_ORIGINS, VITE_API_BASE_URL) can be
-# filled in ahead of time instead of chasing a chicken-and-egg problem.
+# CORRECTION (2026-07-13, confirmed by actually deploying via the API, not
+# assumed): service URLs are NOT deterministically https://<name>.onrender.com
+# -- Render appended a random suffix in practice (e.g. groundtruth-api-igku,
+# groundtruth-frontend-441b). The values below are placeholders you MUST
+# replace with the real assigned URLs after both services first deploy --
+# see DEPLOY.md's post-deploy step. Docs said deterministic; reality wasn't.
 #
 # rootDir paths are relative to the REPO ROOT (MindrianRooms/), not to
 # wherever this file itself lives -- this is a monorepo with unrelated

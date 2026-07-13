@@ -1,7 +1,7 @@
 ---
-computed: 2026-07-13T19:35:02Z
+computed: 2026-07-13T19:46:41Z
 venture_stage: Validation
-total_entries: 19
+total_entries: 20
 ---
 # Data Room State
 
@@ -15,7 +15,7 @@ total_entries: 19
 | financial-model | 0 | 0/5 | Empty | 2026-07-08 |
 | funding | 1 | 1/5 | Active | 2026-07-08 |
 | hamuzim-app | 1 | 1/5 | Active | 2026-07-02 |
-| hamuzim-chat | 1 | 1/5 | Active | 2026-07-13 |
+| hamuzim-chat | 2 | 2/5 | Active | 2026-07-13 |
 | legal-ip | 0 | 0/5 | Empty | 2026-07-08 |
 | market-analysis | 2 | 2/5 | Active | 2026-07-12 |
 | opportunity-bank | 1 | 1/5 | Active | 2026-07-08 |
