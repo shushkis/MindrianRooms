@@ -1,0 +1,39 @@
+# Render Blueprint for GroundTruth (frontend + backend, one platform).
+# Verified against render.com/docs/blueprint-spec on 2026-07-13 -- if Render
+# has changed this syntax since, the dashboard's manual setup (see DEPLOY.md)
+# works regardless of whether this file parses cleanly.
+#
+# Service URLs are deterministic: https://<name>.onrender.com -- that's why
+# the cross-references below (ALLOWED_ORIGINS, VITE_API_BASE_URL) can be
+# filled in ahead of time instead of chasing a chicken-and-egg problem.
+#
+# rootDir paths are relative to the REPO ROOT (MindrianRooms/), not to
+# wherever this file itself lives -- this is a monorepo with unrelated
+# ventures alongside geospatial/, so the full "geospatial/hamuzim-chat/..."
+# path is required, not just "hamuzim-chat/...".
+
+services:
+  - name: groundtruth-api
+    type: web
+    runtime: python
+    plan: free
+    rootDir: geospatial/hamuzim-chat/backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false  # secret -- enter this manually in the Render dashboard,
+                     # never commit it to this file or anywhere in git
+      - key: ALLOWED_ORIGINS
+        value: https://groundtruth-frontend.onrender.com
+
+  - name: groundtruth-frontend
+    type: web
+    runtime: static
+    plan: free
+    rootDir: geospatial/hamuzim-chat/frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://groundtruth-api.onrender.com/api
