@@ -44,10 +44,21 @@ load_dotenv()
 
 app = FastAPI(title="GroundTruth API", version="0.1.0")
 
+# Local dev: unset, defaults to "*" (any origin) since localhost ports vary.
+# Production: set ALLOWED_ORIGINS to the deployed frontend's real origin
+# (comma-separated if more than one, e.g. a preview + production URL) --
+# once this API is on the public internet with a real (if free-tier) Gemini
+# key behind it, a wildcard origin means literally any website can call it
+# from a visitor's browser and spend your quota. allow_credentials is False
+# because this app doesn't use cookies -- True + wildcard origin is also
+# something browsers reject outright, so this avoids that trap entirely.
+_allowed_origins_env = os.environ.get("ALLOWED_ORIGINS", "").strip()
+_allowed_origins = [o.strip() for o in _allowed_origins_env.split(",") if o.strip()] or ["*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # demo app -- tighten before any real deployment
-    allow_credentials=True,
+    allow_origins=_allowed_origins,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )

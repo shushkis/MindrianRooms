@@ -1,6 +1,12 @@
 import { mockChatReply } from "./mockData";
 
-const BASE = "/api";
+// Local dev: unset, so this resolves to "/api" and rides Vite's dev-server
+// proxy (vite.config.js) to the backend on :8001. Production: set
+// VITE_API_BASE_URL to the deployed backend's full URL (e.g.
+// "https://groundtruth-api.onrender.com/api") at build time -- there's no
+// dev-proxy once this is a static build served from a different origin
+// than the backend.
+const BASE = import.meta.env.VITE_API_BASE_URL || "/api";
 
 export async function sendChatMessage(message, history = [], lang = "en") {
   try {
