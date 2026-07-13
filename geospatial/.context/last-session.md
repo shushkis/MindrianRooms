@@ -3,8 +3,8 @@
 ## Session Metadata
 
 - **Date:** 2026-07-12
-- **Time:** 14:27:43 UTC
-- **Active Room:** /c/Users/ורצברגר/MindrianRooms/geospatial
+- **Time:** 20:27:17 UTC
+- **Active Room:** C:\Users\eidlm\MindrianRooms\geospatial
 - **Venture Stage:** venture_stage: Validation
 
 ## Artifacts Filed
@@ -28,4 +28,4 @@
 
 ## Session Notes
 
-Session ended 2026-07-12 at 14:27:43 UTC.
+Session ended 2026-07-12 at 20:27:17 UTC.

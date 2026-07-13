@@ -3,12 +3,19 @@
 Sibling prototype to hamuzim-app. Where HaMuzim proves "draw a parcel, get a
 timeline," this proves "ask a question, get a cited answer across cases."
 
-Everything is mocked (see mock_data.py): six fictional demo parcels, no real
-database, no real satellite/document pipeline. The one real piece of
-engineering is the retrieval contract: every answer must be backed by
-`search_parcels()` results, and the frontend renders those results as
-evidence cards next to the reply -- so the chat can never state a finding
-without a parcel ID and observation year to point at.
+The case-evidence layer is mocked (see mock_data.py): fictional demo
+parcels, no real database, no real satellite/document pipeline. The one
+real piece of engineering on that side is the retrieval contract: every
+answer must be backed by `search_parcels()` results, and the frontend
+renders those results as evidence cards next to the reply -- so the chat
+can never state a finding without a parcel ID and observation year to
+point at.
+
+Added 2026-07-13: a second tool, `query_openstreetmap` (see real_data.py),
+is genuinely real -- a live call to OpenStreetMap's public Nominatim API,
+not mocked at all. It answers real current-day geography questions
+completely separately from the fictional parcel evidence, and the system
+prompt tells the model not to blend the two.
 
 If GEMINI_API_KEY is set, /api/chat runs an actual Gemini function-calling
 loop (google-genai SDK, Interactions API) against `search_parcels`. If it
@@ -31,6 +38,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from mock_data import PARCELS, SIGNAL_TYPES, search_parcels
+from real_data import query_openstreetmap
 
 load_dotenv()
 
@@ -91,20 +99,38 @@ def chat(req: ChatRequest):
 # ---------- Gemini function-calling path ----------
 
 SYSTEM_PROMPT = (
-    "You are the HaMuzim Chat assistant, answering questions about a small "
-    "set of land parcels using only the search_parcels tool. Rules:\n"
-    "1. Always call search_parcels to find evidence before answering a "
+    "You are the HaMuzim Chat assistant. You have two tools, and they are "
+    "NOT interchangeable:\n"
+    "- search_parcels: the FICTIONAL demo evidence set (parcels P-001..P-007). "
+    "Use this for anything about the case-evidence parcels -- cultivation, "
+    "construction, abandonment, documents, disputes.\n"
+    "- query_openstreetmap: REAL, live, current-day geographic data from "
+    "OpenStreetMap. Use this for genuine location/geography questions (where "
+    "is X, what's near Y). Its coverage is uneven: major Palestinian cities "
+    "(e.g. Bethlehem) resolve well; specific Israeli settlement names in the "
+    "West Bank (e.g. Efrat, Gush Etzion) often return nothing, or -- worse -- "
+    "can match an unrelated street with the same name elsewhere in Israel. "
+    "Sanity-check the returned address/region against what was asked before "
+    "trusting it.\n\n"
+    "Rules:\n"
+    "1. Always call the relevant tool to find evidence before answering a "
     "factual question -- never answer from memory.\n"
-    "2. Every claim in your answer must cite a parcel ID (e.g. P-004) and "
-    "an observation year. If you cannot cite it, do not state it.\n"
-    "3. If search_parcels returns nothing, say so plainly -- do not "
-    "speculate or invent a finding.\n"
+    "2. Every claim about a demo parcel must cite a parcel ID (e.g. P-004) "
+    "and an observation year. Every claim about a real place must be "
+    "attributed to OpenStreetMap and clearly marked as real, current-day "
+    "data -- never blend it with the fictional parcel evidence as if it "
+    "were the same kind of source.\n"
+    "3. If a tool returns nothing, or returns a result that looks like the "
+    "wrong place (wrong region/country for what was asked), say so plainly "
+    "-- do not speculate or invent a finding, and do not present a "
+    "mismatched result as if it answered the question.\n"
     "4. Keep answers concise (3-6 sentences) and evidentiary in tone: this "
     "supports legal exhibits, not casual chat.\n"
-    "5. If the question has nothing to do with parcels, land evidence, or "
-    "this case data (e.g. weather, small talk, general knowledge), do not "
-    "call search_parcels at all -- say plainly that you can only answer "
-    "questions about the parcel evidence in this system.\n"
+    "5. If the question has nothing to do with parcels, land evidence, this "
+    "case data, or real-world geography (e.g. weather, small talk, general "
+    "knowledge), do not call either tool -- say plainly that you can only "
+    "answer questions about the parcel evidence or real geographic lookups "
+    "in this system.\n"
     "6. Respond in the same language the user's message is written in. If "
     "they write in Hebrew, answer in Hebrew (use the finding_he/name_he "
     "fields from search results when present), citations still use the "
@@ -157,6 +183,33 @@ GEMINI_TOOL = {
     },
 }
 
+OSM_TOOL = {
+    "type": "function",
+    "name": "query_openstreetmap",
+    "description": (
+        "Look up a REAL place, address, or location by name using OpenStreetMap's "
+        "live public Nominatim API. Returns real, current-day geographic data -- "
+        "coordinates, place type, address -- completely separate from the "
+        "fictional demo parcel evidence in search_parcels. Coverage is uneven "
+        "for this region: major Palestinian cities resolve well; specific "
+        "Israeli West Bank settlement names often return nothing or the wrong "
+        "place (a same-named street elsewhere in Israel). Always check the "
+        "returned address/region matches what was actually asked."
+    ),
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "query": {
+                "type": "string",
+                "description": "Place name, address, or location description to look up.",
+            },
+        },
+        "required": ["query"],
+    },
+}
+
+TOOLS = [GEMINI_TOOL, OSM_TOOL]
+
 
 def _gemini_chat_reply(message: str, history: list[ChatMessage], api_key: str, lang: str = "en") -> dict:
     from google import genai
@@ -178,11 +231,15 @@ def _gemini_chat_reply(message: str, history: list[ChatMessage], api_key: str, l
         model=GEMINI_MODEL,
         system_instruction=SYSTEM_PROMPT,
         input=full_input,
-        tools=[GEMINI_TOOL],
+        tools=TOOLS,
     )
 
-    # Function-calling loop: Gemini may call search_parcels one or more
-    # times before it has enough grounding to answer.
+    # Function-calling loop: Gemini may call search_parcels and/or
+    # query_openstreetmap, one or more times, before it has enough grounding
+    # to answer. Only search_parcels results feed `evidence` (the parcel-
+    # shaped evidence cards the frontend renders) -- OSM results are a
+    # different shape and get described in the reply text instead, not
+    # rendered as a fictional-parcel evidence card.
     max_turns = 4
     turns = 0
     while turns < max_turns:
@@ -193,8 +250,11 @@ def _gemini_chat_reply(message: str, history: list[ChatMessage], api_key: str, l
 
         results = []
         for step in fc_steps:
-            result = search_parcels(**step.arguments)
-            evidence.extend(result)
+            if step.name == "query_openstreetmap":
+                result = query_openstreetmap(**step.arguments)
+            else:
+                result = search_parcels(**step.arguments)
+                evidence.extend(result)
             results.append(
                 {
                     "type": "function_result",
@@ -208,7 +268,7 @@ def _gemini_chat_reply(message: str, history: list[ChatMessage], api_key: str, l
             model=GEMINI_MODEL,
             system_instruction=SYSTEM_PROMPT,
             input=results,
-            tools=[GEMINI_TOOL],
+            tools=TOOLS,
             previous_interaction_id=interaction.id,
         )
 
