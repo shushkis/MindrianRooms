@@ -1,4 +1,4 @@
-import { mockChatReply } from "./mockData";
+import { mockCaseReview, mockChatReply } from "./mockData";
 
 // Local dev: unset, so this resolves to "/api" and rides Vite's dev-server
 // proxy (vite.config.js) to the backend on :8001. Production: set
@@ -20,5 +20,20 @@ export async function sendChatMessage(message, history = [], lang = "en") {
   } catch (err) {
     console.warn("[GroundTruth] backend unreachable, using local mock.", err);
     return mockChatReply(message, lang);
+  }
+}
+
+export async function getCaseReview(parcelId, lang = "en") {
+  try {
+    const res = await fetch(`${BASE}/case-review`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ parcel_id: parcelId, lang }),
+    });
+    if (!res.ok) throw new Error(`/case-review -> ${res.status}`);
+    return await res.json();
+  } catch (err) {
+    console.warn("[GroundTruth] backend unreachable, using local case-review mock.", err);
+    return mockCaseReview(parcelId, lang);
   }
 }

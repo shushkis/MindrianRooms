@@ -543,6 +543,19 @@ PARCELS = [
 SIGNAL_TYPES = ["cultivation", "construction", "abandonment", "document", "dispute"]
 
 
+def get_parcel(parcel_id: str) -> dict | None:
+    """Return one parcel's FULL record (all observations, coordinates,
+    everything) by exact ID, or None. Unlike search_parcels(), this isn't a
+    filter -- it's for Case Review mode, where the whole point is showing
+    the adjudicator every observation on file for one parcel at once, not a
+    filtered subset."""
+    pid = parcel_id.strip().upper() if parcel_id else None
+    for parcel in PARCELS:
+        if parcel["id"].upper() == pid:
+            return parcel
+    return None
+
+
 def search_parcels(signal_type=None, date_from=None, date_to=None, keyword=None, parcel_id=None):
     """Filter PARCELS by signal type / date range / keyword / parcel ID.
 

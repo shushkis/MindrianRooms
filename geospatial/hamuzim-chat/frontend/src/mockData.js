@@ -260,3 +260,44 @@ export function mockChatReply(message, lang = "en") {
 
   return { reply, evidence: matches, source: "mock-offline" };
 }
+
+export function getParcel(parcelId) {
+  const pid = (parcelId || "").trim().toUpperCase();
+  return PARCELS.find((p) => p.id.toUpperCase() === pid) || null;
+}
+
+export function mockCaseReview(parcelId, lang = "en") {
+  const parcel = getParcel(parcelId);
+  if (!parcel) return { error: `No parcel found with id ${parcelId}`, source: "mock-offline" };
+
+  const years = parcel.observations.map((o) => o.year).sort((a, b) => a - b);
+  const gaps = [];
+  for (let i = 0; i < years.length - 1; i++) {
+    if (years[i + 1] - years[i] > 3) gaps.push([years[i], years[i + 1]]);
+  }
+
+  const he = lang === "he";
+  const lines = he
+    ? [`טווח התצפיות: ${years[0]}-${years[years.length - 1]} (${years.length} תצפיות).`]
+    : [`Observation span: ${years[0]}-${years[years.length - 1]} (${years.length} observations).`];
+
+  if (gaps.length) {
+    for (const [a, b] of gaps) {
+      lines.push(
+        he
+          ? `פער בתיעוד: ${a}-${b} (${b - a} שנים ללא תצפית).`
+          : `Coverage gap: ${a}-${b} (${b - a} years with no observation).`
+      );
+    }
+  } else {
+    lines.push(he ? "לא זוהו פערים משמעותיים בתיעוד." : "No significant coverage gaps detected.");
+  }
+
+  lines.push(
+    he
+      ? "זהו סיכום עובדתי בלבד (גיבוי מקומי לא מקוון -- השרת אינו זמין) -- אינו מהווה הערכה משפטית ואינו תחליף לחוות דעת."
+      : "This is a plain factual summary only (offline client-side fallback -- backend unreachable) -- not a legal assessment, and not a substitute for the adjudicator's review."
+  );
+
+  return { assessment: lines.join("\n"), source: "mock-offline", parcel };
+}

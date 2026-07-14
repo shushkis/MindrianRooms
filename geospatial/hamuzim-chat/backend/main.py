@@ -37,7 +37,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from mock_data import PARCELS, SIGNAL_TYPES, search_parcels
+from mock_data import PARCELS, SIGNAL_TYPES, get_parcel, search_parcels
 from real_data import query_openstreetmap
 
 load_dotenv()
@@ -79,6 +79,11 @@ class ChatRequest(BaseModel):
     # language directly, this is a backstop for a Hebrew UI + English query.
 
 
+class CaseReviewRequest(BaseModel):
+    parcel_id: str
+    lang: str = "en"
+
+
 # ---------- routes ----------
 
 @app.get("/api/health")
@@ -91,6 +96,30 @@ def list_parcels():
     """Debug/demo helper -- not used by the chat flow itself, lets you see
     the full mock universe the assistant is grounded against."""
     return {"parcels": PARCELS}
+
+
+@app.post("/api/case-review")
+def case_review(req: CaseReviewRequest):
+    """Case Review mode: given ONE parcel's full observation record, produce
+    a structured, cited, explicitly-gated proposed read of the evidence --
+    not a Q&A answer about a subset. This is the reasoning-layer pivot
+    (see solution-design/reasoning-layer-decision.md) made concrete: the
+    model proposes, cites, and closes by naming itself a proposal requiring
+    the adjudicator's sign-off. It never gets to assert a verdict."""
+    parcel = get_parcel(req.parcel_id)
+    if parcel is None:
+        return {"error": f"No parcel found with id {req.parcel_id!r}"}, 404
+
+    api_key = os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        return {**_mock_case_review(parcel, req.lang), "parcel": parcel}
+
+    try:
+        result = _gemini_case_review(parcel, api_key, req.lang)
+    except Exception as exc:  # noqa: BLE001 -- demo fallback, any failure -> mock
+        result = _mock_case_review(parcel, req.lang)
+        result["error"] = str(exc)
+    return {**result, "parcel": parcel}
 
 
 @app.post("/api/chat")
@@ -289,6 +318,121 @@ def _gemini_chat_reply(message: str, history: list[ChatMessage], api_key: str, l
         "evidence": _dedupe_evidence(evidence),
         "source": "gemini",
     }
+
+
+# ---------- Case Review: gated reasoning-layer demo ----------
+
+def _case_review_system_prompt(lang: str) -> str:
+    if lang == "he":
+        headers = ("כיסוי ציר הזמן", "עוצמת הראיות", "קריאה מוצעת")
+        strength_words = "חזקה, שנויה במחלוקת, או בלתי מספיקה"
+        closing = (
+            "זוהי קריאה מוצעת של הראיות, לא פסק דין -- היא מחייבת את "
+            "בדיקתו ואישורו של הבורר."
+        )
+        lang_instruction = "כתוב את כל התשובה בעברית, כולל כותרות הסעיפים."
+    else:
+        headers = ("TIMELINE COVERAGE", "STRENGTH OF EVIDENCE", "PROPOSED READ")
+        strength_words = "STRONG, CONTESTED, or INSUFFICIENT"
+        closing = (
+            "This is a proposed read of the evidence, not a verdict -- it "
+            "requires the adjudicator's review and sign-off."
+        )
+        lang_instruction = "Write the entire response in English, including section headers."
+
+    return (
+        "You are assisting a land-registration committee adjudicator who is "
+        "reviewing the complete evidence record for ONE parcel. You are NOT "
+        "deciding the case. You are proposing a structured, cited read of "
+        "the evidence for the adjudicator to review, correct, or override. "
+        "Every observation you were given is already complete -- do not "
+        "call any tool, do not invent or assume anything beyond what's "
+        "provided.\n\n"
+        f"Structure your response in exactly three parts, using these "
+        f"exact section headers as given (they are already in the correct "
+        f"language, do not translate or alter them):\n"
+        f"{headers[0]} -- state the earliest and latest years on record, "
+        "name every gap in the timeline (a gap is a multi-year span with no "
+        "observation) and its length in years.\n"
+        f"{headers[1]} -- assess whether the record supports continuous "
+        "cultivation across the required 10-year window under Section 78: "
+        f"state clearly whether the evidence is {strength_words}, and "
+        "justify it by citing specific years and sources for every point "
+        "you make.\n"
+        f"{headers[2]} -- one short paragraph naming the single most "
+        "important thing the adjudicator should know, framed as your "
+        "proposal, not a ruling.\n\n"
+        f"Always end your entire response with this exact sentence on its "
+        f"own line: '{closing}'\n\n"
+        f"{lang_instruction}"
+    )
+
+
+def _format_parcel_for_prompt(parcel: dict) -> str:
+    lines = [f"Parcel {parcel['id']} ({parcel['name']}):"]
+    for obs in parcel["observations"]:
+        lines.append(
+            f"- {obs['year']} | {obs['source']} | {obs['type']} | "
+            f"confidence: {obs['confidence']} | {obs['finding']}"
+        )
+    return "\n".join(lines)
+
+
+def _gemini_case_review(parcel: dict, api_key: str, lang: str = "en") -> dict:
+    from google import genai
+
+    client = genai.Client(api_key=api_key)
+    prompt = _format_parcel_for_prompt(parcel)
+
+    interaction = client.interactions.create(
+        model=GEMINI_MODEL,
+        system_instruction=_case_review_system_prompt(lang),
+        input=prompt,
+    )
+    text = getattr(interaction, "output_text", "") or ""
+    return {
+        "assessment": text.strip() or "No assessment produced -- try again.",
+        "source": "gemini",
+    }
+
+
+def _mock_case_review(parcel: dict, lang: str = "en") -> dict:
+    """Deterministic, honest fallback with no API key: real gap detection
+    over the real observation years -- not a fake AI narrative, and it says
+    so plainly, same discipline as the chat fallback."""
+    years = sorted(o["year"] for o in parcel["observations"])
+    gaps = [(years[i], years[i + 1]) for i in range(len(years) - 1) if years[i + 1] - years[i] > 3]
+    he = lang == "he"
+
+    if he:
+        lines = [
+            f"טווח התצפיות: {years[0]}-{years[-1]} ({len(years)} תצפיות).",
+        ]
+        if gaps:
+            for a, b in gaps:
+                lines.append(f"פער בתיעוד: {a}-{b} ({b - a} שנים ללא תצפית).")
+        else:
+            lines.append("לא זוהו פערים משמעותיים בתיעוד.")
+        lines.append(
+            "זהו סיכום עובדתי בלבד (גיבוי מבוסס-כללים, GEMINI_API_KEY לא מוגדר) -- "
+            "אינו מהווה הערכה משפטית ואינו תחליף לחוות דעת."
+        )
+    else:
+        lines = [
+            f"Observation span: {years[0]}-{years[-1]} ({len(years)} observations).",
+        ]
+        if gaps:
+            for a, b in gaps:
+                lines.append(f"Coverage gap: {a}-{b} ({b - a} years with no observation).")
+        else:
+            lines.append("No significant coverage gaps detected.")
+        lines.append(
+            "This is a plain factual summary only (rule-based fallback, no "
+            "GEMINI_API_KEY set) -- not a legal assessment, and not a "
+            "substitute for the adjudicator's review."
+        )
+
+    return {"assessment": "\n".join(lines), "source": "mock"}
 
 
 # ---------- rule-based fallback path (no API key) ----------

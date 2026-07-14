@@ -471,3 +471,156 @@ button {
 [dir="rtl"] .chat-input-row {
   flex-direction: row-reverse;
 }
+
+/* ---------- mode toggle (Chat / Case Review) ---------- */
+
+.mode-toggle {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 3px;
+}
+
+.mode-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-2);
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: calc(var(--radius) - 2px);
+}
+
+.mode-btn-active {
+  background: var(--accent);
+  color: white;
+}
+
+/* ---------- Case Review mode ---------- */
+
+.case-review-body {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.case-review {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.case-review-intro {
+  font-size: 13px;
+  color: var(--text-1);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.case-review-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.parcel-select {
+  flex: 1;
+  background: var(--bg-2);
+  color: var(--text-0);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.parcel-map {
+  height: 320px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.case-review-loading {
+  font-size: 13px;
+  color: var(--accent);
+  text-align: center;
+  padding: 12px;
+}
+
+.case-review-result {
+  background: var(--bg-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.case-review-error {
+  color: var(--low);
+  font-size: 13px;
+}
+
+.gate-banner {
+  background: var(--medium);
+  color: #1a1400;
+  font-weight: 700;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 8px 12px;
+  border-radius: calc(var(--radius) - 2px);
+  text-align: center;
+}
+
+.assessment-text {
+  font-size: 13.5px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  color: var(--text-0);
+}
+
+.full-record {
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+}
+
+.full-record h4 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-2);
+  margin: 0 0 10px;
+}
+
+.full-record-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.full-record-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+
+[dir="rtl"] .case-review-controls {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .full-record-list li,
+[dir="rtl"] .case-review {
+  text-align: right;
+}

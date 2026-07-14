@@ -40,6 +40,15 @@ export const TRANSLATIONS = {
       low: "Low",
       unverified: "Unverified — source only",
     },
+    modeChat: "Chat",
+    modeCaseReview: "Case Review",
+    caseReviewIntro:
+      "Pick a parcel. GroundTruth will show you every observation on file and propose a structured read of the evidence — gated, cited, and never a final verdict.",
+    selectParcel: "Select a parcel",
+    getRecommendation: "Get proposed read",
+    analyzing: "Analyzing the full record…",
+    gateNotice: "PROPOSAL — requires the adjudicator's review and sign-off",
+    fullRecordTitle: "Full observation record",
   },
   he: {
     brandName: "GroundTruth",
@@ -74,6 +83,15 @@ export const TRANSLATIONS = {
       low: "נמוכה",
       unverified: "לא מאומת — מקור בלבד",
     },
+    modeChat: "צ'אט",
+    modeCaseReview: "בדיקת תיק",
+    caseReviewIntro:
+      "בחרו חלקה. GroundTruth יציג את כל התצפיות התיעודיות ויציע קריאה מובנית של הראיות -- מבוקרת, מצוטטת, ולעולם לא פסק דין סופי.",
+    selectParcel: "בחרו חלקה",
+    getRecommendation: "קבלו קריאה מוצעת",
+    analyzing: "מנתח את התיק המלא…",
+    gateNotice: "הצעה -- מחייבת בדיקה ואישור של הבורר",
+    fullRecordTitle: "רשומת התצפיות המלאה",
   },
 };
 

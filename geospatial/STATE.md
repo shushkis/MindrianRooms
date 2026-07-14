@@ -1,5 +1,5 @@
 ---
-computed: 2026-07-13T19:46:41Z
+computed: 2026-07-13T20:07:34Z
 venture_stage: Validation
 total_entries: 20
 ---
@@ -13,12 +13,12 @@ total_entries: 20
 | competitive-analysis | 3 | 3/5 | Well-developed | 2026-07-12 |
 | exports | 0 | 0/5 | Empty | - |
 | financial-model | 0 | 0/5 | Empty | 2026-07-08 |
-| funding | 1 | 1/5 | Active | 2026-07-08 |
+| funding | 1 | 1/5 | Active | 2026-07-13 |
 | hamuzim-app | 1 | 1/5 | Active | 2026-07-02 |
 | hamuzim-chat | 2 | 2/5 | Active | 2026-07-13 |
 | legal-ip | 0 | 0/5 | Empty | 2026-07-08 |
 | market-analysis | 2 | 2/5 | Active | 2026-07-12 |
-| opportunity-bank | 1 | 1/5 | Active | 2026-07-08 |
+| opportunity-bank | 1 | 1/5 | Active | 2026-07-13 |
 | problem-definition | 5 | 5/5 | Well-developed | 2026-07-12 |
 | room | 0 | 0/5 | Empty | - |
 | solution-design | 5 | 5/5 | Well-developed | 2026-07-12 |
