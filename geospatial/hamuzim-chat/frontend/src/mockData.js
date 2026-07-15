@@ -1,4 +1,4 @@
-// HaMuzim Chat -- client-side mock mirror.
+// GroundTruth (formerly "HaMuzim Chat") -- client-side mock mirror.
 //
 // Keep this in sync with backend/mock_data.py by hand -- there's no shared
 // source of truth between the two languages in this prototype. This is
@@ -98,8 +98,8 @@ export const PARCELS = [
   },
   {
     id: "P-007",
-    name: "Biti Hills -- Demo Reconstruction (inspired by the real committee case; details fictionalized)",
-    name_he: "גבעות ביתי -- שחזור הדגמה (בהשראת המקרה האמיתי בוועדה; הפרטים בדויים)",
+    name: "Parcel G - Evidentiary Gap (Demo)",
+    name_he: "חלקה ז' - פער ראייתי (הדגמה)",
     center: [35.10725, 31.65825],
     primary_signal: "dispute",
     observations: [
@@ -130,7 +130,7 @@ const SIGNAL_KEYWORDS = {
 function parcelNameFragments() {
   // Mirrors backend/main.py's _parcel_name_fragments(): strips boilerplate
   // ("Demo Parcel - ", "Parcel X - ", trailing "(Demo...)" / " -- Demo...")
-  // so a short natural query like "biti hills" / "ביתי" can match the real
+  // so a short natural query like "evidentiary gap" / "פער ראייתי" can match the real
   // name. Includes both English and Hebrew name fragments.
   const fragments = [];
   for (const parcel of PARCELS) {
@@ -259,4 +259,45 @@ export function mockChatReply(message, lang = "en") {
   }
 
   return { reply, evidence: matches, source: "mock-offline" };
+}
+
+export function getParcel(parcelId) {
+  const pid = (parcelId || "").trim().toUpperCase();
+  return PARCELS.find((p) => p.id.toUpperCase() === pid) || null;
+}
+
+export function mockCaseReview(parcelId, lang = "en") {
+  const parcel = getParcel(parcelId);
+  if (!parcel) return { error: `No parcel found with id ${parcelId}`, source: "mock-offline" };
+
+  const years = parcel.observations.map((o) => o.year).sort((a, b) => a - b);
+  const gaps = [];
+  for (let i = 0; i < years.length - 1; i++) {
+    if (years[i + 1] - years[i] > 3) gaps.push([years[i], years[i + 1]]);
+  }
+
+  const he = lang === "he";
+  const lines = he
+    ? [`טווח התצפיות: ${years[0]}-${years[years.length - 1]} (${years.length} תצפיות).`]
+    : [`Observation span: ${years[0]}-${years[years.length - 1]} (${years.length} observations).`];
+
+  if (gaps.length) {
+    for (const [a, b] of gaps) {
+      lines.push(
+        he
+          ? `פער בתיעוד: ${a}-${b} (${b - a} שנים ללא תצפית).`
+          : `Coverage gap: ${a}-${b} (${b - a} years with no observation).`
+      );
+    }
+  } else {
+    lines.push(he ? "לא זוהו פערים משמעותיים בתיעוד." : "No significant coverage gaps detected.");
+  }
+
+  lines.push(
+    he
+      ? "זהו סיכום עובדתי בלבד (גיבוי מקומי לא מקוון -- השרת אינו זמין) -- אינו מהווה הערכה משפטית ואינו תחליף לחוות דעת."
+      : "This is a plain factual summary only (offline client-side fallback -- backend unreachable) -- not a legal assessment, and not a substitute for the adjudicator's review."
+  );
+
+  return { assessment: lines.join("\n"), source: "mock-offline", parcel };
 }

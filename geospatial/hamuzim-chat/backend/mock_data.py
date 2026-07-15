@@ -1,4 +1,4 @@
-# HaMuzim Chat -- Mock data layer
+# GroundTruth (formerly "HaMuzim Chat") -- Mock data layer
 #
 # No real database, no real satellite/document pipeline. This is a small,
 # fully fictional set of parcels (all clearly labeled "Demo") used to prove
@@ -458,8 +458,8 @@ PARCELS = [
     },
     {
         "id": "P-007",
-        "name": "Biti Hills -- Demo Reconstruction (inspired by the real committee case; details fictionalized for this prototype)",
-        "name_he": "גבעות ביתי -- שחזור הדגמה (בהשראת המקרה האמיתי בוועדה; הפרטים בדויים לצורך האב-טיפוס)",
+        "name": "Parcel G - Evidentiary Gap (Demo)",
+        "name_he": "חלקה ז' - פער ראייתי (הדגמה)",
         "coordinates": [
             [35.1050, 31.6600],
             [35.1095, 31.6600],
@@ -541,6 +541,19 @@ PARCELS = [
 ]
 
 SIGNAL_TYPES = ["cultivation", "construction", "abandonment", "document", "dispute"]
+
+
+def get_parcel(parcel_id: str) -> dict | None:
+    """Return one parcel's FULL record (all observations, coordinates,
+    everything) by exact ID, or None. Unlike search_parcels(), this isn't a
+    filter -- it's for Case Review mode, where the whole point is showing
+    the adjudicator every observation on file for one parcel at once, not a
+    filtered subset."""
+    pid = parcel_id.strip().upper() if parcel_id else None
+    for parcel in PARCELS:
+        if parcel["id"].upper() == pid:
+            return parcel
+    return None
 
 
 def search_parcels(signal_type=None, date_from=None, date_to=None, keyword=None, parcel_id=None):

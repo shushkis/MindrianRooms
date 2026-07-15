@@ -1,14 +1,21 @@
-"""HaMuzim Chat -- FastAPI backend.
+"""GroundTruth (formerly "HaMuzim Chat") -- FastAPI backend.
 
 Sibling prototype to hamuzim-app. Where HaMuzim proves "draw a parcel, get a
 timeline," this proves "ask a question, get a cited answer across cases."
 
-Everything is mocked (see mock_data.py): six fictional demo parcels, no real
-database, no real satellite/document pipeline. The one real piece of
-engineering is the retrieval contract: every answer must be backed by
-`search_parcels()` results, and the frontend renders those results as
-evidence cards next to the reply -- so the chat can never state a finding
-without a parcel ID and observation year to point at.
+The case-evidence layer is mocked (see mock_data.py): fictional demo
+parcels, no real database, no real satellite/document pipeline. The one
+real piece of engineering on that side is the retrieval contract: every
+answer must be backed by `search_parcels()` results, and the frontend
+renders those results as evidence cards next to the reply -- so the chat
+can never state a finding without a parcel ID and observation year to
+point at.
+
+Added 2026-07-13: a second tool, `query_openstreetmap` (see real_data.py),
+is genuinely real -- a live call to OpenStreetMap's public Nominatim API,
+not mocked at all. It answers real current-day geography questions
+completely separately from the fictional parcel evidence, and the system
+prompt tells the model not to blend the two.
 
 If GEMINI_API_KEY is set, /api/chat runs an actual Gemini function-calling
 loop (google-genai SDK, Interactions API) against `search_parcels`. If it
@@ -30,16 +37,28 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from mock_data import PARCELS, SIGNAL_TYPES, search_parcels
+from mock_data import PARCELS, SIGNAL_TYPES, get_parcel, search_parcels
+from real_data import query_openstreetmap
 
 load_dotenv()
 
-app = FastAPI(title="HaMuzim Chat API", version="0.1.0")
+app = FastAPI(title="GroundTruth API", version="0.1.0")
+
+# Local dev: unset, defaults to "*" (any origin) since localhost ports vary.
+# Production: set ALLOWED_ORIGINS to the deployed frontend's real origin
+# (comma-separated if more than one, e.g. a preview + production URL) --
+# once this API is on the public internet with a real (if free-tier) Gemini
+# key behind it, a wildcard origin means literally any website can call it
+# from a visitor's browser and spend your quota. allow_credentials is False
+# because this app doesn't use cookies -- True + wildcard origin is also
+# something browsers reject outright, so this avoids that trap entirely.
+_allowed_origins_env = os.environ.get("ALLOWED_ORIGINS", "").strip()
+_allowed_origins = [o.strip() for o in _allowed_origins_env.split(",") if o.strip()] or ["*"]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # demo app -- tighten before any real deployment
-    allow_credentials=True,
+    allow_origins=_allowed_origins,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -60,11 +79,16 @@ class ChatRequest(BaseModel):
     # language directly, this is a backstop for a Hebrew UI + English query.
 
 
+class CaseReviewRequest(BaseModel):
+    parcel_id: str
+    lang: str = "en"
+
+
 # ---------- routes ----------
 
 @app.get("/api/health")
 def health():
-    return {"status": "ok", "service": "hamuzim-chat-backend"}
+    return {"status": "ok", "service": "groundtruth-backend"}
 
 
 @app.get("/api/parcels")
@@ -72,6 +96,30 @@ def list_parcels():
     """Debug/demo helper -- not used by the chat flow itself, lets you see
     the full mock universe the assistant is grounded against."""
     return {"parcels": PARCELS}
+
+
+@app.post("/api/case-review")
+def case_review(req: CaseReviewRequest):
+    """Case Review mode: given ONE parcel's full observation record, produce
+    a structured, cited, explicitly-gated proposed read of the evidence --
+    not a Q&A answer about a subset. This is the reasoning-layer pivot
+    (see solution-design/reasoning-layer-decision.md) made concrete: the
+    model proposes, cites, and closes by naming itself a proposal requiring
+    the adjudicator's sign-off. It never gets to assert a verdict."""
+    parcel = get_parcel(req.parcel_id)
+    if parcel is None:
+        return {"error": f"No parcel found with id {req.parcel_id!r}"}, 404
+
+    api_key = os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        return {**_mock_case_review(parcel, req.lang), "parcel": parcel}
+
+    try:
+        result = _gemini_case_review(parcel, api_key, req.lang)
+    except Exception as exc:  # noqa: BLE001 -- demo fallback, any failure -> mock
+        result = _mock_case_review(parcel, req.lang)
+        result["error"] = str(exc)
+    return {**result, "parcel": parcel}
 
 
 @app.post("/api/chat")
@@ -91,20 +139,38 @@ def chat(req: ChatRequest):
 # ---------- Gemini function-calling path ----------
 
 SYSTEM_PROMPT = (
-    "You are the HaMuzim Chat assistant, answering questions about a small "
-    "set of land parcels using only the search_parcels tool. Rules:\n"
-    "1. Always call search_parcels to find evidence before answering a "
+    "You are the GroundTruth assistant. You have two tools, and they are "
+    "NOT interchangeable:\n"
+    "- search_parcels: the FICTIONAL demo evidence set (parcels P-001..P-007). "
+    "Use this for anything about the case-evidence parcels -- cultivation, "
+    "construction, abandonment, documents, disputes.\n"
+    "- query_openstreetmap: REAL, live, current-day geographic data from "
+    "OpenStreetMap. Use this for genuine location/geography questions (where "
+    "is X, what's near Y). Its coverage is uneven: major Palestinian cities "
+    "(e.g. Bethlehem) resolve well; specific Israeli settlement names in the "
+    "West Bank (e.g. Efrat, Gush Etzion) often return nothing, or -- worse -- "
+    "can match an unrelated street with the same name elsewhere in Israel. "
+    "Sanity-check the returned address/region against what was asked before "
+    "trusting it.\n\n"
+    "Rules:\n"
+    "1. Always call the relevant tool to find evidence before answering a "
     "factual question -- never answer from memory.\n"
-    "2. Every claim in your answer must cite a parcel ID (e.g. P-004) and "
-    "an observation year. If you cannot cite it, do not state it.\n"
-    "3. If search_parcels returns nothing, say so plainly -- do not "
-    "speculate or invent a finding.\n"
+    "2. Every claim about a demo parcel must cite a parcel ID (e.g. P-004) "
+    "and an observation year. Every claim about a real place must be "
+    "attributed to OpenStreetMap and clearly marked as real, current-day "
+    "data -- never blend it with the fictional parcel evidence as if it "
+    "were the same kind of source.\n"
+    "3. If a tool returns nothing, or returns a result that looks like the "
+    "wrong place (wrong region/country for what was asked), say so plainly "
+    "-- do not speculate or invent a finding, and do not present a "
+    "mismatched result as if it answered the question.\n"
     "4. Keep answers concise (3-6 sentences) and evidentiary in tone: this "
     "supports legal exhibits, not casual chat.\n"
-    "5. If the question has nothing to do with parcels, land evidence, or "
-    "this case data (e.g. weather, small talk, general knowledge), do not "
-    "call search_parcels at all -- say plainly that you can only answer "
-    "questions about the parcel evidence in this system.\n"
+    "5. If the question has nothing to do with parcels, land evidence, this "
+    "case data, or real-world geography (e.g. weather, small talk, general "
+    "knowledge), do not call either tool -- say plainly that you can only "
+    "answer questions about the parcel evidence or real geographic lookups "
+    "in this system.\n"
     "6. Respond in the same language the user's message is written in. If "
     "they write in Hebrew, answer in Hebrew (use the finding_he/name_he "
     "fields from search results when present), citations still use the "
@@ -157,6 +223,33 @@ GEMINI_TOOL = {
     },
 }
 
+OSM_TOOL = {
+    "type": "function",
+    "name": "query_openstreetmap",
+    "description": (
+        "Look up a REAL place, address, or location by name using OpenStreetMap's "
+        "live public Nominatim API. Returns real, current-day geographic data -- "
+        "coordinates, place type, address -- completely separate from the "
+        "fictional demo parcel evidence in search_parcels. Coverage is uneven "
+        "for this region: major Palestinian cities resolve well; specific "
+        "Israeli West Bank settlement names often return nothing or the wrong "
+        "place (a same-named street elsewhere in Israel). Always check the "
+        "returned address/region matches what was actually asked."
+    ),
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "query": {
+                "type": "string",
+                "description": "Place name, address, or location description to look up.",
+            },
+        },
+        "required": ["query"],
+    },
+}
+
+TOOLS = [GEMINI_TOOL, OSM_TOOL]
+
 
 def _gemini_chat_reply(message: str, history: list[ChatMessage], api_key: str, lang: str = "en") -> dict:
     from google import genai
@@ -178,11 +271,15 @@ def _gemini_chat_reply(message: str, history: list[ChatMessage], api_key: str, l
         model=GEMINI_MODEL,
         system_instruction=SYSTEM_PROMPT,
         input=full_input,
-        tools=[GEMINI_TOOL],
+        tools=TOOLS,
     )
 
-    # Function-calling loop: Gemini may call search_parcels one or more
-    # times before it has enough grounding to answer.
+    # Function-calling loop: Gemini may call search_parcels and/or
+    # query_openstreetmap, one or more times, before it has enough grounding
+    # to answer. Only search_parcels results feed `evidence` (the parcel-
+    # shaped evidence cards the frontend renders) -- OSM results are a
+    # different shape and get described in the reply text instead, not
+    # rendered as a fictional-parcel evidence card.
     max_turns = 4
     turns = 0
     while turns < max_turns:
@@ -193,8 +290,11 @@ def _gemini_chat_reply(message: str, history: list[ChatMessage], api_key: str, l
 
         results = []
         for step in fc_steps:
-            result = search_parcels(**step.arguments)
-            evidence.extend(result)
+            if step.name == "query_openstreetmap":
+                result = query_openstreetmap(**step.arguments)
+            else:
+                result = search_parcels(**step.arguments)
+                evidence.extend(result)
             results.append(
                 {
                     "type": "function_result",
@@ -208,7 +308,7 @@ def _gemini_chat_reply(message: str, history: list[ChatMessage], api_key: str, l
             model=GEMINI_MODEL,
             system_instruction=SYSTEM_PROMPT,
             input=results,
-            tools=[GEMINI_TOOL],
+            tools=TOOLS,
             previous_interaction_id=interaction.id,
         )
 
@@ -218,6 +318,121 @@ def _gemini_chat_reply(message: str, history: list[ChatMessage], api_key: str, l
         "evidence": _dedupe_evidence(evidence),
         "source": "gemini",
     }
+
+
+# ---------- Case Review: gated reasoning-layer demo ----------
+
+def _case_review_system_prompt(lang: str) -> str:
+    if lang == "he":
+        headers = ("כיסוי ציר הזמן", "עוצמת הראיות", "קריאה מוצעת")
+        strength_words = "חזקה, שנויה במחלוקת, או בלתי מספיקה"
+        closing = (
+            "זוהי קריאה מוצעת של הראיות, לא פסק דין -- היא מחייבת את "
+            "בדיקתו ואישורו של הבורר."
+        )
+        lang_instruction = "כתוב את כל התשובה בעברית, כולל כותרות הסעיפים."
+    else:
+        headers = ("TIMELINE COVERAGE", "STRENGTH OF EVIDENCE", "PROPOSED READ")
+        strength_words = "STRONG, CONTESTED, or INSUFFICIENT"
+        closing = (
+            "This is a proposed read of the evidence, not a verdict -- it "
+            "requires the adjudicator's review and sign-off."
+        )
+        lang_instruction = "Write the entire response in English, including section headers."
+
+    return (
+        "You are assisting a land-registration committee adjudicator who is "
+        "reviewing the complete evidence record for ONE parcel. You are NOT "
+        "deciding the case. You are proposing a structured, cited read of "
+        "the evidence for the adjudicator to review, correct, or override. "
+        "Every observation you were given is already complete -- do not "
+        "call any tool, do not invent or assume anything beyond what's "
+        "provided.\n\n"
+        f"Structure your response in exactly three parts, using these "
+        f"exact section headers as given (they are already in the correct "
+        f"language, do not translate or alter them):\n"
+        f"{headers[0]} -- state the earliest and latest years on record, "
+        "name every gap in the timeline (a gap is a multi-year span with no "
+        "observation) and its length in years.\n"
+        f"{headers[1]} -- assess whether the record supports continuous "
+        "cultivation across the required 10-year window under Section 78: "
+        f"state clearly whether the evidence is {strength_words}, and "
+        "justify it by citing specific years and sources for every point "
+        "you make.\n"
+        f"{headers[2]} -- one short paragraph naming the single most "
+        "important thing the adjudicator should know, framed as your "
+        "proposal, not a ruling.\n\n"
+        f"Always end your entire response with this exact sentence on its "
+        f"own line: '{closing}'\n\n"
+        f"{lang_instruction}"
+    )
+
+
+def _format_parcel_for_prompt(parcel: dict) -> str:
+    lines = [f"Parcel {parcel['id']} ({parcel['name']}):"]
+    for obs in parcel["observations"]:
+        lines.append(
+            f"- {obs['year']} | {obs['source']} | {obs['type']} | "
+            f"confidence: {obs['confidence']} | {obs['finding']}"
+        )
+    return "\n".join(lines)
+
+
+def _gemini_case_review(parcel: dict, api_key: str, lang: str = "en") -> dict:
+    from google import genai
+
+    client = genai.Client(api_key=api_key)
+    prompt = _format_parcel_for_prompt(parcel)
+
+    interaction = client.interactions.create(
+        model=GEMINI_MODEL,
+        system_instruction=_case_review_system_prompt(lang),
+        input=prompt,
+    )
+    text = getattr(interaction, "output_text", "") or ""
+    return {
+        "assessment": text.strip() or "No assessment produced -- try again.",
+        "source": "gemini",
+    }
+
+
+def _mock_case_review(parcel: dict, lang: str = "en") -> dict:
+    """Deterministic, honest fallback with no API key: real gap detection
+    over the real observation years -- not a fake AI narrative, and it says
+    so plainly, same discipline as the chat fallback."""
+    years = sorted(o["year"] for o in parcel["observations"])
+    gaps = [(years[i], years[i + 1]) for i in range(len(years) - 1) if years[i + 1] - years[i] > 3]
+    he = lang == "he"
+
+    if he:
+        lines = [
+            f"טווח התצפיות: {years[0]}-{years[-1]} ({len(years)} תצפיות).",
+        ]
+        if gaps:
+            for a, b in gaps:
+                lines.append(f"פער בתיעוד: {a}-{b} ({b - a} שנים ללא תצפית).")
+        else:
+            lines.append("לא זוהו פערים משמעותיים בתיעוד.")
+        lines.append(
+            "זהו סיכום עובדתי בלבד (גיבוי מבוסס-כללים, GEMINI_API_KEY לא מוגדר) -- "
+            "אינו מהווה הערכה משפטית ואינו תחליף לחוות דעת."
+        )
+    else:
+        lines = [
+            f"Observation span: {years[0]}-{years[-1]} ({len(years)} observations).",
+        ]
+        if gaps:
+            for a, b in gaps:
+                lines.append(f"Coverage gap: {a}-{b} ({b - a} years with no observation).")
+        else:
+            lines.append("No significant coverage gaps detected.")
+        lines.append(
+            "This is a plain factual summary only (rule-based fallback, no "
+            "GEMINI_API_KEY set) -- not a legal assessment, and not a "
+            "substitute for the adjudicator's review."
+        )
+
+    return {"assessment": "\n".join(lines), "source": "mock"}
 
 
 # ---------- rule-based fallback path (no API key) ----------
@@ -241,8 +456,8 @@ def _parcel_name_fragments() -> list[tuple[str, str]]:
     """(lowercased searchable fragment, original-cased fragment) pairs derived
     from each parcel's name, so a free-text query can match a parcel by name
     even though this fallback has no real NLP. Strips the boilerplate
-    "Parcel X - " prefix and any "(Demo...)" suffix so e.g. "Biti Hills" and
-    "North Ridge" are both matchable, not just the full formal name."""
+    "Parcel X - " prefix and any "(Demo...)" suffix so e.g. "Evidentiary Gap"
+    and "North Ridge" are both matchable, not just the full formal name."""
     fragments = []
     for parcel in PARCELS:
         name = re.sub(r"^Demo Parcel\s*-\s*", "", parcel["name"])
@@ -250,7 +465,7 @@ def _parcel_name_fragments() -> list[tuple[str, str]]:
         # Cut at the first "(", or " -- ", whichever comes first -- both are
         # boilerplate separators (" (Demo)" / " -- Demo Reconstruction (...)")
         # that would otherwise stay glued to the real name and stop it
-        # matching a short natural query like "biti hills".
+        # matching a short natural query like "evidentiary gap".
         name = re.split(r"\s+--\s+|\s*\(", name)[0].strip()
         if name:
             fragments.append((name.lower(), name))
@@ -297,8 +512,9 @@ def _naive_parse_query(text: str) -> dict:
     if id_match:
         filters["parcel_id"] = f"P-{int(id_match.group(1)):03d}"
 
-    # Free-text name match: "tell me about Biti Hills" has no signal-type or
-    # date cue at all, so without this the fallback would come back empty
+    # Free-text name match: "tell me about the evidentiary gap parcel" has no
+    # signal-type or date cue at all, so without this the fallback would
+    # come back empty
     # even though the parcel exists -- try each known parcel name fragment
     # as a keyword before giving up.
     if "keyword" not in filters and "parcel_id" not in filters:

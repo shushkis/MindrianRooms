@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import MessageBubble from "./components/MessageBubble";
+import CaseReview from "./components/CaseReview";
 import { sendChatMessage } from "./api";
 import { t } from "./translations";
 
 export default function App() {
   const [lang, setLang] = useState("en");
+  const [mode, setMode] = useState("chat"); // "chat" | "case-review"
   // Welcome bubble is NOT stored in `messages` -- it's re-derived from
   // `lang` on every render (below) so toggling the language updates it too,
   // instead of freezing whatever language was active when the component
@@ -66,55 +68,79 @@ export default function App() {
             <span className="app-brand-tagline">{t(lang, "tagline")}</span>
           </div>
         </div>
+        <div className="mode-toggle">
+          <button
+            type="button"
+            className={`mode-btn ${mode === "chat" ? "mode-btn-active" : ""}`}
+            onClick={() => setMode("chat")}
+          >
+            {t(lang, "modeChat")}
+          </button>
+          <button
+            type="button"
+            className={`mode-btn ${mode === "case-review" ? "mode-btn-active" : ""}`}
+            onClick={() => setMode("case-review")}
+          >
+            {t(lang, "modeCaseReview")}
+          </button>
+        </div>
         <div className="app-header-right">
-          {loading && <span className="loading-indicator">{t(lang, "thinking")}</span>}
+          {loading && mode === "chat" && <span className="loading-indicator">{t(lang, "thinking")}</span>}
           <button type="button" className="btn btn-lang" onClick={toggleLang}>
             {t(lang, "langToggle")}
           </button>
         </div>
       </header>
 
-      <div className="chat-body" ref={scrollRef}>
-        <div className="chat-messages">
-          {messages.length === 0 && (
-            <MessageBubble role="assistant" content={t(lang, "welcome")} evidence={[]} source={undefined} lang={lang} />
-          )}
-          {messages.map((m, i) => (
-            <MessageBubble key={i} role={m.role} content={m.content} evidence={m.evidence} source={m.source} lang={lang} />
-          ))}
-          {loading && (
-            <div className="msg-row msg-row-assistant">
-              <div className="msg-bubble msg-bubble-assistant msg-bubble-loading">
-                <span className="dot" />
-                <span className="dot" />
-                <span className="dot" />
-              </div>
+      {mode === "case-review" ? (
+        <div className="case-review-body">
+          <CaseReview lang={lang} />
+        </div>
+      ) : (
+        <>
+          <div className="chat-body" ref={scrollRef}>
+            <div className="chat-messages">
+              {messages.length === 0 && (
+                <MessageBubble role="assistant" content={t(lang, "welcome")} evidence={[]} source={undefined} lang={lang} />
+              )}
+              {messages.map((m, i) => (
+                <MessageBubble key={i} role={m.role} content={m.content} evidence={m.evidence} source={m.source} lang={lang} />
+              ))}
+              {loading && (
+                <div className="msg-row msg-row-assistant">
+                  <div className="msg-bubble msg-bubble-assistant msg-bubble-loading">
+                    <span className="dot" />
+                    <span className="dot" />
+                    <span className="dot" />
+                  </div>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-      </div>
+          </div>
 
-      <div className="chat-footer">
-        <div className="suggestion-row">
-          {t(lang, "suggestions").map((s) => (
-            <button key={s} className="suggestion-chip" onClick={() => handleSend(s)} disabled={loading}>
-              {s}
-            </button>
-          ))}
-        </div>
-        <form className="chat-input-row" onSubmit={handleSubmit}>
-          <input
-            className="chat-input"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder={t(lang, "inputPlaceholder")}
-            disabled={loading}
-          />
-          <button type="submit" className="btn btn-primary" disabled={loading || !input.trim()}>
-            {t(lang, "send")}
-          </button>
-        </form>
-      </div>
+          <div className="chat-footer">
+            <div className="suggestion-row">
+              {t(lang, "suggestions").map((s) => (
+                <button key={s} className="suggestion-chip" onClick={() => handleSend(s)} disabled={loading}>
+                  {s}
+                </button>
+              ))}
+            </div>
+            <form className="chat-input-row" onSubmit={handleSubmit}>
+              <input
+                className="chat-input"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder={t(lang, "inputPlaceholder")}
+                disabled={loading}
+              />
+              <button type="submit" className="btn btn-primary" disabled={loading || !input.trim()}>
+                {t(lang, "send")}
+              </button>
+            </form>
+          </div>
+        </>
+      )}
     </div>
   );
 }

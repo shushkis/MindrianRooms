@@ -1,11 +1,14 @@
-// HaMuzim Chat -- UI translations. Same pattern as the sibling hamuzim-app's
-// translations.js: one flat dictionary per language, looked up by key.
-// Toggle default is "en" (for you/Elli building), switchable to "he" for
-// the real customer, who is a Hebrew speaker working West Bank cases.
+// GroundTruth (formerly "HaMuzim Chat") -- UI translations. Same pattern as
+// the sibling hamuzim-app's translations.js: one flat dictionary per
+// language, looked up by key. Toggle default is "en" (for you/Elli
+// building), switchable to "he" for the real customer, who is a Hebrew
+// speaker working West Bank cases. Brand name stays in Latin script in
+// both languages (common practice for tech brand names); only the
+// tagline and copy translate.
 
 export const TRANSLATIONS = {
   en: {
-    brandName: "HaMuzim Chat",
+    brandName: "GroundTruth",
     tagline: "Ask the evidence, not the map",
     langToggle: "עברית",
     thinking: "thinking…",
@@ -15,7 +18,7 @@ export const TRANSLATIONS = {
       "Which parcels show construction after 2015?",
       "Show me cultivation loss since 2015.",
       "Are there any boundary disputes?",
-      "Tell me about the Biti Hills parcel.",
+      "Tell me about the evidentiary gap parcel.",
     ],
     inputPlaceholder: "Ask about a parcel, a signal type, or a date range...",
     send: "Send",
@@ -37,9 +40,18 @@ export const TRANSLATIONS = {
       low: "Low",
       unverified: "Unverified — source only",
     },
+    modeChat: "Chat",
+    modeCaseReview: "Case Review",
+    caseReviewIntro:
+      "Pick a parcel. GroundTruth will show you every observation on file and propose a structured read of the evidence — gated, cited, and never a final verdict.",
+    selectParcel: "Select a parcel",
+    getRecommendation: "Get proposed read",
+    analyzing: "Analyzing the full record…",
+    gateNotice: "PROPOSAL — requires the adjudicator's review and sign-off",
+    fullRecordTitle: "Full observation record",
   },
   he: {
-    brandName: "צ'אט המוזים",
+    brandName: "GroundTruth",
     tagline: "שאלו את הראיות, לא את המפה",
     langToggle: "English",
     thinking: "חושב…",
@@ -49,7 +61,7 @@ export const TRANSLATIONS = {
       "אילו חלקות מראות בנייה אחרי 2015?",
       "הראה לי אובדן עיבוד מאז 2015.",
       "האם יש מחלוקות גבול?",
-      "ספר לי על חלקת גבעות ביתי.",
+      "ספר לי על חלקת פער ראייתי.",
     ],
     inputPlaceholder: "שאלו על חלקה, סוג אות, או טווח תאריכים...",
     send: "שליחה",
@@ -71,6 +83,15 @@ export const TRANSLATIONS = {
       low: "נמוכה",
       unverified: "לא מאומת — מקור בלבד",
     },
+    modeChat: "צ'אט",
+    modeCaseReview: "בדיקת תיק",
+    caseReviewIntro:
+      "בחרו חלקה. GroundTruth יציג את כל התצפיות התיעודיות ויציע קריאה מובנית של הראיות -- מבוקרת, מצוטטת, ולעולם לא פסק דין סופי.",
+    selectParcel: "בחרו חלקה",
+    getRecommendation: "קבלו קריאה מוצעת",
+    analyzing: "מנתח את התיק המלא…",
+    gateNotice: "הצעה -- מחייבת בדיקה ואישור של הבורר",
+    fullRecordTitle: "רשומת התצפיות המלאה",
   },
 };
 
