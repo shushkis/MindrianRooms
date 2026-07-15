@@ -1,5 +1,5 @@
 ---
-computed: 2026-07-13T14:27:42Z
+computed: 2026-07-14T10:11:29Z
 venture_stage: Validation
 total_entries: 20
 ---
