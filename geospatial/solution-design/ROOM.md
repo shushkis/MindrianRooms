@@ -26,11 +26,13 @@ A multi-source geospatial fusion platform with decision-level evidence fusion an
 
 ### Artifacts in this section
 - [[data-inventory|Data Source Inventory -- MVP Layer Map]]
-- [[initial-exploration|Platform Architecture: Multi-Source Fusion with Provenance]]
-- [[product-scope-data-fusion/product-scope-data-fusion|Product Scope Decision -- Data Fusion for Operational Conclusions, Not Document Forensics]]
 - [[hamuzim-chat-decision|Product Decision -- HaMuzim Chat: A Conversational Sibling to HaMuzim]]
+- [[initial-exploration|Platform Architecture: Multi-Source Fusion with Provenance]]
+- [[public-archive-poc-concept|PoC Concept -- Reconstruction from Public Digital Archives Only]]
+- [[reasoning-layer-decision|Product Decision -- Reasoning Layer, Mordi's Judgment Deployable]]
 
 ### Cross-section mentions (inbound)
 - (none -- inbound scan is Phase 90 scope)
 <!-- END REFERENCES -->
+
 

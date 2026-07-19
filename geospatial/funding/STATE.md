@@ -1,6 +1,6 @@
 ---
 section: funding
-last_computed: 2026-07-08
+last_computed: 2026-07-13
 total_entries: 0
 ---
 

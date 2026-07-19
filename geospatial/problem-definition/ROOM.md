@@ -26,11 +26,13 @@ Historical geospatial records -- aerial photos, cadastral maps, survey documents
 
 ### Artifacts in this section
 - [[initial-exploration|The Evidence Gap in Geospatial Dispute Resolution]]
-- [[legal-workflow-analysis|Legal Proceeding Workflow -- Full Map]]
-- [[yonatan-sagir-meeting|Meeting: Yonatan Sagir -- IRIS Program Debrief]]
 - [[itamar-water-infra-meeting|Meeting: Itamar -- Water Infrastructure Engineer, Customer Discovery]]
+- [[legal-workflow-analysis|Legal Proceeding Workflow -- Full Map]]
+- [[orit-district-appraiser-meeting|Meeting: Orit -- District Appraiser (Judea & Samaria), Customer Discovery]]
+- [[yonatan-sagir-meeting|Meeting: Yonatan Sagir -- IRIS Program Debrief]]
 
 ### Cross-section mentions (inbound)
 - (none -- inbound scan is Phase 90 scope)
 <!-- END REFERENCES -->
+
 
