@@ -25,6 +25,7 @@ A multi-source geospatial fusion platform with decision-level evidence fusion an
 - (none)
 
 ### Artifacts in this section
+- [[appraiser-vertical-sequencing-decision|Product Decision -- Appraiser Precedent Vertical Deferred, Not Dropped]]
 - [[data-inventory|Data Source Inventory -- MVP Layer Map]]
 - [[hamuzim-chat-decision|Product Decision -- HaMuzim Chat: A Conversational Sibling to HaMuzim]]
 - [[initial-exploration|Platform Architecture: Multi-Source Fusion with Provenance]]
@@ -34,5 +35,6 @@ A multi-source geospatial fusion platform with decision-level evidence fusion an
 ### Cross-section mentions (inbound)
 - (none -- inbound scan is Phase 90 scope)
 <!-- END REFERENCES -->
+
 
 

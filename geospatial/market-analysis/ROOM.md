@@ -25,10 +25,16 @@ Two markets in play: the wedge (legal land dispute professionals) and the platfo
 - (none)
 
 ### Artifacts in this section
+- [[bold-personas-2026-07|Bold Personas -- Five Faces of the Same Evidentiary Gap]]
 - [[buyer-analysis|Buyer Analysis -- Three-Segment Map]]
 - [[jtbd-analysis|Jobs To Be Done -- Geospatial Legal Intelligence]]
+- [[jtbd-list-2026-07|Jobs To Be Done -- Full List Across Validated Segments]]
+- [[market-analyst-report-2026-07|Market Analyst Report -- What Changed Since the Last Research Pass]]
+- [[persona-research-2026-07|Persona Research -- Web-Sourced Corroboration]]
+- [[tam-pricing-gap-closure-2026-07|Closing the Two Open Gaps -- Avi's Pricing Corroboration and a Bottom-Up TAM Attempt]]
 
 ### Cross-section mentions (inbound)
 - (none -- inbound scan is Phase 90 scope)
 <!-- END REFERENCES -->
+
 

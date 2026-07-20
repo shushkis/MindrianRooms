@@ -25,9 +25,12 @@ Two distinct legal dimensions: the IP around the platform methodology, and the j
 - (none)
 
 ### Artifacts in this section
-- No artifacts yet in this section.
+- [[conflict-of-interest-mordi-2026-07|URGENT -- Conflict of Interest: Mordi's Government Employment vs. HaMuzim's First Customer]]
+- [[evidence-admissibility-research-2026-07|Evidence Admissibility Research -- Aerial/Historical Photographic Evidence in Israeli Land Disputes]]
+- [[legal-advisor-inquiry-draft-2026-07|Draft -- Preliminary Inquiry to Ministry Legal Advisor (Conflict of Interest)]]
 
 ### Cross-section mentions (inbound)
 - (none -- inbound scan is Phase 90 scope)
 <!-- END REFERENCES -->
+
 

@@ -31,9 +31,10 @@ Resolve in business-model/ first:
 - (none)
 
 ### Artifacts in this section
-- No artifacts yet in this section.
+- [[bootstrap-model-2026-07|Bootstrap Financial Model -- First Real Pass]]
 
 ### Cross-section mentions (inbound)
 - (none -- inbound scan is Phase 90 scope)
 <!-- END REFERENCES -->
+
 

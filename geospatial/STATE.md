@@ -1,39 +1,32 @@
 ---
-computed: 2026-07-19T04:19:20Z
+computed: 2026-07-20T06:59:36Z
 venture_stage: Validation
-total_entries: 26
+total_entries: 33
 ---
 # Data Room State
 
 ## Sections
 | Section | Entries | Progress | Status | Last Updated |
 |---------|---------|----------|--------|-------------|
-| assets | 0 | 0/6 | Empty | - |
-| business-model | 0 | 0/6 | Empty | 2026-07-08 |
-| competitive-analysis | 4 | 4/6 | Well-developed | 2026-07-19 |
-| exports | 0 | 0/6 | Empty | - |
-| financial-model | 0 | 0/6 | Empty | 2026-07-08 |
-| funding | 1 | 1/6 | Active | 2026-07-19 |
-| hamuzim-app | 1 | 1/6 | Active | 2026-07-02 |
-| hamuzim-chat | 2 | 2/6 | Active | 2026-07-13 |
-| legal-ip | 0 | 0/6 | Empty | 2026-07-08 |
-| market-analysis | 6 | 6/6 | Well-developed | 2026-07-19 |
-| opportunity-bank | 1 | 1/6 | Active | 2026-07-19 |
-| problem-definition | 5 | 5/6 | Well-developed | 2026-07-19 |
-| room | 0 | 0/6 | Empty | - |
-| solution-design | 6 | 6/6 | Well-developed | 2026-07-19 |
-| team-execution | 0 | 0/6 | Empty | 2026-07-08 |
-| team | 0 | 0/6 | Empty | - |
+| business-model | 0 | 0/7 | Empty | 2026-07-20 |
+| competitive-analysis | 4 | 4/7 | Well-developed | 2026-07-20 |
+| exports | 0 | 0/7 | Empty | - |
+| financial-model | 1 | 1/7 | Active | 2026-07-20 |
+| funding | 1 | 1/7 | Active | 2026-07-20 |
+| hamuzim-app | 1 | 1/7 | Active | 2026-07-08 |
+| hamuzim-chat | 2 | 2/7 | Active | 2026-07-15 |
+| legal-ip | 3 | 3/7 | Well-developed | 2026-07-20 |
+| market-analysis | 7 | 7/7 | Well-developed | 2026-07-20 |
+| opportunity-bank | 1 | 1/7 | Active | 2026-07-20 |
+| problem-definition | 5 | 5/7 | Well-developed | 2026-07-20 |
+| room | 0 | 0/7 | Empty | - |
+| solution-design | 6 | 6/7 | Well-developed | 2026-07-20 |
+| team-execution | 2 | 2/7 | Active | 2026-07-20 |
 
 ## Gaps
-- assets: No entries.
 - business-model: No entries. Consider defining your revenue model.
 - exports: No entries.
-- financial-model: No entries. Consider building initial financial projections.
-- legal-ip: No entries. Consider documenting legal structure and IP.
 - room: No entries.
-- team-execution: No entries. Consider documenting your team and execution plan.
-- team: No entries.
 
 ## Cross-References
 No cross-references detected yet.

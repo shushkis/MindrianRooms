@@ -26,10 +26,12 @@ ESRI/ArcGIS can do overlays. What no existing tool does is package the fusion ou
 
 ### Artifacts in this section
 - [[competitive-landscape|Competitive Landscape -- Geospatial Intelligence Platform]]
+- [[competitive-refresh-2026-07|Competitive Landscape Refresh -- 2026-07]]
 - [[global-landscape-deep-dive|Global Deep Dive -- Who Else Touches This Problem]]
 - [[orhitec-review|Competitor Review -- Orhitec GIS Group]]
 
 ### Cross-section mentions (inbound)
 - (none -- inbound scan is Phase 90 scope)
 <!-- END REFERENCES -->
+
 

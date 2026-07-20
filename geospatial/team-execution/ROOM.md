@@ -35,9 +35,11 @@ Two founders with complementary and non-obvious strengths: a sensor fusion engin
 - (none)
 
 ### Artifacts in this section
-- No artifacts yet in this section.
+- [[mordi-role-decision-2026-07|Founder Decision -- Mordi's Role, Structure, and the Firm Relationship]]
+- [[mordi-role-prep-2026-07|Prep: Defining Mordi's Role -- Founder, Design Partner, or Both]]
 
 ### Cross-section mentions (inbound)
 - (none -- inbound scan is Phase 90 scope)
 <!-- END REFERENCES -->
+
 
