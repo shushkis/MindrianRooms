@@ -2,11 +2,22 @@
 
 ## Session Metadata
 
-- **Date:** 2026-07-21
+- **Date:** 2026-07-21 (merged with Elli's 2026-07-20 second-pass session)
 - **Active Room:** geospatial
 - **Venture Stage:** Validation
 
-## Artifacts Filed This Session
+## Artifacts Filed -- 2026-07-20, Second Pass (Elli)
+
+- `market-analysis/vc-demo-feedback-iris2026-2026-07.md` -- pulled real VC
+  feedback from the Iris 2026 cohort demo (25/35, strong on prior art +
+  technical trust, weak on first-customer clarity, defensibility, and
+  market-sizing tooling).
+- `market-analysis/defensibility-narrative-rewrite-2026-07.md` -- rewrote
+  the pitch's defensibility answer to lead with the assembled-evidence
+  moat instead of Mordi's government relationships (which are both
+  fragile as a moat and currently under the COI review below).
+
+## Artifacts Filed -- 2026-07-21 (Mordi/Larry)
 
 - `legal-ip/legal-advisor-inquiry-draft-2026-07.md` (+ Word export) --
   preliminary, low-disclosure inquiry to the ministry legal advisor.
@@ -40,7 +51,25 @@
   capability generalizes across Israeli land law, not as a second
   near-term customer segment.
 
-## What Happened This Session
+## In-Progress, Not Yet Filed (Elli, carried forward -- pick this back up)
+
+**Beautiful Question deep dive on the anchor-case blocker** -- real
+insight surfaced, not yet written up as a room artifact:
+
+- The anchor case isn't stuck on indecision. Exactly one case was ever
+  named (Biti Hills), and it was explicitly banned as a demo anchor on
+  2026-07-12 (non-representative + confidentiality risk) --
+  see `.context/rejection-log.md`. Nobody has proposed a replacement
+  since.
+- Reframe in progress (WHAT IF, unresolved): finding candidates and
+  picking one got treated as a single task, and the first half (actually
+  sourcing 2-3 real public-record candidates) never got done. Worth
+  finishing this arc to a HOW and filing to `problem-definition/` next
+  session -- pick it back up rather than restarting it. This is the
+  same anchor-case blocker referenced throughout the 2026-07-21 market
+  research below -- both threads converge on the same open item.
+
+## What Happened -- 2026-07-21 (Conflict of Interest Thread)
 
 - Mordi consulted his own labor-law attorney, who reviewed and endorsed
   the general-inquiry approach Larry drafted -- confirms the sequencing
@@ -63,23 +92,39 @@
 - A separate room (`sde-alon`, בי"ס שדה אלון) was started and then
   paused mid-scaffold at the user's request -- registry entry exists,
   directory skeleton + one ROOM.md exist, not fully built. Active room
-  switched back to `geospatial`. Resume `sde-alon` separately when ready.
+  switched back to `geospatial`. Resume `sde-alon` separately when
+  ready. **Not shared with Elli** -- `sde-alon/` is gitignored and the
+  registry entry is `skip-worktree`'d locally; it will not appear if
+  Elli pulls this repo.
 
 ## Where To Continue From
 
+**Urgent, external:** waiting on Mordi on two fronts --
+1. The legal-advisor inquiry (`legal-ip/legal-advisor-inquiry-draft-2026-07.md`) --
+   nothing proceeds commercially toward his own office until answered.
+2. The case-volume inquiry (`market-analysis/case-volume-inquiry-draft-2026-07.md`) --
+   drafted, not yet confirmed sent, to the סגן רמ"א contact. Unblocks
+   SAM/TAM sizing that's been stuck across three research passes.
+
 **The waiting-for-legal-advisor work plan (weeks, not days) -- three tracks:**
 
-**Full speed, not gated on the answer at all:**
-- Pick the anchor case for the PoC (recurring open item across
-  `buyer-analysis.md`, `legal-workflow-analysis.md`,
-  `public-archive-poc-concept.md` -- do not default to a previously
-  rejected case, per `.context/rejection-log.md` 2026-07-12)
+**Full speed, not gated on either answer:**
+- Pick the anchor case for the PoC -- converges Elli's beautiful-question
+  thread (Biti Hills banned 2026-07-12, no replacement proposed) with
+  every other file's recurring open item (`buyer-analysis.md`,
+  `legal-workflow-analysis.md`, `public-archive-poc-concept.md`). Do not
+  default to a previously rejected case, per `.context/rejection-log.md`
+  2026-07-12. **This is the single most recurring blocker in the room --
+  worth actually finishing next session, not re-opening again.**
 - Define MVP scope / entry-point module for the first demo
 - Reasoning-layer product decisions (`solution-design/reasoning-layer-decision.md`)
 - Ask Mordi directly the evidence-admissibility questions in
   `legal-ip/evidence-admissibility-research-2026-07.md` -- personal
   domain knowledge, not office contact
 - Decide the georeferencing/overlay partner for aerial-photo work
+- Pitch deck slides for the other two VC feedback gaps (second-vertical/
+  Italy analog, TAM-methodology slide) -- see
+  `market-analysis/vc-demo-feedback-iris2026-2026-07.md` open items
 
 **Continue, but through a channel that is NOT Mordi's own office:**
 - Demand/appetite validation -- a colleague, a different unit, or רמ"י
@@ -96,21 +141,23 @@
 ## Standing Blockers, In Order
 
 1. Legal advisor's answer on Mordi's conflict of interest -- sent
-   2026-07-22, response expected in a few weeks. Not blocking the three
-   work tracks above.
+   2026-07-22, response expected in a few weeks. Not blocking the work
+   tracks above.
 2. **Case-volume answer from the סגן רמ"א contact** -- message drafted
    in `market-analysis/case-volume-inquiry-draft-2026-07.md`, not yet
-   confirmed sent. This unblocks the SAM/TAM sizing that's been stuck
-   across three prior research passes. Once the answer lands, update
-   (in order) `case-volume-inquiry-draft-2026-07.md`,
+   confirmed sent. Once the answer lands, update (in order)
+   `case-volume-inquiry-draft-2026-07.md`,
    `population-prevalence-payer-table-2026-07.md`,
    `dual-use-market-definition-2026-07.md`, and
    `source-verification-audit-2026-07.md` item #10.
-3. Anchor case for the PoC -- still unpicked, now unblocked to pursue
-   in parallel (see work plan)
+3. **Anchor case for the PoC** -- now unblocked to pursue in parallel;
+   the beautiful-question WHAT IF just needs to close out to a HOW
+   (Elli's thread) -- do not restart this analysis from scratch.
 4. Founder equity percentage and role split -- drafting fallback
    scenarios now, formal signing waits for the legal advisor's answer
 
 ## Session Notes
 
-Session ended 2026-07-21, pushed to git for continuity.
+Plugin updated to v1.15.3-beta.32 during Elli's 2026-07-20 session
+(unrelated to room content). Session ended 2026-07-21, merged with
+Elli's concurrent session and pushed to git for continuity.
