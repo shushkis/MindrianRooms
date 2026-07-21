@@ -6,3 +6,6 @@
 # OS / editor
 .DS_Store
 Thumbs.db
+
+# Personal room, not shared with the geospatial/HaMuzim collaborators
+sde-alon/
